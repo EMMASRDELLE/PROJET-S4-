@@ -134,6 +134,6 @@ void Graphe::affichage_Resultat1()
     for(size_t i=0;i<m_sommets.size();++i)
     {
         double num=calculDegre(i);
-        std::cout<<m_sommets[i]->getNum()<<m_sommets[i]->getNom()<<num<<std::endl;
+        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" degre = "<<num<<std::endl;
     }
 }
