@@ -5,7 +5,8 @@ Arrete::Arrete(const Sommet* ex1,const Sommet*ex2,int indice):m_ex1{ex1},m_ex2{e
 
 void Arrete::afficher() const{
     std::cout<<"<"<<m_indice;
-    std::cout<<""<<m_ex1->getNom()<<"  "<<m_ex2->getNom()<<"> : "<<std::endl;
+
+    std::cout<<""<<m_ex1.getX()<<std::endl;
 }
 double Arrete::getIndice() const{
     return m_indice;

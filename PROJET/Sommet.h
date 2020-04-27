@@ -5,18 +5,18 @@
 class Sommet
 {
     public:
-        Sommet(int num, char nom, int x,int y);
+        Sommet(int num, char nom, double x,double y);
         int getNum() const;
-        int getX() const;
-        int getY() const;
+        double getX() const;
+        double getY() const;
         char getNom() const;
 
     protected:
 
     private:
-        int m_num;
-        int m_x;
-        int m_y;
+        int m_indice;
+        double m_x;
+        double m_y;
         char m_nom;
 };
 

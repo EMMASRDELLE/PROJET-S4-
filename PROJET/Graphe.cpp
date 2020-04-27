@@ -3,9 +3,7 @@
 #include <algorithm>
 #include "Graphe.h"
 
-/* La construction du réseau peut se faire à partir d'un fichier
-        dont le nom est passé en paramètre
-       Le fichier contient : orientation (0 ou 1), ordre, taille, liste des arcs */
+
 Graphe::Graphe(std::string nomFichier)
 {
     std::ifstream ifs{nomFichier};
@@ -26,8 +24,6 @@ Graphe::Graphe(std::string nomFichier)
         ifs>>indice>>nom>>x>>y;
          m_sommets.push_back( new Sommet{indice,nom,x,y} );
     }
-
-
         int taille;
     ifs >> taille;
     if ( ifs.fail() )
