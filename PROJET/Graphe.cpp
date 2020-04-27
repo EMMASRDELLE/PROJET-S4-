@@ -93,7 +93,7 @@ void Graphe::Dessiner(Svgfile &svgout) const
 
 }
 
-
+/// Calcul de degré
 double Graphe::calculDegre(int num)
 {
     double deg=0;
@@ -137,3 +137,5 @@ void Graphe::affichage_Resultat1()
         std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" degre = "<<num<<std::endl;
     }
 }
+
+
