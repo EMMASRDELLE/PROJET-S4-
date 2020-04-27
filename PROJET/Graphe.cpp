@@ -62,10 +62,10 @@ Graphe::~Graphe()
         std::cout<<"non oriente"<<std::endl<<"  ";
         std::cout<<"ordre = "<<m_sommets.size()<<std::endl<<"  ";
          std::cout<<"listes d'adjacence :"<<std::endl;
-     /*   for (auto s : m_arretes)
+       for (auto s : m_arretes)
         {
             s->afficher();
             std::cout<<std::endl;
-        }*/
+        }
 
     }
