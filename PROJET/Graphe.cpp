@@ -60,11 +60,9 @@ Graphe::~Graphe()
         else
         std::cout<<"non oriente"<<std::endl<<"  ";
         std::cout<<"ordre = "<<m_sommets.size()<<std::endl<<"  ";
-        std::cout<<"taille="<< m_arretes.size()<<std::endl<<"  ";
-         std::cout<<"listes d'adjacence :"<<std::endl;
+        std::cout<<"taille="<< m_arretes.size()<<std::endl;
        for (auto s : m_arretes)
         {
-            std::cout<<"heo";
             s->afficher();
             std::cout<<std::endl;
         }
