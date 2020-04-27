@@ -9,9 +9,9 @@ class Sommet
     public:
         Sommet(int indice, char nom, int x, int y);
         virtual ~Sommet();
-        char getNom()const;
-        int getX() const;
-        int getY () const;
+        char getNom();
+        int getX() ;
+        int getY () ;
 
 
     protected:
