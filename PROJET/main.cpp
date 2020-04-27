@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Graphe.h"
+#include "svgfile.h"
 
 void afficher_Arbre(std::vector<const Arrete*> arretes)
 {
@@ -12,9 +13,11 @@ void afficher_Arbre(std::vector<const Arrete*> arretes)
 
 int main()
 {
-   size_t num;
+    size_t num;
+   Svgfile svgout;
    Graphe g {"Graphe.txt"};
    g.afficher();
+   g.Dessiner(svgout);
 
     return 0;
 }

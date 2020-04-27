@@ -4,19 +4,20 @@
 
 class Arrete
 {
-    public:
-        Arrete( Sommet*, Sommet*,int indice);
-        void afficher()const ;
-        double getIndice() const;
-     const Sommet*getEx1() const;
-  const  Sommet*getEx2() const;
+public:
+    Arrete( Sommet*, Sommet*,int indice);
+    void afficher()const ;
+    double getIndice() const;
+    const Sommet*getEx1() const;
+    const Sommet*getEx2() const;
+    void Dessiner(Svgfile &svgout) const;
 
-    protected:
+protected:
 
-    private:
-        const Sommet* m_ex1;
-       const  Sommet* m_ex2;
-        int m_indice;
+private:
+    const Sommet* m_ex1;
+    const Sommet* m_ex2;
+    int m_indice;
 };
 
 #endif // ARETE_H

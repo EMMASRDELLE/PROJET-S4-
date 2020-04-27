@@ -2,6 +2,7 @@
 #include <fstream>
 #include <algorithm>
 #include "Graphe.h"
+#include "svgfile.h"
 
 
 Graphe::Graphe(std::string nomFichier)
@@ -16,8 +17,8 @@ Graphe::Graphe(std::string nomFichier)
     ifs >> ordre;
     if ( ifs.fail() )
         throw std::runtime_error("Probleme lecture ordre du graphe");
-
-    int indice,x,y;
+    int indice;
+    double x,y;
     char nom;
     for (int i=0; i<ordre; ++i)
     {
@@ -30,7 +31,7 @@ Graphe::Graphe(std::string nomFichier)
         throw std::runtime_error("Probleme lecture taille du graphe");
 
     int indice2,num1,num2;
-    double poids;
+
     for (int i=0; i<taille; ++i)
     {
         ifs>>indice2>>num1>>num2;
@@ -71,3 +72,23 @@ Graphe::~Graphe()
     }
 }
 
+
+void Graphe::Dessiner(Svgfile &svgout) const
+{
+    svgout.addGrid();
+
+    ///on dessine les sommets
+
+    for(int i=0;i<m_sommets.size();++i)
+    {
+        m_sommets[i]->Dessiner(svgout);
+    }
+
+    /// on dessine les arretes
+    for(int j=0;j<m_arretes.size();++j)
+    {
+        m_arretes[j]->Dessiner(svgout);
+    }
+
+
+}

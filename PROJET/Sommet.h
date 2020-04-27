@@ -1,7 +1,9 @@
 #ifndef SOMMET_H
 #define SOMMET_H
 
-
+#include <iostream>
+#include <string>
+#include "svgfile.h"
 class Sommet
 {
     public:
@@ -9,7 +11,8 @@ class Sommet
 
         double getX()const ;
         double getY() const;
-        char getNom() const;
+        std::string getNom() const;
+        void Dessiner(Svgfile&svgout)const;
 
     protected:
 
@@ -17,7 +20,7 @@ class Sommet
         int m_indice;
         double m_x;
         double m_y;
-        char m_nom;
+        std::string m_nom;
 };
 
 #endif // SOMMET_H

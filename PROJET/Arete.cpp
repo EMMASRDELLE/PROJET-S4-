@@ -15,3 +15,7 @@ double Arrete::getIndice()const {
  const Sommet*Arrete::getEx2() const{
     return m_ex2;
 }
+void Arrete::Dessiner(Svgfile &svgout) const
+ {
+   svgout.addLine((m_ex1->getX())*100,(m_ex1->getY())*100,(m_ex2->getX())*100,(m_ex2->getY())*100,"black");
+ }

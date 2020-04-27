@@ -4,6 +4,7 @@
 #include <vector>
 #include "Sommet.h"
 #include "Arete.h"
+#include "svgfile.h"
 
 class Graphe
 {
@@ -11,6 +12,7 @@ class Graphe
         Graphe(std::string nomFic);
         void afficher()const;
         ~Graphe();
+         void Dessiner(Svgfile &svgout) const;
 
     protected:
 

@@ -5,7 +5,7 @@ Sommet::Sommet(int indice, char nom,  double x,double y):m_indice{indice},m_nom{
     //ctor
 }
 
-char Sommet::getNom()const
+std::string Sommet::getNom()const
 {
     return m_nom;
 }
@@ -16,4 +16,10 @@ double Sommet::getX()const
 double Sommet::getY()const
 {
     return m_y;
+}
+
+void Sommet::Dessiner(Svgfile&svgout)const
+{
+    svgout.addDisk(m_x*100,m_y*100,10,"black");
+    svgout.addText(m_x,(m_y-30),m_nom,"black");
 }
