@@ -4,7 +4,7 @@
 void afficher_Arbre(std::vector<const Arrete*> arretes)
 {
     std::cout<<"Liste :"<<std::endl;
-    for (auto a:arretes)
+    for (auto a: arretes)
     {
         a->afficher();
     }
