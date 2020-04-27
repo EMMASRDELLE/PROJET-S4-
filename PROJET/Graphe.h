@@ -9,15 +9,15 @@
 class Graphe
 {
     public:
-        Graphe(std::string nomFic);
-        void afficher()const;
-        ~Graphe();
+         Graphe(std::string nomFic);
+         void ChargementFichierPond(std::string nomFichier);
+         void afficher()const;
+         ~Graphe();
          void Dessiner(Svgfile &svgout) const;
          double calculDegre(int num);
          void sauvegarde(std::string nomFichier);
          void VectorPropre();
-
-void affichage_Resultat1();
+         void affichage_Resultat1();
 
     protected:
 

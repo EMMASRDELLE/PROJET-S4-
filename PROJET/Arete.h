@@ -12,6 +12,8 @@ public:
     const Sommet*getEx2() const;
     void Dessiner(Svgfile &svgout) const;
     bool CalculDEG( const Sommet*a, Arrete*b);
+    void setPoids(double poids);
+    double getPoids()const;
 
 protected:
 
@@ -19,6 +21,7 @@ private:
     const Sommet* m_ex1;
     const Sommet* m_ex2;
     int m_indice;
+    double m_poids;
 };
 
 #endif // ARETE_H
