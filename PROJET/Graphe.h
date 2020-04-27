@@ -1,8 +1,6 @@
 #ifndef GRAPHE_H_INCLUDED
 #define GRAPHE_H_INCLUDED
 
-#include "Sommet.h"
-#include "Arrete.h"
 #include <vector>
 #include <iostream>
 #include <fstream>
