@@ -1,11 +1,22 @@
 #include <iostream>
+#include "Graphe.h"
 
-
+void afficher_Arbre(std::vector<const Arrete*> arretes)
+{
+    std::cout<<"Liste :"<<std::endl;
+    for (auto a:arretes)
+    {
+        a->afficher();
+    }
+}
 
 int main()
 {
-    std::cout << "Hello world!" << std::endl;
-    std::cout<<"shguugugg"<<std::endl;
-    std::cout<<"SHOBIYAAAAA"<<std::endl;
+   size_t num;
+   Graphe g {"Graphe.txt"};
+    g.afficher();
+
     return 0;
 }
+
+
