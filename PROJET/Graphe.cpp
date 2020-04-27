@@ -36,11 +36,11 @@ Graphe::Graphe(std::string nomFichier)
         ifs>>indice2>>num1>>num2;
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture arc");
-        m_arretes.push_back(new Arrete(m_sommets[num1-1],m_sommets[num2-1],indice2));
+        m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2));
     }
 }
 /*méthode d'affichage*/
-void Graphe::afficher() const
+void Graphe::afficher()const
 {
     std::cout<<std::endl<<"graphe ";
     if(m_orientation)

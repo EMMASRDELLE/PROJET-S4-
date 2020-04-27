@@ -6,8 +6,8 @@ class Sommet
 {
     public:
         Sommet(int num, char nom, double x,double y);
-        int getNum() const;
-        double getX() const;
+
+        double getX()const ;
         double getY() const;
         char getNom() const;
 

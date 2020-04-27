@@ -5,17 +5,17 @@
 class Arrete
 {
     public:
-        Arrete(const Sommet*,const Sommet*,int indice);
-        void afficher() const;
+        Arrete( Sommet*, Sommet*,int indice);
+        void afficher()const ;
         double getIndice() const;
-        const Sommet*getEx1() const;
-        const Sommet*getEx2() const;
+     const Sommet*getEx1() const;
+  const  Sommet*getEx2() const;
 
     protected:
 
     private:
         const Sommet* m_ex1;
-        const Sommet* m_ex2;
+       const  Sommet* m_ex2;
         int m_indice;
 };
 

@@ -5,15 +5,15 @@ Sommet::Sommet(int indice, char nom,  double x,double y):m_indice{indice},m_nom{
     //ctor
 }
 
-char Sommet::getNom() const
+char Sommet::getNom()const
 {
     return m_nom;
 }
-double Sommet::getX() const
+double Sommet::getX()const
 {
     return m_x;
 }
-double Sommet::getY() const
+double Sommet::getY()const
 {
     return m_y;
 }

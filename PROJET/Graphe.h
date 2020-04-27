@@ -9,7 +9,7 @@ class Graphe
 {
     public:
         Graphe(std::string nomFic);
-        void afficher() const;
+        void afficher()const;
         ~Graphe();
 
     protected:
