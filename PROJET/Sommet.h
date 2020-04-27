@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include "svgfile.h"
-
+#include <vector>
 class Sommet
 {
     public:
@@ -24,6 +24,7 @@ class Sommet
         std::string m_nom;
         double m_x;
         double m_y;
+        std::vector <const Sommet*> m_successeurs;
 
 };
 
