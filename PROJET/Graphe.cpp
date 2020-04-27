@@ -41,14 +41,18 @@ Graphe::Graphe(std::string nomFichier)
 }
 /*méthode d'affichage*/
 void Graphe::afficher()const
-{
-    std::cout<<std::endl<<"graphe ";
+{ std::cout << "------------------------------PROJET PISCINE-------------------------------------\n"<<std::endl;
+
+    std::cout<<" \t  Yanis CHAMSON --- Shobiya KANDASAMY --- Emma SIRANDELLE "<<std::endl;
+    std::cout<<" \t \t \t \t ING2 TD7\n\n"<<std::endl;
+
+
     if(m_orientation)
-        std::cout<<"oriente"<<std::endl<<"  ";
+        std::cout<<"Le graphe est oriente"<<std::endl<<"  ";
     else
-        std::cout<<"non oriente"<<std::endl<<"  ";
-    std::cout<<"ordre = "<<m_sommets.size()<<std::endl<<"  ";
-    std::cout<<"taille(nombre d'arcs) :"<<m_arretes.size()<<std::endl;
+        std::cout<<"Le graphe est non oriente"<<std::endl<<"\n";
+    std::cout<<"  - Ordre : "<<m_sommets.size()<<std::endl<<"";
+    std::cout<<"  - Taille :"<<m_arretes.size()<<std::endl<<"\n";
     for (auto a : m_arretes)
     {
         a->afficher();
