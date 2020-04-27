@@ -1,28 +1,18 @@
+#include <iostream>
 #include "Arete.h"
 
+Arrete::Arrete(const Sommet* ex1,const Sommet*ex2,int indice):m_ex1{ex1},m_ex2{ex2},m_indice{indice}{}
 
-Arrete::Arrete(int indice, Sommet* ex1, Sommet* ex2):m_indice {indice},m_ex1{ex1},m_ex2{ex2}
-{
-    //ctor
+void Arrete::afficher() const{
+    std::cout<<"<"<<m_indice;
+    std::cout<<""<<m_ex1->getNom()<<"  "<<m_ex2->getNom()<<"> : "<<std::endl;
 }
-
-Arrete::~Arrete()
-{
-    //dtor
+double Arrete::getIndice() const{
+    return m_indice;
 }
-void Arrete::afficher() const
- {
-
-    std::cout <<""<<m_indice<<std::endl;
-    std::cout <<"heo2";
- }
-
-/// GETTER
-
 const Sommet*Arrete::getEx1() const{
     return m_ex1;
 }
-
- const Sommet*Arrete::getEx2()const {
+const Sommet*Arrete::getEx2() const{
     return m_ex2;
 }

@@ -1,27 +1,23 @@
-#ifndef SOMMET_H_INCLUDED
-#define SOMMET_H_INCLUDED
-#include <vector>
-#include <iostream>
-#include <fstream>
+#ifndef SOMMET_H
+#define SOMMET_H
+
 
 class Sommet
 {
     public:
-        Sommet(int indice, char nom, int x, int y);
-        virtual ~Sommet();
-        char getNom()const;
+        Sommet(int num, char nom, int x,int y);
+        int getNum() const;
         int getX() const;
-        int getY () const;
-
+        int getY() const;
+        char getNom() const;
 
     protected:
 
     private:
-
-        int m_indice;
-        char m_nom;
+        int m_num;
         int m_x;
         int m_y;
+        char m_nom;
 };
 
-#endif // SOMMET_H_INCLUDED
+#endif // SOMMET_H

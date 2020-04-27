@@ -1,29 +1,22 @@
-#ifndef ARETE_H_INCLUDED
-#define ARETE_H_INCLUDED
-
+#ifndef ARETE_H
+#define ARETE_H
 #include "Sommet.h"
-#include <vector>
-#include <iostream>
-#include <fstream>
+
 class Arrete
 {
     public:
-        Arrete(int indice, Sommet* ex1, Sommet* ex2);
-        virtual ~Arrete();
-       void afficher () const;
-      const  Sommet* getEx1()const;
-       const Sommet* getEx2()const;
+        Arrete(const Sommet*,const Sommet*,int indice);
+        void afficher() const;
+        double getIndice() const;
+        const Sommet*getEx1() const;
+        const Sommet*getEx2() const;
 
     protected:
 
     private:
-        int m_indice;
         const Sommet* m_ex1;
-         const Sommet* m_ex2;
-
+        const Sommet* m_ex2;
+        int m_indice;
 };
 
-
-
-
-#endif // ARETE_H_INCLUDED
+#endif // ARETE_H

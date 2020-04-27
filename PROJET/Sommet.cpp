@@ -1,27 +1,20 @@
 #include "Sommet.h"
 
-Sommet::Sommet(int indice, char nom, int x, int y):m_indice{indice},m_nom{nom},m_x{x},m_y{y}
+Sommet::Sommet(int num, char nom, int x,int y):m_num{num},m_nom{nom}, m_x{x},m_y{y}
 {
-//ctor
+    //ctor
 }
-
-Sommet::~Sommet()
+int Sommet::getNum() const{
+    return m_num;
+}
+char Sommet::getNom() const
 {
-    //dtor
+    return m_nom;
 }
-
-
-/// GETTER
-char Sommet::getNom()const
-{
-     return m_nom;
-}
-
-int Sommet::getX()const
+int Sommet::getX() const
 {
     return m_x;
 }
-
 int Sommet::getY() const
 {
     return m_y;
