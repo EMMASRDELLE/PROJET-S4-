@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include "svgfile.h"
-
+#include <vector>
 class Sommet
 {
     public:
@@ -15,6 +15,9 @@ class Sommet
         int getNum()const;
         std::string getNom() const;
         void Dessiner(Svgfile&svgout)const;
+        void ajouterSucc(const Sommet*s);
+        void set_indice(int nombre);
+         const std::vector <const Sommet*>& getSuccesseurs()const  {return m_successeurs; };
 
     protected:
 
@@ -24,6 +27,7 @@ class Sommet
         std::string m_nom;
         double m_x;
         double m_y;
+        std::vector <const Sommet*> m_successeurs;
 
 };
 

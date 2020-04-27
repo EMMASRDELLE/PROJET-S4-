@@ -8,7 +8,14 @@ int Sommet::getNum()const
 {
     return m_indice;
 }
-
+void Sommet::set_indice(int nombre)
+{
+    m_indice=nombre;
+}
+void Sommet::ajouterSucc(const Sommet*s)
+{
+    m_successeurs.push_back(s);
+}
 std::string Sommet::getNom()const
 {
     return m_nom;

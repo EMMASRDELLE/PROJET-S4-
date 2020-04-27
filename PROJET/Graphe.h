@@ -15,6 +15,7 @@ class Graphe
          void Dessiner(Svgfile &svgout) const;
          double calculDegre(int num);
          void sauvegarde(std::string nomFichier);
+         void VectorPropre();
 
 void affichage_Resultat1();
 
