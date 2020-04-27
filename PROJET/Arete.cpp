@@ -12,7 +12,7 @@ Arrete::~Arrete()
 }
 void Arrete::afficher() const
  {
-     std::cout <<"<"<<m_ex1->getNom()<<" "<<m_ex2->getNom()<<"> : " <<m_indice<<std::endl;
+     std::cout <<"<"<<m_ex1->getNom()<<" "<<m_ex2->getNom()<<"> : " <<m_indice<< m_ex1->getX()<< m_ex1->getY()<< m_ex2->getX()<<m_ex2->getY()<<std::endl;
  }
 
 /// GETTER
