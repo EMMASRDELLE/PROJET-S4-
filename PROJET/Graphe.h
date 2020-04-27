@@ -1,10 +1,12 @@
 #ifndef GRAPHE_H_INCLUDED
 #define GRAPHE_H_INCLUDED
-#include <Sommet.h>
+
+#include<Sommet.h>
 #include <Arete.h>
 #include <vector>
 #include <iostream>
 #include <fstream>
+
 class Graphe
 {
     public:
