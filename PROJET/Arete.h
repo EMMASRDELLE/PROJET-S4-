@@ -2,12 +2,17 @@
 #define ARETE_H_INCLUDED
 
 #include "Sommet.h"
-
+#include <vector>
+#include <iostream>
+#include <fstream>
 class Arrete
 {
     public:
         Arrete(int indice, Sommet* ex1, Sommet* ex2);
         virtual ~Arrete();
+<<<<<<< HEAD
+=======
+       void afficher () const;
        const Sommet* getEx1()const;
        const Sommet* getEx2()const;
 
@@ -20,7 +25,7 @@ class Arrete
 
 };
 
-#endif // ARRETE_H
+
 
 
 #endif // ARETE_H_INCLUDED

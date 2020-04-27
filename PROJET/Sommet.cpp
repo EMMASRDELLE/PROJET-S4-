@@ -10,6 +10,7 @@ Sommet::~Sommet()
     //dtor
 }
 
+
 /// GETTER
 char Sommet::getNom()const
 {
