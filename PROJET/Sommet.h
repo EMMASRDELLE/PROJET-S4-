@@ -15,6 +15,9 @@ class Sommet
         int getNum()const;
         std::string getNom() const;
         void Dessiner(Svgfile&svgout)const;
+        void ajouterSucc(const Sommet*s);
+        void set_indice(int nombre);
+         const std::vector <const Sommet*>& getSuccesseurs()const  {return m_successeurs; };
 
     protected:
 

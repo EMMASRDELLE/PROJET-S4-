@@ -38,6 +38,8 @@ Graphe::Graphe(std::string nomFichier)
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture arc");
         m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2));
+            m_sommets[num1]->ajouterSucc(m_sommets[num2]);
+            if((!m_orientation)&&(num1<num2)) m_sommets[num2]->ajouterSucc(m_sommets[num1]);
     }
 }
 /*méthode d'affichage*/
@@ -136,4 +138,35 @@ void Graphe::affichage_Resultat1()
         double num=calculDegre(i);
         std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" degre = "<<num<<std::endl;
     }
+}
+
+void Graphe::VectorPropre()
+{
+    ///initialisation
+    for (size_t i=0;i<m_sommets.size();++i)
+    {
+        m_sommets[i]->set_indice(1);
+    }
+    int L=0;
+    do {
+        for(auto s: m_sommets)
+        {
+            for (auto succ:s->getSuccesseurs())
+            {
+                L= succ->getNum()+L;
+
+            }
+
+        }
+         double C=sqrt(L*L);
+          for(auto s: m_sommets)
+        {
+            for (auto succ:s->getSuccesseurs())
+            {
+                L= (succ->getNum()+L)/C;
+               std::cout<<L<<std::endl;
+            }
+
+        }
+    }while(L>0&& L<500);
 }
