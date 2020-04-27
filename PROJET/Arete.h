@@ -8,7 +8,6 @@ class Arrete
     public:
         Arrete(int indice, Sommet* ex1, Sommet* ex2);
         virtual ~Arrete();
-
        const Sommet* getEx1()const;
        const Sommet* getEx2()const;
 
