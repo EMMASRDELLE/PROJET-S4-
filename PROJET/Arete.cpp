@@ -12,7 +12,9 @@ Arrete::~Arrete()
 }
 void Arrete::afficher() const
  {
-     std::cout <<"<"<<m_ex1->getNom()<<" "<<m_ex2->getNom()<<"> : " <<m_indice<<"Coords S1 :"<< m_ex1->getX()<< m_ex1->getY()<< "Coords S2 : "<< m_ex2->getX()<<m_ex2->getY()<<std::endl;
+
+     std::cout <<"<"<<m_ex1->getNom(); //<<" "<<m_ex2->getNom()<<"> : " <<m_indice<<"Coords S1 :"<< m_ex1->getX()<< m_ex1->getY()<< "Coords S2 : "<< m_ex2->getX()<<m_ex2->getY()<<std::endl;
+      std::cout <<"heo2";
  }
 
 /// GETTER

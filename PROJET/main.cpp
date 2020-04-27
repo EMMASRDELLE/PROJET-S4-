@@ -15,7 +15,6 @@ int main()
    size_t num;
    Graphe g {"Graphe.txt"};
     g.afficher();
-
     return 0;
 }
 

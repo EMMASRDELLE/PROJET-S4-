@@ -12,7 +12,6 @@ Graphe::Graphe(std::string nomFichier)
         ifs >> ordre;
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture ordre du graphe");
-            int taille;
 
 
         for (int i=0; i<ordre; ++i)
@@ -24,7 +23,7 @@ Graphe::Graphe(std::string nomFichier)
         m_sommets.push_back( new Sommet(indice,nom,x,y) );
 
         }
-
+         int taille;
          ifs >> taille;
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture taille du graphe");
@@ -65,6 +64,7 @@ Graphe::~Graphe()
          std::cout<<"listes d'adjacence :"<<std::endl;
        for (auto s : m_arretes)
         {
+            std::cout<<"heo";
             s->afficher();
             std::cout<<std::endl;
         }
