@@ -140,15 +140,16 @@ void Graphe::affichage_Resultat1()
     }
 }
 
-void Graphe::VectorPropre()
+void Graphe::VectorPropre(std::string Nomfichier)
 {
+    std::ofstream ifs{Nomfichier};
     ///initialisation
     for (size_t i=0;i<m_sommets.size();++i)
     {
         m_sommets[i]->set_indice(1);
     }
-    int L=0;
-    do {
+    double L=0;
+    //do {
         for(auto s: m_sommets)
         {
             for (auto succ:s->getSuccesseurs())
@@ -159,14 +160,17 @@ void Graphe::VectorPropre()
 
         }
          double C=sqrt(L*L);
+         double G=0;
           for(auto s: m_sommets)
         {
             for (auto succ:s->getSuccesseurs())
             {
-                L= (succ->getNum()+L)/C;
-               std::cout<<L<<std::endl;
-            }
+                G= succ->getNum()+G;
 
+            }
+            L=G/C;
+                std::cout<<s->getNom()<<" "<<L<<std::endl;
+               ifs<<s->getNum()<<" "<<s->getNom()<<" "<<L<<std::endl;;
         }
-    }while(L>0&& L<500);
+   // }while(L<10);
 }
