@@ -4,6 +4,10 @@ Sommet::Sommet(int indice, std::string nom,  double x, double y):m_indice{indice
 {
     //ctor
 }
+int Sommet::getNum()const
+{
+    return m_indice;
+}
 
 std::string Sommet::getNom()const
 {
@@ -21,5 +25,5 @@ double Sommet::getY()const
 void Sommet::Dessiner(Svgfile&svgout)const
 {
     svgout.addDisk(m_x*100,m_y*100,10,"black");
-    svgout.addText(m_x,(m_y-30),m_nom,"green");
+    svgout.addText(m_x*100,(m_y*100)-20,m_nom,"blue");
 }

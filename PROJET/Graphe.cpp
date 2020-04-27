@@ -92,31 +92,48 @@ void Graphe::Dessiner(Svgfile &svgout) const
 
 
 }
-int Graphe::calculDegre()
+
+
+double Graphe::calculDegre(int num)
 {
-    int deg=0;
-    double CG;
+    double deg=0;
+    double CG=0;
 
-std::cout<<"test sommet "<<std::endl;
-int num;
-std::cin>>num;
-//const Sommet*a;
-        for (auto b: m_arretes)
+    for (auto b: m_arretes)
+    {
+        for (auto a : m_sommets)
         {
-           for (auto a : m_sommets)
-           {
-               if (a==m_sommets[num])
-               {
-                  if(b->CalculDEG(a,b)==true)
+            if (a==m_sommets[num])
             {
-            ++deg;
+                if(b->CalculDEG(a,b)==true)
+                {
+                    ++deg;
+                }
             }
-               }
-           }
-
-
-
         }
-        CG=deg/(m_arretes.size()-1);
+    }
+        CG=deg/(m_sommets.size()-1);
 return CG;
+}
+
+void Graphe:: sauvegarde(std::string nomFichier)
+{
+    std::ofstream ifs{nomFichier};
+    for(size_t i=0;i<m_sommets.size();++i)
+    {
+
+        double num=calculDegre(i);
+        if (ifs.is_open())
+        ifs<<m_sommets[i]->getNum()<<m_sommets[i]->getNom()<<num<<"\n";
+    }
+    ifs.close();
+}
+
+void Graphe::affichage_Resultat1()
+{
+    for(size_t i=0;i<m_sommets.size();++i)
+    {
+        double num=calculDegre(i);
+        std::cout<<m_sommets[i]->getNum()<<m_sommets[i]->getNom()<<num<<std::endl;
+    }
 }

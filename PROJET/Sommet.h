@@ -12,6 +12,7 @@ class Sommet
 
         double getX()const ;
         double getY() const;
+        int getNum()const;
         std::string getNom() const;
         void Dessiner(Svgfile&svgout)const;
 
