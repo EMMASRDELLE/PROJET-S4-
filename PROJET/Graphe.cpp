@@ -50,7 +50,7 @@ void Graphe::afficher()const
     if(m_orientation)
         std::cout<<"Le graphe est oriente"<<std::endl<<"  ";
     else
-        std::cout<<"Le graphe est non oriente"<<std::endl<<"\n";
+        std::cout<<"Le graphe est non oriente  "<<std::endl<<"\n";
     std::cout<<"  - Ordre : "<<m_sommets.size()<<std::endl<<"";
     std::cout<<"  - Taille :"<<m_arretes.size()<<std::endl<<"\n";
     for (auto a : m_arretes)
