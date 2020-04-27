@@ -18,15 +18,18 @@ void Arrete::afficher() const
  }
 
 /// GETTER
-Sommet* Arrete::getEx1()const
- {
+
+
+Sommet*Arrete::getEx1()const{
 
  return m_ex1;
 
  }
 
 
-Sommet* Arrete::getEx2()const{
+  Sommet*Arrete::getEx2()const{
+
+
 
  return m_ex2;
  }
