@@ -12,17 +12,17 @@ Sommet::~Sommet()
 
 
 /// GETTER
-char Sommet::getNom()
+char Sommet::getNom()const
 {
      return m_nom;
 }
 
-int Sommet::getX()
+int Sommet::getX()const
 {
     return m_x;
 }
 
-int Sommet::getY()
+int Sommet::getY() const
 {
     return m_y;
 }

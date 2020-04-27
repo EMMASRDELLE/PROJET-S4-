@@ -60,7 +60,7 @@ Graphe::~Graphe()
         else
         std::cout<<"non oriente"<<std::endl<<"  ";
         std::cout<<"ordre = "<<m_sommets.size()<<std::endl<<"  ";
-        std::cout<<"taille="<< m_arretes.size()<<std::endl;
+        std::cout<<"taille="<< m_arretes.size()<<std::endl<<"  ";
        for (auto s : m_arretes)
         {
             s->afficher();
