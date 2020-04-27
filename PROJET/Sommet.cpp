@@ -2,7 +2,7 @@
 
 Sommet::Sommet(int indice, char nom, int x, int y):m_indice{indice},m_nom{nom},m_x{x},m_y{y}
 {
-   std::cout<<"le sommet a été crée"; //ctor
+//ctor
 }
 
 Sommet::~Sommet()

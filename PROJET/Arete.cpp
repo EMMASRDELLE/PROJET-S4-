@@ -12,18 +12,21 @@ Arrete::~Arrete()
 }
 void Arrete::afficher() const
  {
-     std::cout <<"<"<<m_indice <<" "<< m_ex1->getX()<<std::endl;
+
+    std::cout <<"<"<<m_indice<< std::endl;
     std::cout <<"heo2";
  }
 
 /// GETTER
-Sommet*Arrete::getEx1()const{
+Sommet* Arrete::getEx1()const
+ {
 
  return m_ex1;
 
  }
 
-Sommet*Arrete::getEx2()const{
+
+Sommet* Arrete::getEx2()const{
 
  return m_ex2;
  }

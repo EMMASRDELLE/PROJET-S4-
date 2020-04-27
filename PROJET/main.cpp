@@ -15,8 +15,6 @@ int main()
    size_t num;
    Graphe g {"Graphe.txt"};
    g.afficher();
-   Sommet a(1,"damso",2,3);
-    g.afficher();
 
     return 0;
 }

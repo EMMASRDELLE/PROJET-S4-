@@ -13,6 +13,8 @@ class Arrete
         void afficher ()const;
         Sommet* getEx1()const;
         Sommet* getEx2()const;
+         int getXX();
+
 
     protected:
 
