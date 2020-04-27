@@ -13,7 +13,6 @@ void afficher_Arbre(std::vector<const Arrete*> arretes)
 
 int main()
 {
-    size_t num;
    Svgfile svgout;
    Graphe g {"Graphe.txt"};
    g.afficher();

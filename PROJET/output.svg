@@ -42,15 +42,15 @@
 <line x1="1000" y1="0" x2="1000" y2="800" stroke="lightgrey" />
 <text x="1005" y="15" fill="lightgrey" >1000</text>
 <circle cx="200" cy="100" r="10" fill="black" />
-<text x="2" y="-29" fill="black" >A</text>
+<text x="2" y="-29" fill="green" >A</text>
 <circle cx="100" cy="200" r="10" fill="black" />
-<text x="1" y="-28" fill="black" >B</text>
+<text x="1" y="-28" fill="green" >B</text>
 <circle cx="200" cy="200" r="10" fill="black" />
-<text x="2" y="-28" fill="black" >C</text>
+<text x="2" y="-28" fill="green" >C</text>
 <circle cx="300" cy="200" r="10" fill="black" />
-<text x="3" y="-28" fill="black" >D</text>
+<text x="3" y="-28" fill="green" >D</text>
 <circle cx="200" cy="300" r="10" fill="black" />
-<text x="2" y="-27" fill="black" >E</text>
+<text x="2" y="-27" fill="green" >E</text>
 <line x1="200" y1="100" x2="200" y2="200" stroke="black" />
 <line x1="100" y1="200" x2="200" y2="200" stroke="black" />
 <line x1="200" y1="200" x2="300" y2="200" stroke="black" />

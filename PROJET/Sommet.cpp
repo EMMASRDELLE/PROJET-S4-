@@ -1,6 +1,6 @@
 #include "Sommet.h"
 
-Sommet::Sommet(int indice, char nom,  double x,double y):m_indice{indice},m_nom{nom}, m_x{x},m_y{y}
+Sommet::Sommet(int indice, std::string nom,  double x, double y):m_indice{indice},m_nom{nom}, m_x{x},m_y{y}
 {
     //ctor
 }
@@ -21,5 +21,5 @@ double Sommet::getY()const
 void Sommet::Dessiner(Svgfile&svgout)const
 {
     svgout.addDisk(m_x*100,m_y*100,10,"black");
-    svgout.addText(m_x,(m_y-30),m_nom,"black");
+    svgout.addText(m_x,(m_y-30),m_nom,"green");
 }

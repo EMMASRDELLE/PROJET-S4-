@@ -19,7 +19,7 @@ Graphe::Graphe(std::string nomFichier)
         throw std::runtime_error("Probleme lecture ordre du graphe");
     int indice;
     double x,y;
-    char nom;
+    std::string nom;
     for (int i=0; i<ordre; ++i)
     {
         ifs>>indice>>nom>>x>>y;
@@ -79,13 +79,13 @@ void Graphe::Dessiner(Svgfile &svgout) const
 
     ///on dessine les sommets
 
-    for(int i=0;i<m_sommets.size();++i)
+    for(size_t i=0;i<m_sommets.size();++i)
     {
         m_sommets[i]->Dessiner(svgout);
     }
 
     /// on dessine les arretes
-    for(int j=0;j<m_arretes.size();++j)
+    for(size_t j=0;j<m_arretes.size();++j)
     {
         m_arretes[j]->Dessiner(svgout);
     }
