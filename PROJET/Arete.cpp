@@ -19,3 +19,15 @@ void Arrete::Dessiner(Svgfile &svgout) const
  {
    svgout.addLine((m_ex1->getX())*100,(m_ex1->getY())*100,(m_ex2->getX())*100,(m_ex2->getY())*100,"black");
  }
+bool Arrete::CalculDEG( const Sommet*a, Arrete*b)
+{
+
+            if((a==b->m_ex1)||(a==b->m_ex2))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }

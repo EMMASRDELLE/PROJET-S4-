@@ -13,6 +13,7 @@ class Graphe
         void afficher()const;
         ~Graphe();
          void Dessiner(Svgfile &svgout) const;
+         int calculDegre();
 
     protected:
 

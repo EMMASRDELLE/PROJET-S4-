@@ -11,6 +11,7 @@ public:
     const Sommet*getEx1() const;
     const Sommet*getEx2() const;
     void Dessiner(Svgfile &svgout) const;
+    bool CalculDEG( const Sommet*a, Arrete*b);
 
 protected:
 

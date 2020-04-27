@@ -92,3 +92,31 @@ void Graphe::Dessiner(Svgfile &svgout) const
 
 
 }
+int Graphe::calculDegre()
+{
+    int deg=0;
+    double CG;
+
+std::cout<<"test sommet "<<std::endl;
+int num;
+std::cin>>num;
+//const Sommet*a;
+        for (auto b: m_arretes)
+        {
+           for (auto a : m_sommets)
+           {
+               if (a==m_sommets[num])
+               {
+                  if(b->CalculDEG(a,b)==true)
+            {
+            ++deg;
+            }
+               }
+           }
+
+
+
+        }
+        CG=deg/(m_arretes.size()-1);
+return CG;
+}

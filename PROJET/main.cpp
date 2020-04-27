@@ -15,8 +15,11 @@ int main()
 {
    Svgfile svgout;
    Graphe g {"Graphe.txt"};
+
    g.afficher();
    g.Dessiner(svgout);
+   int a =g.calculDegre();
+    std::cout <<a;
 
     return 0;
 }
