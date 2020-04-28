@@ -247,9 +247,7 @@ std::vector<int> Graphe::Djikstra(int debut)
                     std::cout<<"on est la";
                 }
             }
-
         }
-
 
         for( auto a: m_arretes)
         {
