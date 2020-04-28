@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Arete.h"
 
-Arrete::Arrete( Sommet* ex1, Sommet*ex2,int indice,int poids):m_ex1{ex1},m_ex2{ex2},m_indice{indice}, m_poids{poids}{}
+Arrete::Arrete( Sommet* ex1, Sommet*ex2,int indice,double poids):m_ex1{ex1},m_ex2{ex2},m_indice{indice}, m_poids{poids}{}
 
 ///GETTER
 double Arrete::getIndice()const
@@ -35,6 +35,7 @@ void Arrete::afficher()const
 void Arrete::Dessiner(Svgfile &svgout) const
 {
     svgout.addLine((m_ex1->getX())*100,(m_ex1->getY())*100,(m_ex2->getX())*100,(m_ex2->getY())*100,"black");
+    svgout.addText(((m_ex1->getX())*100+(m_ex2->getX())*100)/2,((m_ex1->getY())*100+(m_ex2->getY())*100)/2-20,m_poids,"red");
 }
 
 

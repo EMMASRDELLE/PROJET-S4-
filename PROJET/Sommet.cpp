@@ -33,10 +33,7 @@ void Sommet::Dessiner(Svgfile&svgout)const
 {
     svgout.addDisk(m_x*100,m_y*100,10,"black");
     svgout.addText(m_x*100,(m_y*100)-20,m_nom,"blue");
+    svgout.addText((m_x*100),(m_y*100)-50,m_indice,"green");
 }
 
 
-  const std::vector <const Sommet*> Sommet::intialiserSucc(int num, std::string nom, double x, double y, double poids)
-  {
-
-  }
