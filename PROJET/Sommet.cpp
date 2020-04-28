@@ -34,3 +34,5 @@ void Sommet::Dessiner(Svgfile&svgout)const
     svgout.addDisk(m_x*100,m_y*100,10,"black");
     svgout.addText(m_x*100,(m_y*100)-20,m_nom,"blue");
 }
+
+

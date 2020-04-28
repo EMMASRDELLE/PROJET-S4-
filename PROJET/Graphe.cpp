@@ -3,6 +3,8 @@
 #include <algorithm>
 #include "Graphe.h"
 #include "svgfile.h"
+#include <queue>
+
 
 void Graphe::ChargementFichierPond(std::string nomFichier)
 {
@@ -62,7 +64,7 @@ Graphe::Graphe(std::string nomFichier)
         ifs>>indice2>>num1>>num2;
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture arc");
-            m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2));
+            m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2,1));
             m_sommets[num1]->ajouterSucc(m_sommets[num2]);
             if((!m_orientation)&&(num1<num2)) m_sommets[num2]->ajouterSucc(m_sommets[num1]);
     }
@@ -166,34 +168,87 @@ void Graphe::affichage_Resultat1()
 }
 
 
-void Graphe::VectorPropre()
+void Graphe::VectorPropre(std::string Nomfichier)
 {
+    std::ofstream ifs{Nomfichier};
     ///initialisation
     for (size_t i=0;i<m_sommets.size();++i)
     {
         m_sommets[i]->set_indice(1);
     }
-    int L=0;
+    double Somme=0;
+    double Lambdapred=0;
+    double Lambda=0;
+    double T=0;
     do {
         for(auto s: m_sommets)
         {
             for (auto succ:s->getSuccesseurs())
             {
-                L= succ->getNum()+L;
+              Somme= succ->getNum()+Somme;
 
             }
+            T=T+Somme;
 
+          Somme=0;
         }
-         double C=sqrt(L*L);
+
+          Lambda=sqrt(T*T);
+         double G=0;
           for(auto s: m_sommets)
         {
             for (auto succ:s->getSuccesseurs())
             {
-                L= (succ->getNum()+L)/C;
-               std::cout<<L<<std::endl;
+                G= succ->getNum()+G;
+
+            }
+           double Result=G/Lambda;
+           G=0;
+                std::cout<<s->getNom()<<" "<<Result<<std::endl;
+               ifs<<s->getNum()<<" "<<s->getNom()<<" "<<Result<<std::endl;;
+        }
+        Lambdapred=Lambda;
+    }while((Lambda-Lambdapred>0));
+}
+ std::vector<int> Graphe::Djikstra(int debut)
+ {
+    std::vector<int> couleurs((int)m_sommets.size(),0);
+    std::vector<int> dists((int)m_sommets.size(),9999);
+    std::vector<int> preds((int)m_sommets.size(),-1);
+    int temp=0;
+
+    dists[debut]=0;
+    Sommet*actuel;
+
+    while(temp==0)
+    {
+        for (auto s: m_sommets)
+        {
+            for (auto succ: s->getSuccesseurs())
+            {
+               if(( dists[s->getNum()]<dists[succ->getNum()])&&(couleurs[s->getNum()]==0))
+               {
+                  actuel=s;
+                  couleurs[succ->getNum()]=1;
+                   dists[succ->getNum()]=dists[s->getNum()];
+               }
             }
 
         }
-    }while(L>0&& L<500);
-}
+        for( auto a: m_arretes)
+        {
+            if (a->getEx1()->getNum()==actuel->getNum())
+            {
+                if((dists[actuel->getNum()]+a->getPoids())<dists[a->getEx2()->getNum()])
+                {
+                    dists[a->getEx2()->getNum()]=dists[actuel->getNum()]+a->getPoids();
+                    preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
+                    couleurs[a->getEx2()->getNum()]=1;
+                }
+            }
+        }
 
+    }
+
+    return preds;
+ }

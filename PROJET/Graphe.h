@@ -16,8 +16,9 @@ class Graphe
          void Dessiner(Svgfile &svgout) const;
          double calculDegre(int num);
          void sauvegarde(std::string nomFichier);
-         void VectorPropre();
+         void VectorPropre(std::string nomFichier);
          void affichage_Resultat1();
+          std::vector<int> Djikstra(int debut);
 
     protected:
 
@@ -28,3 +29,4 @@ class Graphe
 };
 
 #endif // GRAPHE_H
+
