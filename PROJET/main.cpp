@@ -19,8 +19,9 @@ int main()
    g.ChargementFichierPond("Pondération2.txt");
    g.afficher();
    g.Dessiner(svgout);
-   g.affichage_Resultat1();
-
+   //g.affichage_Resultat1();
+   g.afficherListe();
+    //g.VectorPropre("Resultat2");
    std::cout<< "Entrez le sommet de depart pour calculer les chemins les plus courts"<<std::endl;
    std::cin>>debut;
    DJ=g.Djikstra(debut);

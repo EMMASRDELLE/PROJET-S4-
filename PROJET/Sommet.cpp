@@ -37,3 +37,11 @@ void Sommet::Dessiner(Svgfile&svgout)const
 }
 
 
+
+void Sommet::afficher() const
+    {
+        std::cout<<"     sommet "<<m_nom<<" : ";
+        for (auto s : m_successeurs)
+            std::cout<<s->getNom()<<" ";
+    }
+

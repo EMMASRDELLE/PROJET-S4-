@@ -230,6 +230,7 @@ std::vector<int> Graphe::Djikstra(int debut)
     std::vector<int> dists((int)m_sommets.size(),99999);/// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);
 
+
     int temp=0;
     int s;
     int id;
@@ -252,7 +253,7 @@ std::vector<int> Graphe::Djikstra(int debut)
         marquage [s]=1; /// On marque les sommets découverts
 
 
-        for( auto a: m_arretes)
+        for( auto a:m_arretes)
         {
             if (a->getEx1()->getNum()==s)
             {
@@ -272,7 +273,6 @@ std::vector<int> Graphe::Djikstra(int debut)
 
                 }
             }
-
         }
         temp=1;
         for(int i=0; i<m_sommets.size(); ++i)
@@ -300,5 +300,15 @@ std::vector<int> Graphe::Djikstra(int debut)
     }
 
     return preds;
+}
+
+void Graphe::afficherListe()
+{
+    std::cout<<"listes d'adjacence :"<<std::endl;
+        for (auto s : m_sommets)
+        {
+            s->afficher();
+            std::cout<<std::endl;
+        }
 }
 
