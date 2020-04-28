@@ -19,7 +19,8 @@ int main()
    g.afficher();
    g.Dessiner(svgout);
    g.affichage_Resultat1();
-    g.VectorPropre("Resultat2");
+    //g.VectorPropre("Resultat2");
+    g.Djikstra(1);
 
     return 0;
 }

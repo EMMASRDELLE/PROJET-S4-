@@ -3,6 +3,8 @@
 #include <algorithm>
 #include "Graphe.h"
 #include "svgfile.h"
+#include <queue>
+
 
 void Graphe::ChargementFichierPond(std::string nomFichier)
 {
@@ -208,7 +210,60 @@ void Graphe::VectorPropre(std::string Nomfichier)
         Lambdapred=Lambda;
     }while((Lambda-Lambdapred>0));
 }
-void Graphe::Intermediarite()
-{
+ std::vector<int> Graphe::Djikstra(int debut)
+ {
+    std::vector<int> couleurs((int)m_sommets.size(),0);
+    std::vector<int> dists((int)m_sommets.size(),9999);
+    std::vector<int> preds((int)m_sommets.size(),-1);
+    int temp=0;
 
-}
+    dists[debut]=0;
+    Sommet*actuel;
+
+    while(temp==0)
+    {
+        for (auto s: m_sommets)
+        {
+            for (auto succ: s->getSuccesseurs())
+            {
+               if(( dists[s->getNum()]<dists[succ->getNum()])&&(couleurs[s->getNum()]==0))
+               {
+                  actuel=s;
+                  couleurs[succ->getNum()]=1;
+                   dists[succ->getNum()]=dists[s->getNum()];
+               }
+            }
+
+        }
+        for( auto a: m_arretes)
+        {
+            if (a->getEx1()->getNum()==actuel->getNum())
+            {
+                if((dists[actuel->getNum()]+a->getPoids())<dists[a->getEx2()->getNum()])
+                {
+                    dists[a->getEx2()->getNum()]=dists[actuel->getNum()]+a->getPoids();
+                    preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
+                    couleurs[a->getEx2()->getNum()]=1;
+                }
+            }
+        }
+
+    }
+    int id;
+        for(int i=0; i<m_sommets.size();++i)
+        {
+            std::cout<<std::endl;
+            if(i!=debut)
+            {
+                std::cout<<i;
+                id=i;
+                while(preds[id]!=-1)
+                {
+                    std::cout<<" <--"<<preds[id];
+                    id=preds[id];
+                }
+            }
+        }
+        std::cout<<std::endl;
+    return preds;
+ }
