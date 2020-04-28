@@ -249,7 +249,7 @@ std::vector<int> Graphe::Djikstra(int debut)
     }marquage [s]=1; /// On marque les sommets découverts
 
 
-        for( int i=0;i<m_arretes.size();++i)
+        for( auto a:m_arretes)
         {
             if (a->getEx1()->getNum()==s)
             {
@@ -257,7 +257,7 @@ std::vector<int> Graphe::Djikstra(int debut)
                 {
                     dists[a->getEx2()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
-                //   marquage[a->getEx2()->getNum()]=1; 
+                //   marquage[a->getEx2()->getNum()]=1;
                 }
             }
              if(a->getEx2()->getNum()==s)
@@ -271,7 +271,7 @@ std::vector<int> Graphe::Djikstra(int debut)
         }
 
         temp=1;
-        
+
     }
     int id;
      for(int i=0;i<m_sommets.size();++i)

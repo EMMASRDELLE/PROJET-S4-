@@ -15,8 +15,8 @@ int main()
 {
    Svgfile svgout;
    std::vector <int> DJ;
-   Graphe g {"Graphe.txt"};
-   g.ChargementFichierPond("Pondération.txt");
+   Graphe g {"Graphe2.txt"};
+   g.ChargementFichierPond("Pondération2.txt");
    g.afficher();
    g.Dessiner(svgout);
    //g.affichage_Resultat1();
