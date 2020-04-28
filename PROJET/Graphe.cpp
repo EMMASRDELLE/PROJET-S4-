@@ -259,17 +259,19 @@ std::vector<int> Graphe::Djikstra(int debut)
                 {
                     dists[a->getEx2()->getNum()]=dists[actuel->getNum()]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
-                    couleurs[a->getEx2()->getNum()]=1;
+                    couleurs[a->getEx1()->getNum()]=1;
+                    std::cout<<"LOIS";
                 }
             }
         }
 
-
+  temp=1;
 
     }
     int id;
     for(int i=0; i<m_sommets.size(); ++i)
     {
+
         std::cout<<std::endl;
         if(i!=debut)
         {
