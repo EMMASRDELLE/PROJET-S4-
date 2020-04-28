@@ -19,6 +19,7 @@ class Graphe
          void VectorPropre(std::string nomFichier);
          void affichage_Resultat1();
           std::vector<int> Djikstra(int debut);
+          void afficherListe();
 
     protected:
 

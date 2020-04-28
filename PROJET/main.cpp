@@ -19,7 +19,8 @@ int main()
    g.ChargementFichierPond("Pondération.txt");
    g.afficher();
    g.Dessiner(svgout);
-   g.affichage_Resultat1();
+   //g.affichage_Resultat1();
+   g.afficherListe();
     //g.VectorPropre("Resultat2");
     DJ=g.Djikstra(1);
     int id;

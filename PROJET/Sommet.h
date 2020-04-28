@@ -18,6 +18,7 @@ class Sommet
         void ajouterSucc(const Sommet*s);
         void set_indice(int nombre);
         const std::vector <const Sommet*>& getSuccesseurs()const  {return m_successeurs; };
+        void afficher() const;
 
     protected:
 

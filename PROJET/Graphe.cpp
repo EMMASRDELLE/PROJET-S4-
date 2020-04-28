@@ -222,43 +222,52 @@ std::vector<int> Graphe::Djikstra(int debut)
     int temp=0;
 
     dists[debut]=0;
-    Sommet*actuel;
-
-    while(temp==0)
+ Sommet*actuel;
+    while(couleurs[actuel->getNum()]==0)
     {
-        for (auto s: m_sommets)
+        for (auto succ: m_sommets->getSuccesseurs())
         {
-            for (auto succ: s->getSuccesseurs())
-            {
+
                 if(( dists[s->getNum()]<dists[succ->getNum()])&&(couleurs[s->getNum()]==0))
                 {
-                    actuel=s;
+
+                    //actuel=s;
+                    h=s->getNum();
                     dists[succ->getNum()]=dists[s->getNum()];
-                    couleurs[s->getNum()]=1;
-                    std::cout<<"on est la";
+
                 }
             }
 
         }
+        couleurs[h]=1;
 
-        for( auto a: m_arretes)
+        for( int i=0;i<m_arretes.size();++i)
         {
-            if (a->getEx1()->getNum()==actuel->getNum())
+            if (m_arretes[i]->getEx1()->getNum()==h)
             {
-                if((dists[actuel->getNum()]+a->getPoids())<dists[a->getEx2()->getNum()])
+                if((dists[h]+m_arretes[i]->getPoids())<dists[m_arretes[i]->getEx2()->getNum()])
                 {
-                    dists[a->getEx2()->getNum()]=dists[actuel->getNum()]+a->getPoids();
-                    preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
-                    couleurs[a->getEx1()->getNum()]=1;
+                    std::cout<<"OK";
                     std::cout<<"LOIS";
+                    dists[m_arretes[i]->getEx2()->getNum()]=dists[h]+m_arretes[i]->getPoids();
+                    preds[m_arretes[i]->getEx2()->getNum()]=m_arretes[i]->getEx1()->getNum();
+
+
                 }
             }
         }
 
-  temp=1;
+        temp=1;
+        for (int i=0;i<m_sommets.size();++i)
+        {
+            if(couleurs[i]==0)
+            {
+                temp=0;
+            }
+        }
     }
     int id;
-    for(int i=0; i<m_sommets.size(); ++i)
+    for(int i=0;i<m_sommets.size(); ++i)
     {
 
         std::cout<<std::endl;
@@ -274,4 +283,13 @@ std::vector<int> Graphe::Djikstra(int debut)
         }
     }
     return preds;
+}
+void Graphe::afficherListe()
+{
+    std::cout<<"listes d'adjacence :"<<std::endl;
+        for (auto s : m_sommets)
+        {
+            s->afficher();
+            std::cout<<std::endl;
+        }
 }

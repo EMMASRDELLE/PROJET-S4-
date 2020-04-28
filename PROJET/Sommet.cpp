@@ -35,4 +35,9 @@ void Sommet::Dessiner(Svgfile&svgout)const
     svgout.addText(m_x*100,(m_y*100)-20,m_nom,"blue");
 }
 
-
+void Sommet::afficher() const
+    {
+        std::cout<<"     sommet "<<m_nom<<" : ";
+        for (auto s : m_successeurs)
+            std::cout<<s->getNom()<<" ";
+    }
