@@ -22,7 +22,8 @@ int main()
    //g.affichage_Resultat1();
    g.afficherListe();
     //g.VectorPropre("Resultat2");
-    DJ=g.Djikstra(1);
+    DJ=g.Djikstra(0);
+
     int id;
 
     return 0;
