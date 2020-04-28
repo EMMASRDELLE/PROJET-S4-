@@ -20,8 +20,6 @@ class Sommet
 
         void afficher() const;
 
-        const std::vector <const Sommet*> intialiserSucc(int num, std::string nom, double x, double y, double poids);
-
 
     protected:
 

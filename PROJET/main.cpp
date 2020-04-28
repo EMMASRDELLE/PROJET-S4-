@@ -12,7 +12,7 @@ void afficher_Arbre(std::vector<const Arrete*> arretes)
 }
 
 int main()
-{
+{  int debut;
    Svgfile svgout;
    std::vector <int> DJ;
    Graphe g {"Graphe2.txt"};
@@ -22,8 +22,9 @@ int main()
    //g.affichage_Resultat1();
    g.afficherListe();
     //g.VectorPropre("Resultat2");
-    g.Calcul();
-    int id;
+   std::cout<< "Entrez le sommet de depart pour calculer les chemins les plus courts"<<std::endl;
+   std::cin>>debut;
+   DJ=g.Djikstra(debut);
 
     return 0;
 }

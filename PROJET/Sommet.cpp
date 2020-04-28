@@ -33,7 +33,9 @@ void Sommet::Dessiner(Svgfile&svgout)const
 {
     svgout.addDisk(m_x*100,m_y*100,10,"black");
     svgout.addText(m_x*100,(m_y*100)-20,m_nom,"blue");
+    svgout.addText((m_x*100),(m_y*100)-50,m_indice,"green");
 }
+
 
 
 void Sommet::afficher() const
@@ -42,3 +44,4 @@ void Sommet::afficher() const
         for (auto s : m_successeurs)
             std::cout<<s->getNom()<<" ";
     }
+
