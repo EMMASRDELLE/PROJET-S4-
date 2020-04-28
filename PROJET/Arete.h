@@ -5,7 +5,7 @@
 class Arrete
 {
 public:
-    Arrete( Sommet*, Sommet*,int indice);
+    Arrete( Sommet*, Sommet*,int indice,int poids);
     void afficher()const ;
     double getIndice() const;
     const Sommet*getEx1() const;

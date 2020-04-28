@@ -1,13 +1,14 @@
 #include <iostream>
 #include "Arete.h"
 
-Arrete::Arrete( Sommet* ex1, Sommet*ex2,int indice):m_ex1{ex1},m_ex2{ex2},m_indice{indice}{}
+Arrete::Arrete( Sommet* ex1, Sommet*ex2,int indice,int poids):m_ex1{ex1},m_ex2{ex2},m_indice{indice}, m_poids{poids}{}
 
 ///GETTER
 double Arrete::getIndice()const
 {
     return m_indice;
 }
+
 const Sommet*Arrete::getEx1() const
 {
     return m_ex1;

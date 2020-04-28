@@ -62,7 +62,7 @@ Graphe::Graphe(std::string nomFichier)
         ifs>>indice2>>num1>>num2;
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture arc");
-            m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2));
+            m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2,1));
             m_sommets[num1]->ajouterSucc(m_sommets[num2]);
             if((!m_orientation)&&(num1<num2)) m_sommets[num2]->ajouterSucc(m_sommets[num1]);
     }
@@ -208,4 +208,7 @@ void Graphe::VectorPropre(std::string Nomfichier)
         Lambdapred=Lambda;
     }while((Lambda-Lambdapred>0));
 }
+void Graphe::Intermediarite()
+{
 
+}

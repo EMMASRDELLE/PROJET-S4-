@@ -18,6 +18,7 @@ class Graphe
          void sauvegarde(std::string nomFichier);
          void VectorPropre(std::string nomFichier);
          void affichage_Resultat1();
+         void Intermediarite();
 
     protected:
 
