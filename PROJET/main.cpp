@@ -21,7 +21,7 @@ int main()
    g.Dessiner(svgout);
    g.affichage_Resultat1();
     //g.VectorPropre("Resultat2");
-    DJ=g.Djikstra(1);
+    DJ=g.Djikstra(0);
 
     int id;
 

@@ -11,7 +11,7 @@ void Graphe::ChargementFichierPond(std::string nomFichier)
     std::ifstream ifs{nomFichier};
     if (!ifs)
         throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
-
+ std::vector <int> Dji;
     int taille;
     ifs >> taille;
     if ( ifs.fail() )
@@ -25,12 +25,11 @@ void Graphe::ChargementFichierPond(std::string nomFichier)
         ifs>>indice>>poids;
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture arc");
-        /*m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2));
-        m_sommets[num1]->ajouterSucc(m_sommets[num2]);
-        if((!m_orientation)&&(num1<num2)) m_sommets[num2]->ajouterSucc(m_sommets[num1]);*/
+
         m_arretes[indice]->setPoids(poids);
 
-    }
+
+    } Dji=Djikstra(4);
 }
 Graphe::Graphe(std::string nomFichier)
 {
@@ -222,51 +221,63 @@ void Graphe::VectorPropre(std::string Nomfichier)
     }
     while((Lambda-Lambdapred>0));
 }
+
 std::vector<int> Graphe::Djikstra(int debut)
 {
-    std::vector<int> couleurs((int)m_sommets.size(),0);
-    std::vector<int> dists((int)m_sommets.size(),9999);
+    std::vector<int> marquage((int)m_sommets.size(),0);
+    std::vector<int> dists((int)m_sommets.size(),99999);
     std::vector<int> preds((int)m_sommets.size(),-1);
-    int temp=0;
 
-    dists[debut]=0;
-    Sommet*actuel;
+    int temp=0;
+    dists[debut]=0;/// Poids du sommet de départ
+    int s;
+    int id;
+    int temp2=9999;
 
     while(temp==0)
     {
-        for (auto s: m_sommets)
+        temp2=9999;
+         for (int i =0; i<m_sommets.size();i++)
+    {
+        if((dists[i] < temp2)&&(marquage[i]==0))
         {
-            for (auto succ: s->getSuccesseurs())
-            {
+            s=i;
+            temp2=dists[i]; /// On prend l'arrete avec la plus petite distance
 
-                if(( dists[s->getNum()]<dists[succ->getNum()])&&(couleurs[s->getNum()]==0))
-                {
-                    actuel=s;
-                    dists[succ->getNum()]=dists[s->getNum()];
-                    couleurs[s->getNum()]=1;
-                    std::cout<<"on est la";
-                }
-            }
         }
+    }marquage [s]=1; /// On marque les sommets découverts
+
 
         for( auto a: m_arretes)
         {
-            if (a->getEx1()->getNum()==actuel->getNum())
+            if (a->getEx1()->getNum()==s)
             {
-                if((dists[actuel->getNum()]+a->getPoids())<dists[a->getEx2()->getNum()])
+                if((dists[s]+a->getPoids())<dists[a->getEx2()->getNum()])
                 {
-                    dists[a->getEx2()->getNum()]=dists[actuel->getNum()]+a->getPoids();
+                    dists[a->getEx2()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
-                    couleurs[a->getEx1()->getNum()]=1;
+                //   marquage[a->getEx2()->getNum()]=1;
                     std::cout<<"LOIS";
                 }
             }
+             if(a->getEx2()->getNum()==s)
+            {
+                if((dists[s]+a->getPoids())<dists[a->getEx1()->getNum()])
+                {
+                    dists[a->getEx1()->getNum()]=dists[s]+a->getPoids();
+                    preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
+                //   marquage[a->getEx2()->getNum()]=1;
+                }
         }
 
-  temp=1;
-
+    }  temp=1;
+     for(int i=0;i<m_sommets.size();++i)
+    {
+        if(marquage[i]==0)
+            temp=0;
     }
-    int id;
+    }
+
     for(int i=0; i<m_sommets.size(); ++i)
     {
 
@@ -277,11 +288,12 @@ std::vector<int> Graphe::Djikstra(int debut)
             id=i;
             while(preds[id]!=-1)
             {
-                std::cout<<" <--"<<preds[id];
+                std::cout<<" -->"<<preds[id];
                 id=preds[id];
             }
         }
     }
+
     return preds;
 }
 

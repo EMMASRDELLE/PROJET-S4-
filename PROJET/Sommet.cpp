@@ -36,3 +36,7 @@ void Sommet::Dessiner(Svgfile&svgout)const
 }
 
 
+  const std::vector <const Sommet*> Sommet::intialiserSucc(int num, std::string nom, double x, double y, double poids)
+  {
+
+  }
