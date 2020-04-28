@@ -88,4 +88,49 @@
 <text x="250" y="380" fill="red" >5</text>
 <line x1="300" y1="400" x2="400" y2="400" stroke="black" />
 <text x="350" y="380" fill="red" >1</text>
-<line x1="400" y1="400" 
+<line x1="400" y1="400" x2="500" y2="500" stroke="black" />
+<text x="450" y="430" fill="red" >2</text>
+<line x1="200" y1="400" x2="100" y2="500" stroke="black" />
+<text x="150" y="430" fill="red" >19</text>
+  
+
+<defs>
+    <radialGradient id="redball" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+      <stop offset="0%" style="stop-color:rgb(255,250,250)" />
+      <stop offset="3%" style="stop-color:rgb(255,250,250)" />
+      <stop offset="7%" style="stop-color:rgb(255,160,160)" />
+      <stop offset="70%" style="stop-color:rgb(255,0,0)" />
+      <stop offset="100%" style="stop-color:rgb(255,0,0)" />
+    </radialGradient>
+    <radialGradient id="greenball" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+      <stop offset="0%" style="stop-color:rgb(250,255,250)" />
+      <stop offset="3%" style="stop-color:rgb(250,255,250)" />
+      <stop offset="7%" style="stop-color:rgb(160,255,160)" />
+      <stop offset="70%" style="stop-color:rgb(0,255,0)" />
+      <stop offset="100%" style="stop-color:rgb(0,255,0)" />
+    </radialGradient>
+    <radialGradient id="blueball" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+      <stop offset="0%" style="stop-color:rgb(250,250,255)" />
+      <stop offset="3%" style="stop-color:rgb(250,250,255)" />
+      <stop offset="7%" style="stop-color:rgb(160,160,255)" />
+      <stop offset="70%" style="stop-color:rgb(0,0,255)" />
+      <stop offset="100%" style="stop-color:rgb(0,255,0)" />
+    </radialGradient>
+    <radialGradient id="yellowball" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+      <stop offset="0%" style="stop-color:rgb(255,255,250)" />
+      <stop offset="3%" style="stop-color:rgb(255,255,250)" />
+      <stop offset="7%" style="stop-color:rgb(255,255,160)" />
+      <stop offset="70%" style="stop-color:rgb(255,255,0)" />
+      <stop offset="100%" style="stop-color:rgb(255,255,0)" />
+    </radialGradient>
+    <radialGradient id="greyball" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+      <stop offset="0%" style="stop-color:rgb(250,250,250)" />
+      <stop offset="3%" style="stop-color:rgb(250,250,250)" />
+      <stop offset="7%" style="stop-color:rgb(160,160,160)" />
+      <stop offset="70%" style="stop-color:rgb(100,100,100)" />
+      <stop offset="100%" style="stop-color:rgb(100,100,100)" />
+    </radialGradient>
+  </defs>
+
+
+</svg>

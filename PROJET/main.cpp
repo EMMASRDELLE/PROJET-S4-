@@ -22,9 +22,8 @@ int main()
    //g.affichage_Resultat1();
    g.afficherListe();
     //g.VectorPropre("Resultat2");
-   std::cout<< "Entrez le sommet de depart pour calculer les chemins les plus courts"<<std::endl;
-   std::cin>>debut;
-   DJ=g.Djikstra(debut);
+  // DJ=g.Djikstra(debut);
+  g.Calculproximite();
 
 
 

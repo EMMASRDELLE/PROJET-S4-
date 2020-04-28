@@ -235,6 +235,8 @@ std::vector<int> Graphe::Djikstra(int debut)
     int s;
     int id;
     int temp2=9999;
+    float Cps;
+    float somme;
 
     dists[debut]=0;/// Poids du sommet de départ
 
@@ -261,6 +263,7 @@ std::vector<int> Graphe::Djikstra(int debut)
                 {
                     dists[a->getEx2()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
+                    somme= somme+dists[s]+a->getPoids();
 
                 }
             }
@@ -270,6 +273,7 @@ std::vector<int> Graphe::Djikstra(int debut)
                 {
                     dists[a->getEx1()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
+                    somme= somme+dists[s]+a->getPoids();
 
                 }
             }
@@ -292,11 +296,17 @@ std::vector<int> Graphe::Djikstra(int debut)
             id=i;
             while(preds[id]!=-1)
             {
-                std::cout<<" -->"<<preds[id];
+                std::cout<<" <--"<<preds[id];
                 id=preds[id];
 
             }
         }
+    } std::cout<<std::endl;
+     Cps= (m_sommets.size()-1)/somme;
+    for( auto p: m_sommets)
+    {
+          if(p->getNum()==debut)
+            std::cout<< "sommet " << p->getNom() << " a une proximite de " << Cps<<std::endl;
     }
 
     return preds;
@@ -312,3 +322,11 @@ void Graphe::afficherListe()
         }
 }
 
+void Graphe::Calculproximite()
+{
+    std::vector<int> dji;
+    for(auto p:m_sommets)
+    {
+        dji=Djikstra(p->getNum());
+    }
+}
