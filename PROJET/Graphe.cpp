@@ -175,18 +175,23 @@ void Graphe::VectorPropre(std::string Nomfichier)
         m_sommets[i]->set_indice(1);
     }
     double Somme=0;
-    double Cpred=0;
-    //do {
+    double Lambdapred=0;
+    double Lambda=0;
+    double T=0;
+    do {
         for(auto s: m_sommets)
         {
             for (auto succ:s->getSuccesseurs())
             {
-                Somme= succ->getNum()+Somme;
+              Somme= succ->getNum()+Somme;
 
             }
+            T=T+Somme;
 
+          Somme=0;
         }
-         double C=sqrt(Somme*Somme);
+
+          Lambda=sqrt(T*T);
          double G=0;
           for(auto s: m_sommets)
         {
@@ -195,11 +200,12 @@ void Graphe::VectorPropre(std::string Nomfichier)
                 G= succ->getNum()+G;
 
             }
-            L=G/C;
-                std::cout<<s->getNom()<<" "<<L<<std::endl;
-               ifs<<s->getNum()<<" "<<s->getNom()<<" "<<L<<std::endl;;
+           double Result=G/Lambda;
+           G=0;
+                std::cout<<s->getNom()<<" "<<Result<<std::endl;
+               ifs<<s->getNum()<<" "<<s->getNom()<<" "<<Result<<std::endl;;
         }
-        Cpred=C;
-    }while((C-Cpred<0.01)||(C-Cpred>0.01));
+        Lambdapred=Lambda;
+    }while((Lambda-Lambdapred>0));
 }
 
