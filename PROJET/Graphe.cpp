@@ -260,7 +260,7 @@ std::vector<int> Graphe::Djikstra(int debut)
                 {
                     dists[a->getEx2()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
-                    std::cout<<"Poids"<<dists[s]+a->getPoids();
+
                 }
             }
             if(a->getEx2()->getNum()==s)
@@ -269,7 +269,7 @@ std::vector<int> Graphe::Djikstra(int debut)
                 {
                     dists[a->getEx1()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
-                    std::cout<<"Poids:  "<<dists[s]+a->getPoids();
+
                 }
             }
 
