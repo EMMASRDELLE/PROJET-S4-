@@ -22,6 +22,7 @@ class Graphe
           void afficherListe();
           void Calculproximite();
 
+
     protected:
 
     private:

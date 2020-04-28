@@ -16,7 +16,7 @@ int main()
    Svgfile svgout;
    std::vector <int> DJ;
    Graphe g {"Graphe2.txt"};
-   g.ChargementFichierPond("Pondération2.txt");
+   g.ChargementFichierPond("Ponderation2.txt");
    g.afficher();
    g.Dessiner(svgout);
    //g.affichage_Resultat1();
@@ -24,8 +24,6 @@ int main()
     //g.VectorPropre("Resultat2");
   // DJ=g.Djikstra(debut);
   g.Calculproximite();
-
-
 
     return 0;
 }
