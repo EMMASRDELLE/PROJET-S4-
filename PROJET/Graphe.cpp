@@ -299,7 +299,22 @@ std::vector<int> Graphe::Djikstra(int debut)
 
     return preds;
 }
+void Graphe::Calcul()
+{
+    std::vector<int>Graphe;
+    double poids=0;
 
+    for (int i=0;i<m_sommets.size();++i)
+    {
+         Graphe= Djikstra(i);
+         for(int j=0;j<Graphe.size();++j)
+         {
+             poids=Graphe[j]+poids;
+         }
+         std::cout <<m_sommets[i]->getNum()<< " "<<poids;
+    }
+
+}
 void Graphe::afficherListe()
 {
     std::cout<<"listes d'adjacence :"<<std::endl;
