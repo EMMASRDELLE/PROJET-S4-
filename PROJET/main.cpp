@@ -15,6 +15,7 @@ int main()
 {
    Svgfile svgout;
    Graphe g {"Graphe.txt"};
+   g.ChargementFichierPond("Pondération.txt");
    g.afficher();
    g.Dessiner(svgout);
    g.affichage_Resultat1();

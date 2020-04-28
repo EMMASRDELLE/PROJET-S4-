@@ -4,7 +4,32 @@
 #include "Graphe.h"
 #include "svgfile.h"
 
+void Graphe::ChargementFichierPond(std::string nomFichier)
+{
+    std::ifstream ifs{nomFichier};
+    if (!ifs)
+        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
 
+        int taille;
+    ifs >> taille;
+    if ( ifs.fail() )
+        throw std::runtime_error("Probleme lecture taille du graphe");
+
+    int indice;
+    double poids;
+
+    for (int i=0; i<taille; ++i)
+    {
+        ifs>>indice>>poids;
+        if ( ifs.fail() )
+            throw std::runtime_error("Probleme lecture arc");
+            /*m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2));
+            m_sommets[num1]->ajouterSucc(m_sommets[num2]);
+            if((!m_orientation)&&(num1<num2)) m_sommets[num2]->ajouterSucc(m_sommets[num1]);*/
+            m_arretes[indice]->setPoids(poids);
+
+    }
+}
 Graphe::Graphe(std::string nomFichier)
 {
     std::ifstream ifs{nomFichier};
@@ -37,7 +62,7 @@ Graphe::Graphe(std::string nomFichier)
         ifs>>indice2>>num1>>num2;
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture arc");
-        m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2));
+            m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2));
             m_sommets[num1]->ajouterSucc(m_sommets[num2]);
             if((!m_orientation)&&(num1<num2)) m_sommets[num2]->ajouterSucc(m_sommets[num1]);
     }
@@ -95,7 +120,7 @@ void Graphe::Dessiner(Svgfile &svgout) const
 
 }
 
-
+/// Calcul de degré
 double Graphe::calculDegre(int num)
 {
     double deg=0;
@@ -136,9 +161,10 @@ void Graphe::affichage_Resultat1()
     for(size_t i=0;i<m_sommets.size();++i)
     {
         double num=calculDegre(i);
-        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" degre = "<<num<<std::endl;
+        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" = "<<num<<std::endl;
     }
 }
+
 
 void Graphe::VectorPropre(std::string Nomfichier)
 {
@@ -148,18 +174,19 @@ void Graphe::VectorPropre(std::string Nomfichier)
     {
         m_sommets[i]->set_indice(1);
     }
-    double L=0;
+    double Somme=0;
+    double Cpred=0;
     //do {
         for(auto s: m_sommets)
         {
             for (auto succ:s->getSuccesseurs())
             {
-                L= succ->getNum()+L;
+                Somme= succ->getNum()+Somme;
 
             }
 
         }
-         double C=sqrt(L*L);
+         double C=sqrt(Somme*Somme);
          double G=0;
           for(auto s: m_sommets)
         {
@@ -172,5 +199,7 @@ void Graphe::VectorPropre(std::string Nomfichier)
                 std::cout<<s->getNom()<<" "<<L<<std::endl;
                ifs<<s->getNum()<<" "<<s->getNom()<<" "<<L<<std::endl;;
         }
-   // }while(L<10);
+        Cpred=C;
+    }while((C-Cpred<0.01)||(C-Cpred>0.01));
 }
+
