@@ -322,7 +322,11 @@ void Graphe::Calculproximite(std::string Nomfichier)
     std::vector<int> dji;
     for(auto p:m_sommets)
     {
-        dji=Djikstra(p->getNum(), Nomfichier);
+
+        dji=Djikstra(p->getNum(),Nomfichier);
+    }
+}
+
 
 }}
 

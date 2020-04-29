@@ -11,7 +11,6 @@ int Sommet::getNum()const
 }
 
 
-
 /// GETTER
 
 void Sommet::set_indice(int nombre)
