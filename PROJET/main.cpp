@@ -152,7 +152,7 @@ int main()
 
         {
             color(15,0);*/
-         g.Calculproximite("CalculProx.txt");
+        // g.Calculproximite("CalculProx.txt");
             color(11,0);
     /*        std::cout<<"Voulez affichez un autre calcul? oui/non";
             color(5,0);
