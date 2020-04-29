@@ -1,19 +1,27 @@
-#ifndef SOMMET_H_INCLUDED
-#define SOMMET_H_INCLUDED
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include "svgfile.h"
 
+#ifndef SOMMET_H
+#define SOMMET_H
+
+
+#include <iostream>
+#include <string>
+#include "svgfile.h"
+#include <vector>
 class Sommet
 {
     public:
-        Sommet(int indice, char nom, double x, double y);
-        virtual~Sommet();
-        char getNom();
-        int getX() ;
-        int getY ();
-        void Dessiner(Svgfile &svgout) const;
+
+        Sommet(int num, std::string nom, double x,double y);
+        double getX()const ;
+        double getY() const;
+        int getNum()const;
+        std::string getNom() const;
+        void Dessiner(Svgfile&svgout)const;
+        void ajouterSucc(const Sommet*s);
+        void set_indice(int nombre);
+        const std::vector <const Sommet*>& getSuccesseurs()const  {return m_successeurs; };
+        void afficher() const;
+
 
 
     protected:
@@ -21,9 +29,11 @@ class Sommet
     private:
 
         int m_indice;
-        char m_nom;
-        int m_x;
-        int m_y;
+        std::string m_nom;
+        double m_x;
+        double m_y;
+        std::vector <const Sommet*> m_successeurs;
+
 };
 
-#endif // SOMMET_H_INCLUDED
+#endif // SOMMET_H
