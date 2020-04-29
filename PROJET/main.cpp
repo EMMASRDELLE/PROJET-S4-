@@ -48,7 +48,8 @@ int main()
     int choix;
     int choix2;
     int choix3;
-    std::string NomFichier;
+    char* reponse;
+  /*  std::string NomFichier;
     std::string NomFic;
     color(11,0);
     std::cout<<"\nEntrez votre choix : ";
@@ -66,18 +67,20 @@ int main()
     color(5,0);
     std::cin>>NomFic;
     std::cout<<std::endl;
-    color(14,0);
+    color(15,0);*/
 
-    Graphe g {NomFichier};
-    g.ChargementFichierPond(NomFic);
+    Graphe g {"Graphe2.txt"};
+    g.ChargementFichierPond("Ponderation2.txt");
+ //   g.afficherListe();
+    g.Intermediarite(0,1);
 
-    if(choix==1)
-    {
+  /* if(choix==1)
+    {*/
 
 
         g.afficher();
         g.Dessiner(svgout);
-         color(11,0);
+   /*     color(11,0);
         std::cout<<"\nEntrez votre choix : ";
         color(5,0);
         std::cin>> choix;
@@ -90,54 +93,93 @@ int main()
         std::cout<< "Nom du fichier de ponderation (ex: Ponderation.txt) : ";
         color(5,0);
         std::cin>>NomFic;
-        g.ChargementFichierPond(NomFic);
-        color(14,0);
+        g.ChargementFichierPond("Ponderation.txt");
+    /*    color(15,0);
         g.afficher();
         color(11,0);
         std::cout<<"\nEntrez votre choix : ";
         color(5,0);
         std::cin>> choix;
     }
-    if(choix==3)
+   /* if(choix==3)
     {
-         color(11,0);
-       std::cout<<" Quel calcul voulez vous affichez?\n"
-                  "1: Calcul de degre\n"
-                  "2: Calcul de vecteur propre\n"
-                  "3: Calcul de proximite\n"
-                  "4: Calcul d'intermediarite"
-       <<std::endl;
-       color(5,0);
-       std::cin>>choix2;
+        color(3,0);;
+        std::cout<<" Quel calcul voulez vous affichez?\n"
+                 "1: Calcul de degre\n"
+                 "2: Calcul de vecteur propre\n"
+                 "3: Calcul de proximite\n"
+                 "4: Calcul d'intermediarite"
+                 <<std::endl;
+        color(5,0);
+        std::cin>>choix2;
 
-       if (choix2==1)
+        if (choix2==1)
 
-       {color(14,0);
-           g.afficherListe();
-           char* reponse;
-        std::cout<<"Voulez affichez un autre calcul?";
+        {
+            color(15,0);*/
+
+        //     g.affichage_Resultat1();
+         //    g.sauvegarde("Resultat1");
+     /*       color(11,0);
+            std::cout<<"Voulez affichez un autre calcul? oui/non";
+            color(5,0);
             std::cin>> reponse;
 
             if (strcmp("oui",reponse)==0)
             {
-               std::cin>>choix2;
+                color(5,0);
+                std::cin>>choix2;
             }
-       }
+        }
 
-       if (choix2==2)
-       {    color(14,0);
-           g.affichage_Resultat1();
-           g.VectorPropre("Resultat2");
-       }
+        if (choix2==2)
+        {
+            color(15,0);*/
+
+         //   g.VectorPropre("Resultat2");
+        /*    color(11,0);
+            std::cout<<"Voulez affichez un autre calcul? oui/non";
+            color(5,0);
+            std::cin>> reponse;
+
+            if (strcmp("oui",reponse)==0)
+            {
+                color(5,0);
+                std::cin>>choix2;
+            }
+        }
         if (choix2==3)
-       {
 
-               g.Calculproximite("CalculProx.txt");
-       }
+        {
+            color(15,0);*/
+         g.Calculproximite("CalculProx.txt");
+            color(11,0);
+    /*        std::cout<<"Voulez affichez un autre calcul? oui/non";
+            color(5,0);
+            std::cin>> reponse;
+
+            if (strcmp("oui",reponse)==0)
+            {
+                color(5,0);
+                std::cin>>choix2;
+            }
+        }
+
         if (choix2==4)
-       {    color(14,0);
+        {
+            color(15,0);
+            color(11,0);
+            std::cout<<"Voulez affichez un autre calcul? oui/non";
+            color(5,0);
+            std::cin>> reponse;
 
-       }
+            if (strcmp("oui",reponse)==0)
+            {
+                color(5,0);
+                std::cin>>choix2;
+            }
+
+        }
 
         color(11,0);
         std::cout<<"\nEntrez votre choix : ";
@@ -151,7 +193,7 @@ int main()
         color(5,0);
         std::cin>> choix;
     }
-    color(15,0);
+    color(15,0);*/
     return 0;
 }
 
