@@ -27,16 +27,13 @@ void Graphe::ChargementFichierPond(std::string nomFichier)
             throw std::runtime_error("Probleme lecture arc");
 
         m_arretes[indice]->setPoids(poids);
-
-
-    }
-    Dji=Djikstra(4);
-}
+}}
 Graphe::Graphe(std::string nomFichier)
 {
     std::ifstream ifs{nomFichier};
     if (!ifs)
         throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
+
     ifs >> m_orientation;
     if ( ifs.fail() )
         throw std::runtime_error("Probleme lecture orientation du graphe");
@@ -75,12 +72,6 @@ Graphe::Graphe(std::string nomFichier)
 /*méthode d'affichage*/
 void Graphe::afficher()const
 {
-    std::cout << "------------------------------PROJET PISCINE-------------------------------------\n"<<std::endl;
-
-    std::cout<<" \t  Yanis CHAMSON --- Shobiya KANDASAMY --- Emma SIRANDELLE "<<std::endl;
-    std::cout<<" \t \t \t \t ING2 TD7\n\n"<<std::endl;
-
-
     if(m_orientation)
         std::cout<<"Le graphe est oriente"<<std::endl<<"  ";
     else
@@ -105,12 +96,11 @@ Graphe::~Graphe()
     }
 }
 
-
 void Graphe::Dessiner(Svgfile &svgout) const
 {
     svgout.addGrid();
 
-    ///on dessine les sommets
+    //on dessine les sommets
 
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
@@ -126,7 +116,7 @@ void Graphe::Dessiner(Svgfile &svgout) const
 
 }
 
-/// Calcul de degré
+// Calcul de degré
 double Graphe::calculDegre(int num)
 {
     double deg=0;
@@ -156,6 +146,7 @@ void Graphe:: sauvegarde(std::string nomFichier)
     {
 
         double num=calculDegre(i);
+
         if (ifs.is_open())
             ifs<<m_sommets[i]->getNum()<<m_sommets[i]->getNom()<<num<<"\n";
     }
@@ -192,10 +183,7 @@ void Graphe::VectorPropre(std::string Nomfichier)
         {
             for (auto succ:s->getSuccesseurs())
             {
-
                 Somme= succ->getNum()+Somme;
-
-
             }
             T=T+Somme;
 
@@ -225,11 +213,10 @@ void Graphe::VectorPropre(std::string Nomfichier)
 
 std::vector<int> Graphe::Djikstra(int debut)
 {
-    ///Initialisation des variables
+    //Initialisation des variables
     std::vector<int> marquage((int)m_sommets.size(),0);
-    std::vector<int> dists((int)m_sommets.size(),99999);/// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
+    std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);
-
 
     int temp=0;
     int s;
@@ -238,21 +225,21 @@ std::vector<int> Graphe::Djikstra(int debut)
     float Cps;
     float somme;
 
-    dists[debut]=0;/// Poids du sommet de départ
+    dists[debut]=0;// Poids du sommet de départ
 
     while(temp==0)
     {
         temp2=9999;
-        for (int i =0; i<m_sommets.size(); i++)
+        for (unsigned int i =0; i<m_sommets.size(); i++)
         {
             if((dists[i] < temp2)&&(marquage[i]==0))
             {
                 s=i;
-                temp2=dists[i]; /// On prend l'arrete avec la plus petite distance
+                temp2=dists[i]; // On prend l'arrete avec la plus petite distance
 
             }
         }
-        marquage [s]=1; /// On marque les sommets découverts
+        marquage [s]=1; // On marque les sommets découverts
 
 
         for( auto a:m_arretes)
@@ -279,14 +266,14 @@ std::vector<int> Graphe::Djikstra(int debut)
             }
         }
         temp=1;
-        for(int i=0; i<m_sommets.size(); ++i)
+        for(unsigned int i=0; i<m_sommets.size(); ++i)
         {
             if(marquage[i]==0)
                 temp=0;
         }
     }
 
-    for(int i=0; i<m_sommets.size(); ++i)
+    for( unsigned int i=0; i<m_sommets.size(); ++i)
     {
 
         std::cout<<std::endl;
@@ -311,7 +298,7 @@ std::vector<int> Graphe::Djikstra(int debut)
 
     return preds;
 }
-void Graphe::Calcul()
+/*void Graphe::Calcul()
 {
     std::vector<int>Graphe;
     double poids=0;
@@ -326,7 +313,7 @@ void Graphe::Calcul()
          std::cout <<m_sommets[i]->getNum()<< " "<<poids;
     }
 
-}
+}*/
 void Graphe::afficherListe()
 {
     std::cout<<"listes d'adjacence :"<<std::endl;
@@ -343,5 +330,5 @@ void Graphe::Calculproximite()
     for(auto p:m_sommets)
     {
         dji=Djikstra(p->getNum());
-    }
-}
+
+}}
