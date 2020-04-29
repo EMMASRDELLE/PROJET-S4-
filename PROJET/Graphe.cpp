@@ -347,6 +347,7 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
     int id;
     int temp2=9999;
     float somme;
+    double var;
     int cpt=0;
 
     dists[debut]=0;// Poids du sommet de départ
@@ -375,6 +376,9 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
                     dists[a->getEx2()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
                     somme= somme+dists[s]+a->getPoids();
+                      var=dists[s]+a->getPoids();
+
+std::cout<<"Sommet "<<a->getEx2()->getNom()<<" : Poids"<<var<<std::endl;
 
                 }
             }
@@ -385,6 +389,8 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
                     dists[a->getEx1()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
                     somme= somme+dists[s]+a->getPoids();
+                    var=dists[s]+a->getPoids();
+                    std::cout<<"Sommet2 "<<a->getEx1()->getNom()<<": Poids "<<var<<std::endl;;
 
                 }
             }
@@ -396,7 +402,7 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
                 temp=0;
         }
     }
-
+double cmpt3=0;
     for( unsigned int i=0; i<m_sommets.size(); ++i)
     {
 
@@ -405,31 +411,29 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
         {
             std::cout<<i;
             id=i;
+
             while(preds[id]!=-1)
             {
+
                  std::cout<<" <--"<<preds[id];
-
-
-                if((preds[id]==Sommet))
-                {
-                     cpt=cpt+1;
-
-                      std::cout<<"    aFFICHAGE   "<<cpt<<std::endl;
-
-                }
                 if(id==Sommet)
                 {
                     cpt++;
-                    std::cout<<" JNSNJNSV";
-                }
 
+                    if(dists[id]<dists[preds[id]-m_arretes[id]->getPoids()])
+                 {
+                     ++cmpt3;
+                 }
+
+                }
+                id=preds[id];
 
 
             }
         }
 
     } std::cout<<std::endl;
-  std::cout<<"compteur"<<cpt<<std::endl;
+  std::cout<<"compteur"<<cpt<<" "<<cmpt3<<std::endl;
 
     return preds;
 }
