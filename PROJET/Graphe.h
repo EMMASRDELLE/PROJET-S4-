@@ -4,6 +4,7 @@
 #include <vector>
 #include "Sommet.h"
 #include "Arete.h"
+
 #include "svgfile.h"
 
 class Graphe
@@ -22,6 +23,7 @@ class Graphe
           void afficherListe();
           std::vector<int> Intermediarite(int debut,int Sommet);
           void Calculproximite(std::string Nomfichier);
+
 
 
     protected:

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Graphe.h"
 #include "svgfile.h"
+
 #include <windows.h>
 
 void color(int t,int f)
@@ -8,6 +9,7 @@ void color(int t,int f)
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H,f*16+t);
 }
+
 
 void afficher_Arbre(std::vector<const Arrete*> arretes)
 {
@@ -37,6 +39,7 @@ void Menu()
 int main()
 
 {
+
     Menu();
     color(15,0);
     Svgfile svgout;
