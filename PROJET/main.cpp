@@ -69,9 +69,9 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Graphe2.txt"};
-    g.ChargementFichierPond("Ponderation2.txt");
- //   g.afficherListe();
+    Graphe g {"Graphe.txt"};
+    g.ChargementFichierPond("Ponderation.txt");
+    g.afficherListe();
     g.Intermediarite(0,3);
 
   /* if(choix==1)
