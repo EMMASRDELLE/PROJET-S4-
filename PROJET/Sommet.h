@@ -3,15 +3,17 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include "svgfile.h"
 
 class Sommet
 {
     public:
-        Sommet(int indice, char nom, int x, int y);
-        virtual ~Sommet();
+        Sommet(int indice, char nom, double x, double y);
+        virtual~Sommet();
         char getNom();
         int getX() ;
-        int getY () ;
+        int getY ();
+        void Dessiner(Svgfile &svgout) const;
 
 
     protected:

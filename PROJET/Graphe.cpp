@@ -1,4 +1,5 @@
 #include "Graphe.h"
+#include "svgfile.h"
 
 Graphe::Graphe(std::string nomFichier)
 {
@@ -36,7 +37,7 @@ Graphe::Graphe(std::string nomFichier)
             ifs>>indice2>>num1>>num2;
             if ( ifs.fail() )
                 throw std::runtime_error("Probleme lecture arc");
-         m_arretes.push_back(new Arrete(indice2,m_sommets[num1-1],m_sommets[num2-1]));
+         m_arretes.push_back(new Arrete(indice2,m_sommets[num1],m_sommets[num2]));
 
         }
 
@@ -70,3 +71,26 @@ Graphe::~Graphe()
         }
 
     }
+
+
+void Graphe::Dessiner(Svgfile &svgout) const
+{
+    svgout.addGrid();
+
+    ///on dessine les sommets
+
+    for(int i=0;i<m_sommets.size();++i)
+    {
+        m_sommets[i]->Dessiner(svgout);
+    }
+
+    /// on dessine les arretes
+    for(int j=0;j<m_arretes.size();++j)
+    {
+        m_arretes[j]->Dessiner(svgout);
+    }
+
+
+}
+
+

@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include "svgfile.h"
 class Arrete
 {
     public:
@@ -13,6 +14,7 @@ class Arrete
         void afficher ()const;
         Sommet* getEx1()const;
         Sommet* getEx2()const;
+        void Dessiner(Svgfile &svgout) const;
 
     protected:
 
