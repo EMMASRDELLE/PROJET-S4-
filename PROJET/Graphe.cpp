@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "Graphe.h"
 #include "svgfile.h"
+
 #include <queue>
 
 
@@ -126,6 +127,11 @@ double Graphe::calculDegre(int num)
     {
         for (auto a : m_sommets)
         {
+            ifs>>indice2>>num1>>num2;
+            if ( ifs.fail() )
+                throw std::runtime_error("Probleme lecture arc");
+         m_arretes.push_back(new Arrete(indice2,m_sommets[num1],m_sommets[num2]));
+
             if (a==m_sommets[num])
             {
                 if(b->CalculDEG(a,b)==true)
@@ -315,6 +321,30 @@ void Graphe::afficherListe()
             std::cout<<std::endl;
         }
 }
+
+    }
+
+
+void Graphe::Dessiner(Svgfile &svgout) const
+{
+    svgout.addGrid();
+
+    ///on dessine les sommets
+
+    for(int i=0;i<m_sommets.size();++i)
+    {
+        m_sommets[i]->Dessiner(svgout);
+    }
+
+    /// on dessine les arretes
+    for(int j=0;j<m_arretes.size();++j)
+    {
+        m_arretes[j]->Dessiner(svgout);
+    }
+
+
+}
+
 
 void Graphe::Calculproximite(std::string Nomfichier)
 {

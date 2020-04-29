@@ -4,6 +4,7 @@
 #include <vector>
 #include "Sommet.h"
 #include "Arete.h"
+
 #include "svgfile.h"
 
 class Graphe
@@ -21,6 +22,7 @@ class Graphe
           std::vector<int> Djikstra(int debut,std::string Nomfichier);
           void afficherListe();
           void Calculproximite(std::string Nomfichier);
+
 
 
     protected:
