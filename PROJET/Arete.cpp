@@ -28,6 +28,9 @@ void Arrete::setPoids(double poids)
     m_poids=poids;
 }
 
+
+
+
 ///AFFICHAGE
 void Arrete::afficher()const
 {
