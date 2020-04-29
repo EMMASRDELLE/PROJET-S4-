@@ -100,7 +100,6 @@ Graphe::~Graphe()
 void Graphe::Dessiner(Svgfile &svgout) const
 {
     svgout.addGrid();
-
     //on dessine les sommets
 
     for(size_t i=0; i<m_sommets.size(); ++i)
@@ -127,10 +126,6 @@ double Graphe::calculDegre(int num)
     {
         for (auto a : m_sommets)
         {
-            ifs>>indice2>>num1>>num2;
-            if ( ifs.fail() )
-                throw std::runtime_error("Probleme lecture arc");
-         m_arretes.push_back(new Arrete(indice2,m_sommets[num1],m_sommets[num2]));
 
             if (a==m_sommets[num])
             {
@@ -141,9 +136,8 @@ double Graphe::calculDegre(int num)
             }
         }
     }
-    //CG=deg/(m_sommets.size()-1);
 
-    return CG;
+    return deg;
 }
 
 void Graphe:: sauvegarde(std::string nomFichier)
@@ -168,7 +162,7 @@ void Graphe::affichage_Resultat1()
         double num=calculDegre(i);
         double CG=num/(m_sommets.size()-1);
 
-        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" = "<<CG<<std::endl;
+        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl;
     }
 }
 
@@ -213,8 +207,8 @@ void Graphe::VectorPropre(std::string Nomfichier)
 
             double Result=G/Lambda;
             G=0;
-            std::cout<<s->getNom()<<" "<<Result<<std::endl;
-            ifs<<s->getNum()<<" "<<s->getNom()<<" "<<" "<<Lambda<<" "<< Result<<std::endl;;
+            std::cout<<s->getNom()<<" Lambda : "<<Lambda<<" Calcul : "<<Result<<std::endl;
+            ifs<<s->getNum()<<" "<<s->getNom()<<" "<<Lambda<<" "<< Result<<std::endl;;
         }
         Lambdapred=Lambda;
     }
@@ -306,7 +300,7 @@ std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
     {
           if(p->getNum()==debut)
             std::cout<< "sommet " << p->getNom() << " a une proximite de " << Cps<<std::endl;
-            ifs<<p->getNom()<<Cps;
+            ifs<<p->getNom()<<" "<<Cps;
     }
 
     return preds;
@@ -320,29 +314,6 @@ void Graphe::afficherListe()
             s->afficher();
             std::cout<<std::endl;
         }
-}
-
-    }
-
-
-void Graphe::Dessiner(Svgfile &svgout) const
-{
-    svgout.addGrid();
-
-    ///on dessine les sommets
-
-    for(int i=0;i<m_sommets.size();++i)
-    {
-        m_sommets[i]->Dessiner(svgout);
-    }
-
-    /// on dessine les arretes
-    for(int j=0;j<m_arretes.size();++j)
-    {
-        m_arretes[j]->Dessiner(svgout);
-    }
-
-
 }
 
 
