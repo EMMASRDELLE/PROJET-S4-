@@ -232,13 +232,14 @@ void Graphe::VectorPropre(std::string Nomfichier)
     while((Lambda-Lambdapred>0));
 }
 
-std::vector<int> Graphe::Djikstra(int debut)
+std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
 {
-    ///Initialisation des variables
+    /// fichier
+    std::ofstream ifs{Nomfichier};
+    //Initialisation des variables
     std::vector<int> marquage((int)m_sommets.size(),0);
-    std::vector<int> dists((int)m_sommets.size(),99999);/// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
+    std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);
-
 
     int temp=0;
     int s;
@@ -247,21 +248,21 @@ std::vector<int> Graphe::Djikstra(int debut)
     float Cps;
     float somme;
 
-    dists[debut]=0;/// Poids du sommet de départ
+    dists[debut]=0;// Poids du sommet de départ
 
     while(temp==0)
     {
         temp2=9999;
-        for (int i =0; i<m_sommets.size(); i++)
+        for (unsigned int i =0; i<m_sommets.size(); i++)
         {
             if((dists[i] < temp2)&&(marquage[i]==0))
             {
                 s=i;
-                temp2=dists[i]; /// On prend l'arrete avec la plus petite distance
+                temp2=dists[i]; // On prend l'arrete avec la plus petite distance
 
             }
         }
-        marquage [s]=1; /// On marque les sommets découverts
+        marquage [s]=1; // On marque les sommets découverts
 
 
         for( auto a:m_arretes)
@@ -288,14 +289,14 @@ std::vector<int> Graphe::Djikstra(int debut)
             }
         }
         temp=1;
-        for(int i=0; i<m_sommets.size(); ++i)
+        for(unsigned int i=0; i<m_sommets.size(); ++i)
         {
             if(marquage[i]==0)
                 temp=0;
         }
     }
 
-    for(int i=0; i<m_sommets.size(); ++i)
+    for( unsigned int i=0; i<m_sommets.size(); ++i)
     {
 
         std::cout<<std::endl;
@@ -315,12 +316,10 @@ std::vector<int> Graphe::Djikstra(int debut)
     for( auto p: m_sommets)
     {
           if(p->getNum()==debut)
-
           {
              std::cout<< "sommet " << p->getNom() << "Somme : "<<somme<< " a une proximite de " << Cps<<std::endl;
             ifs<<p->getNom()<<" "<<somme<<" "<<Cps;
           }
-
 
     }
 
@@ -345,7 +344,7 @@ void Graphe::Calculproximite(std::string Nomfichier)
     std::vector<int> dji;
     for(auto p:m_sommets)
     {
-        dji=Djikstra(p->getNum());
+        dji=Djikstra(p->getNum(),Nomfichier);
     }
 }
 
