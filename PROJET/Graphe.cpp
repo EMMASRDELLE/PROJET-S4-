@@ -328,7 +328,7 @@ void Graphe::Calculproximite(std::string Nomfichier)
 }
 
 
-}}
+
 
 
 /*void Graphe::Calculintermediarite()
@@ -422,11 +422,6 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
                     cpt++;
                     std::cout<<" JNSNJNSV";
                 }
-                if((id==Sommet)&&(preds[id]==Sommet))
-                {
-                    cpt=0;
-                }
-                id=preds[id];
 
 
 
