@@ -204,7 +204,7 @@ void Graphe::VectorPropre(std::string Nomfichier)
             double Result=G/Lambda;
             G=0;
             std::cout<<s->getNom()<<" "<<Result<<std::endl;
-            ifs<<s->getNum()<<" "<<s->getNom()<<" "<<Result<<std::endl;;
+            ifs<<s->getNum()<<" "<<s->getNom()<<" "<<" "<<Lambda<<" "<< Result<<std::endl;;
         }
         Lambdapred=Lambda;
     }
@@ -320,3 +320,8 @@ void Graphe::Calculproximite(std::string Nomfichier)
         dji=Djikstra(p->getNum(), Nomfichier);
 
 }}
+
+/*void Graphe:: Intermediarite()
+{
+
+}*/
