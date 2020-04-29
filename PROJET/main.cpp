@@ -35,6 +35,7 @@ void Menu()
 
 }
 int main()
+
 {
     Menu();
     color(15,0);
@@ -72,6 +73,7 @@ int main()
 
   /* if(choix==1)
     {*/
+
 
         g.afficher();
         g.Dessiner(svgout);
@@ -144,9 +146,10 @@ int main()
             }
         }
         if (choix2==3)
+
         {
             color(15,0);*/
-        //    g.Calculproximite();
+         g.Calculproximite("CalculProx.txt");
             color(11,0);
     /*        std::cout<<"Voulez affichez un autre calcul? oui/non";
             color(5,0);
@@ -158,6 +161,7 @@ int main()
                 std::cin>>choix2;
             }
         }
+
         if (choix2==4)
         {
             color(15,0);

@@ -211,8 +211,10 @@ void Graphe::VectorPropre(std::string Nomfichier)
     while((Lambda-Lambdapred>0));
 }
 
-std::vector<int> Graphe::Djikstra(int debut)
+std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
 {
+    /// fichier
+    std::ofstream ifs{Nomfichier};
     //Initialisation des variables
     std::vector<int> marquage((int)m_sommets.size(),0);
     std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
@@ -294,26 +296,12 @@ std::vector<int> Graphe::Djikstra(int debut)
     {
           if(p->getNum()==debut)
             std::cout<< "sommet " << p->getNom() << " a une proximite de " << Cps<<std::endl;
+            ifs<<p->getNom()<<Cps;
     }
 
     return preds;
 }
-/*void Graphe::Calcul()
-{
-    std::vector<int>Graphe;
-    double poids=0;
 
-    for (int i=0;i<m_sommets.size();++i)
-    {
-         Graphe= Djikstra(i);
-         for(int j=0;j<Graphe.size();++j)
-         {
-             poids=Graphe[j]+poids;
-         }
-         std::cout <<m_sommets[i]->getNum()<< " "<<poids;
-    }
-
-}*/
 void Graphe::afficherListe()
 {
     std::cout<<"listes d'adjacence :"<<std::endl;
@@ -324,12 +312,12 @@ void Graphe::afficherListe()
         }
 }
 
-void Graphe::Calculproximite()
+void Graphe::Calculproximite(std::string Nomfichier)
 {
     std::vector<int> dji;
     for(auto p:m_sommets)
     {
-        dji=Djikstra(p->getNum());
+        dji=Djikstra(p->getNum(), Nomfichier);
 
 }}
 
