@@ -109,7 +109,7 @@ int main()
 
        if (choix2==1)
 
-       {
+       {color(14,0);
            g.afficherListe();
            char* reponse;
         std::cout<<"Voulez affichez un autre calcul?";
@@ -122,7 +122,7 @@ int main()
        }
 
        if (choix2==2)
-       {
+       {    color(14,0);
            g.affichage_Resultat1();
            g.VectorPropre("Resultat2");
        }
@@ -130,11 +130,9 @@ int main()
        {
 
                g.Calculproximite("CalculProx.txt");
-
-
        }
         if (choix2==4)
-       {
+       {    color(14,0);
 
        }
 
