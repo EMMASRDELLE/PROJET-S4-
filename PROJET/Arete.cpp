@@ -30,6 +30,7 @@ void Arrete::setPoids(double poids)
 
 
 
+
 ///AFFICHAGE
 void Arrete::afficher()const
 {

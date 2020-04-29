@@ -110,7 +110,9 @@ void Graphe::Dessiner(Svgfile &svgout) const
 {
     svgout.addGrid();
 
+
     ///on dessine les sommets
+
 
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
@@ -130,12 +132,12 @@ void Graphe::Dessiner(Svgfile &svgout) const
 double Graphe::calculDegre(int num)
 {
     double deg=0;
-    double CG=0;
 
     for (auto b: m_arretes)
     {
         for (auto a : m_sommets)
         {
+
             if (a==m_sommets[num])
             {
                 if(b->CalculDEG(a,b)==true)
@@ -145,8 +147,9 @@ double Graphe::calculDegre(int num)
             }
         }
     }
-    CG=deg/(m_sommets.size()-1);
-    return CG;
+
+    return deg;
+
 }
 
 void Graphe:: sauvegarde(std::string nomFichier)
@@ -167,7 +170,11 @@ void Graphe::affichage_Resultat1()
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
         double num=calculDegre(i);
-        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" = "<<num<<std::endl;
+
+        double CG=num/(m_sommets.size()-1);
+
+        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl;
+
     }
 }
 
@@ -215,8 +222,10 @@ void Graphe::VectorPropre(std::string Nomfichier)
 
             double Result=G/Lambda;
             G=0;
-            std::cout<<s->getNom()<<" "<<Result<<std::endl;
-            ifs<<s->getNum()<<" "<<s->getNom()<<" "<<Result<<std::endl;;
+
+            std::cout<<s->getNom()<<" Lambda : "<<Lambda<<" Calcul : "<<Result<<std::endl;
+            ifs<<s->getNum()<<" "<<s->getNom()<<" "<<Lambda<<" "<< Result<<std::endl;;
+
         }
         Lambdapred=Lambda;
     }
@@ -306,7 +315,13 @@ std::vector<int> Graphe::Djikstra(int debut)
     for( auto p: m_sommets)
     {
           if(p->getNum()==debut)
-            std::cout<< "sommet " << p->getNom() << " a une proximite de " << Cps<<std::endl;
+
+          {
+             std::cout<< "sommet " << p->getNom() << "Somme : "<<somme<< " a une proximite de " << Cps<<std::endl;
+            ifs<<p->getNom()<<" "<<somme<<" "<<Cps;
+          }
+
+
     }
 
     return preds;
@@ -322,7 +337,10 @@ void Graphe::afficherListe()
         }
 }
 
-void Graphe::Calculproximite()
+
+
+void Graphe::Calculproximite(std::string Nomfichier)
+
 {
     std::vector<int> dji;
     for(auto p:m_sommets)
