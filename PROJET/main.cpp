@@ -72,7 +72,7 @@ int main()
     Graphe g {"Graphe2.txt"};
     g.ChargementFichierPond("Ponderation2.txt");
  //   g.afficherListe();
-    g.Intermediarite(0,1);
+    g.Intermediarite(0,3);
 
   /* if(choix==1)
     {*/
