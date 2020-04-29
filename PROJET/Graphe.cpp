@@ -378,7 +378,7 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
                     somme= somme+dists[s]+a->getPoids();
                       var=dists[s]+a->getPoids();
 
-std::cout<<"Sommet "<<a->getEx2()->getNom()<<" : Poids"<<var<<std::endl;
+std::cout<<"Sommet "<<a->getEx2()->getNom()<<" : Poids = "<<var<<std::endl;
 
                 }
             }
@@ -390,7 +390,7 @@ std::cout<<"Sommet "<<a->getEx2()->getNom()<<" : Poids"<<var<<std::endl;
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
                     somme= somme+dists[s]+a->getPoids();
                     var=dists[s]+a->getPoids();
-                    std::cout<<"Sommet2 "<<a->getEx1()->getNom()<<": Poids "<<var<<std::endl;;
+                    std::cout<<"Sommet2 "<<a->getEx1()->getNom()<<": Poids = "<<var<<std::endl;;
 
                 }
             }
