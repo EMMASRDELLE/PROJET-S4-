@@ -21,6 +21,7 @@ class Graphe
           std::vector<int> Djikstra(int debut);
           void afficherListe();
           void Calculproximite();
+          std::vector<int> Intermediarite(int debut,int Sommet);
 
 
     protected:
