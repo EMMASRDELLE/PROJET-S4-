@@ -135,7 +135,8 @@ double Graphe::calculDegre(int num)
             }
         }
     }
-    CG=deg/(m_sommets.size()-1);
+    //CG=deg/(m_sommets.size()-1);
+
     return CG;
 }
 
@@ -145,10 +146,11 @@ void Graphe:: sauvegarde(std::string nomFichier)
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
 
-        double num=calculDegre(i);
+        double deg=calculDegre(i);
+        double CG=deg/(m_sommets.size()-1);
 
         if (ifs.is_open())
-            ifs<<m_sommets[i]->getNum()<<m_sommets[i]->getNom()<<num<<"\n";
+            ifs<<m_sommets[i]->getNum()<<m_sommets[i]->getNom()<<" "<<deg<<" "<< CG<<"\n";
     }
     ifs.close();
 }
@@ -158,7 +160,9 @@ void Graphe::affichage_Resultat1()
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
         double num=calculDegre(i);
-        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" = "<<num<<std::endl;
+        double CG=num/(m_sommets.size()-1);
+
+        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" = "<<CG<<std::endl;
     }
 }
 
