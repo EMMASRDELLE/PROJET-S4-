@@ -18,9 +18,10 @@ class Graphe
          void sauvegarde(std::string nomFichier);
          void VectorPropre(std::string nomFichier);
          void affichage_Resultat1();
-          std::vector<int> Djikstra(int debut);
+          std::vector<int> Djikstra(int debut,std::string Nomfichier);
           void afficherListe();
-          void Calcul();
+          void Calculproximite(std::string Nomfichier);
+
 
     protected:
 
