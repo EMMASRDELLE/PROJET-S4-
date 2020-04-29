@@ -120,7 +120,6 @@ void Graphe::Dessiner(Svgfile &svgout) const
 double Graphe::calculDegre(int num)
 {
     double deg=0;
-    double CG=0;
 
     for (auto b: m_arretes)
     {
@@ -299,8 +298,11 @@ std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
     for( auto p: m_sommets)
     {
           if(p->getNum()==debut)
-            std::cout<< "sommet " << p->getNom() << " a une proximite de " << Cps<<std::endl;
-            ifs<<p->getNom()<<" "<<Cps;
+          {
+             std::cout<< "sommet " << p->getNom() << "Somme : "<<somme<< " a une proximite de " << Cps<<std::endl;
+            ifs<<p->getNom()<<" "<<somme<<" "<<Cps;
+          }
+
     }
 
     return preds;
