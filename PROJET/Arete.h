@@ -5,11 +5,11 @@
 #include <iostream>
 #include <fstream>
 #include "svgfile.h"
-class Arrete
+class Arete
 {
     public:
-        Arrete(int indice, Sommet* ex1, Sommet* ex2);
-        virtual ~Arrete();
+        Arete(int indice, Sommet* ex1, Sommet* ex2);
+        virtual ~Arete();
         void afficher ()const;
         Sommet* getEx1()const;
         Sommet* getEx2()const;
@@ -24,16 +24,16 @@ class Arrete
 
 
 
-class Arrete
+class Arete
 {
 public:
-    Arrete( Sommet*, Sommet*,int indice,double poids);
+    Arete( Sommet*, Sommet*,int indice,double poids);
     void afficher()const ;
     double getIndice() const;
     const Sommet*getEx1() const;
     const Sommet*getEx2() const;
     void Dessiner(Svgfile &svgout) const;
-    bool CalculDEG( const Sommet*a, Arrete*b);
+    bool CalculDEG( const Sommet*a, Arete*b);
     void setPoids(double poids);
     double getPoids()const;
 
