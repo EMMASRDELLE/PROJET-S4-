@@ -100,7 +100,6 @@ Graphe::~Graphe()
 void Graphe::Dessiner(Svgfile &svgout) const
 {
     svgout.addGrid();
-
     //on dessine les sommets
 
     for(size_t i=0; i<m_sommets.size(); ++i)
@@ -121,16 +120,11 @@ void Graphe::Dessiner(Svgfile &svgout) const
 double Graphe::calculDegre(int num)
 {
     double deg=0;
-    double CG=0;
 
     for (auto b: m_arretes)
     {
         for (auto a : m_sommets)
         {
-            ifs>>indice2>>num1>>num2;
-            if ( ifs.fail() )
-                throw std::runtime_error("Probleme lecture arc");
-         m_arretes.push_back(new Arrete(indice2,m_sommets[num1],m_sommets[num2]));
 
             if (a==m_sommets[num])
             {
@@ -141,9 +135,8 @@ double Graphe::calculDegre(int num)
             }
         }
     }
-    //CG=deg/(m_sommets.size()-1);
 
-    return CG;
+    return deg;
 }
 
 void Graphe:: sauvegarde(std::string nomFichier)
@@ -168,7 +161,7 @@ void Graphe::affichage_Resultat1()
         double num=calculDegre(i);
         double CG=num/(m_sommets.size()-1);
 
-        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" = "<<CG<<std::endl;
+        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl;
     }
 }
 
@@ -213,8 +206,8 @@ void Graphe::VectorPropre(std::string Nomfichier)
 
             double Result=G/Lambda;
             G=0;
-            std::cout<<s->getNom()<<" "<<Result<<std::endl;
-            ifs<<s->getNum()<<" "<<s->getNom()<<" "<<" "<<Lambda<<" "<< Result<<std::endl;;
+            std::cout<<s->getNom()<<" Lambda : "<<Lambda<<" Calcul : "<<Result<<std::endl;
+            ifs<<s->getNum()<<" "<<s->getNom()<<" "<<Lambda<<" "<< Result<<std::endl;;
         }
         Lambdapred=Lambda;
     }
@@ -305,8 +298,11 @@ std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
     for( auto p: m_sommets)
     {
           if(p->getNum()==debut)
-            std::cout<< "sommet " << p->getNom() << " a une proximite de " << Cps<<std::endl;
-            ifs<<p->getNom()<<Cps;
+          {
+             std::cout<< "sommet " << p->getNom() << "Somme : "<<somme<< " a une proximite de " << Cps<<std::endl;
+            ifs<<p->getNom()<<" "<<somme<<" "<<Cps;
+          }
+
     }
 
     return preds;
@@ -321,39 +317,18 @@ void Graphe::afficherListe()
             std::cout<<std::endl;
         }
 }
-
-    }
-
-
-void Graphe::Dessiner(Svgfile &svgout) const
-{
-    svgout.addGrid();
-
-    ///on dessine les sommets
-
-    for(int i=0;i<m_sommets.size();++i)
-    {
-        m_sommets[i]->Dessiner(svgout);
-    }
-
-    /// on dessine les arretes
-    for(int j=0;j<m_arretes.size();++j)
-    {
-        m_arretes[j]->Dessiner(svgout);
-    }
-
-
-}
-
-
 void Graphe::Calculproximite(std::string Nomfichier)
 {
     std::vector<int> dji;
     for(auto p:m_sommets)
     {
-        dji=Djikstra(p->getNum(), Nomfichier);
 
-}}
+        dji=Djikstra(p->getNum(),Nomfichier);
+    }
+}
+
+
+
 
 
 /*void Graphe::Calculintermediarite()
@@ -372,6 +347,7 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
     int id;
     int temp2=9999;
     float somme;
+    double var;
     int cpt=0;
 
     dists[debut]=0;// Poids du sommet de départ
@@ -400,6 +376,9 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
                     dists[a->getEx2()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
                     somme= somme+dists[s]+a->getPoids();
+                      var=dists[s]+a->getPoids();
+
+std::cout<<"Sommet "<<a->getEx2()->getNom()<<" : Poids = "<<var<<std::endl;
 
                 }
             }
@@ -410,6 +389,8 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
                     dists[a->getEx1()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
                     somme= somme+dists[s]+a->getPoids();
+                    var=dists[s]+a->getPoids();
+                    std::cout<<"Sommet2 "<<a->getEx1()->getNom()<<": Poids = "<<var<<std::endl;;
 
                 }
             }
@@ -421,7 +402,7 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
                 temp=0;
         }
     }
-
+double cmpt3=0;
     for( unsigned int i=0; i<m_sommets.size(); ++i)
     {
 
@@ -430,36 +411,29 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
         {
             std::cout<<i;
             id=i;
+
             while(preds[id]!=-1)
             {
+
                  std::cout<<" <--"<<preds[id];
-
-
-                if((preds[id]==Sommet))
-                {
-                     cpt=cpt+1;
-
-                      std::cout<<"    aFFICHAGE   "<<cpt<<std::endl;
-
-                }
                 if(id==Sommet)
                 {
                     cpt++;
-                    std::cout<<" JNSNJNSV";
-                }
-                if((id==Sommet)&&(preds[id]==Sommet))
-                {
-                    cpt=0;
+
+                    if(dists[id]<dists[preds[id]-m_arretes[id]->getPoids()])
+                 {
+                     ++cmpt3;
+                 }
+
                 }
                 id=preds[id];
-
 
 
             }
         }
 
     } std::cout<<std::endl;
-  std::cout<<"compteur"<<cpt<<std::endl;
+  std::cout<<"compteur"<<cpt<<" "<<cmpt3<<std::endl;
 
     return preds;
 }

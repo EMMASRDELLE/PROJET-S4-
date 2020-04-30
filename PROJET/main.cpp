@@ -69,10 +69,10 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Graphe2.txt"};
-    g.ChargementFichierPond("Ponderation2.txt");
- //   g.afficherListe();
-    g.Intermediarite(0,1);
+    Graphe g {"Graphe.txt"};
+    g.ChargementFichierPond("Ponderation.txt");
+    g.afficherListe();
+    g.Intermediarite(0,3);
 
   /* if(choix==1)
     {*/
@@ -152,7 +152,7 @@ int main()
 
         {
             color(15,0);*/
-         g.Calculproximite("CalculProx.txt");
+        // g.Calculproximite("CalculProx.txt");
             color(11,0);
     /*        std::cout<<"Voulez affichez un autre calcul? oui/non";
             color(5,0);

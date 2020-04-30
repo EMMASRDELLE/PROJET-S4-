@@ -27,15 +27,7 @@ void Arete::setPoids(double poids)
 {
     m_poids=poids;
 }
-void Arete::afficher() const
- {
-    std::cout <<"<"<<m_indice <<" "<< m_ex1->getX()<<std::endl;
- }
 
- void Arete::Dessiner(Svgfile &svgout) const
- {
-   svgout.addLine((m_ex1->getX()),(m_ex1->getY()),(m_ex2->getX()),(m_ex2->getY()),"black");
- }
 
 ///AFFICHAGE
 void Arete::afficher()const

@@ -4,7 +4,6 @@
 #include <vector>
 #include "Sommet.h"
 #include "Arete.h"
-
 #include "svgfile.h"
 
 class Graphe
@@ -15,16 +14,14 @@ class Graphe
          void afficher()const;
          ~Graphe();
          void Dessiner(Svgfile &svgout) const;
-        double calculDegre(int num);
+         double calculDegre(int num);
          void sauvegarde(std::string nomFichier);
          void VectorPropre(std::string nomFichier);
          void affichage_Resultat1();
-          std::vector<int> Djikstra(int debut,std::string Nomfichier);
+         std::vector<int> Djikstra(int debut, std::string Nomfichier);
           void afficherListe();
+          void Calculproximite(std::string nomFichier);
           std::vector<int> Intermediarite(int debut,int Sommet);
-          void Calculproximite(std::string Nomfichier);
-
-
 
     protected:
 
