@@ -3,7 +3,6 @@
 #include <algorithm>
 #include "Graphe.h"
 #include "svgfile.h"
-
 #include <queue>
 
 
@@ -71,7 +70,7 @@ Graphe::Graphe(std::string nomFichier)
 
     }
 }
-/*méthode d'affichage*/
+///méthode d'affichage
 void Graphe::afficher()const
 {
     if(m_orientation)
@@ -97,11 +96,11 @@ Graphe::~Graphe()
         delete m_arretes[i];
     }
 }
-
+///DessinerSVG
 void Graphe::Dessiner(Svgfile &svgout) const
 {
     svgout.addGrid();
-    //on dessine les sommets
+    ///on dessine les sommets
 
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
@@ -117,7 +116,7 @@ void Graphe::Dessiner(Svgfile &svgout) const
 
 }
 
-// Calcul de degré
+/// Calcul de degré
 double Graphe::calculDegre(int num)
 {
     double deg=0;
@@ -323,25 +322,13 @@ std::vector<int> Graphe::Djikstra(int debut, double &Cps, double & somme )
     }
     std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
-    for( auto p: m_sommets)
-{
 
-
-        if(p->getNum()==debut)
-        {
-            std::cout<< "sommet " << p->getNom() << "Somme : "<<somme<< " a une proximite de " << Cps<<std::endl;
-
-           // RESULT.push_back(Cps);
-        }
-
-    }
 
     return preds;
 }
 void Graphe::sauvegarderProximite()
 {
     std::vector<int> dji;
-    std::vector<double> resultat;
     double Cps=0;
     double somme=0;
    std::ofstream ifs{"Resultat2.txt"};
@@ -361,18 +348,10 @@ void Graphe::afficherListe()
         std::cout<<std::endl;
     }
 }
-/*void Graphe::Calculproximite()
-{
-    std::vector<int> dji;
-    for(auto p:m_sommets)
-    {
-        dji=Djikstra(p->getNum());
-    }
-}
-*/
+
 std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
 {
-    //Initialisation des variables
+    ///Initialisation des variables
     std::vector<int> marquage((int)m_sommets.size(),0);
     std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);
@@ -557,7 +536,6 @@ void Graphe::VulnerabiliteDegre()
         std::cout<<" Sommet"<<m_sommets[i]->getNom()<<":"<<diff<<std::endl;
     }
 
-
 }
 void Graphe::VulnerabiliteVP()
 {
@@ -584,4 +562,121 @@ void Graphe::VulnerabiliteVP()
      }
 }
 
+void Graphe ::VulnerabiliteDjikstra()
+{
+    std::vector<double> Result;
+    std::vector<double> Result2;
+    std::vector<int> dji;
+    std::vector<int> dji2;
+    double Cps;
+    double somme;
+    double diff;
 
+  for (auto s :m_sommets)
+    {
+        dji=Djikstra(s->getNum(), Cps, somme);
+        Result.push_back(Cps);
+    }
+ for (auto v : Result)
+    {
+        std::cout<<v<<std::endl;
+    }
+    supprimer_arrete();
+ Cps=0;
+ somme=0;
+    for(auto s:m_sommets)
+    {
+        std::cout<<"heo";
+        dji2=Djikstra(s->getNum(), Cps, somme);
+        std::cout<<"salam";
+        Result2.push_back(Cps);
+
+    }
+
+     /*for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
+    {
+        diff=Result2[i]- Result[i];
+        std::cout<<" Sommet"<<m_sommets[i]->getNom()<<":"<<diff<<std::endl;
+    }*/
+
+}
+std::vector<int> Graphe::BFS(int num_s0, int & compteur)const
+    {
+        /// déclaration de la file
+        std::queue< Sommet*> file;
+        /// pour le marquage
+        std::vector<int> couleurs((int)m_sommets.size(),0);
+        ///pour noter les prédécesseurs : on note les numéros des prédécesseurs (on pourrait stocker des pointeurs sur ...)
+        std::vector<int> preds((int)m_sommets.size(),-1);
+        ///étape initiale : on enfile et on marque le sommet initial
+        file.push(m_sommets[num_s0]);
+        couleurs[num_s0]=1;
+      Sommet*s;
+      compteur=0;
+        ///tant que la file n'est pas vide
+        while(!file.empty())
+        {
+            ///on défile le prochain sommet
+            s=file.front();
+            file.pop();
+            ///pour chaque successeur du sommet défilé
+            for(auto succ:s->getSuccesseurs())
+            {
+                if(couleurs[succ->getNum()]==0)
+                {
+                    ///s'il n'est pas marqué
+                    couleurs[succ->getNum()]=1;///on le marque
+                    preds[succ->getNum()]=s->getNum();///on note son prédecesseur (=le sommet défilé)
+                    file.push(succ);///on le met dans la file
+
+                }
+            }++compteur;
+        }
+        return preds;
+}
+void Graphe::testConnexe()
+{
+    std::vector<int> bfs;
+    int compteur;
+    for(auto s: m_sommets)
+    {
+        bfs=BFS(s->getNum(), compteur);
+        afficher_parcours(s->getNum(), bfs);
+        std::cout<<std::endl;
+        std::cout<<compteur<<std::endl;
+
+    }
+
+    std::cout<<bfs.size()<<std::endl;
+if(compteur==m_sommets.size())
+{
+    std::cout<<" CE GRAPHE EST CONNEXE"<<std::endl;
+    std::cout<<std::endl;
+}
+else
+{
+    std::cout<<" NON CONNEXE"<<std::endl;
+    std::cout<<std::endl;
+}
+
+}
+void Graphe::afficher_parcours(size_t num,const std::vector<int>& arbre)
+{
+    for(size_t i=0; i<arbre.size(); ++i)
+    {
+        if(i!=num)
+        {
+            if(arbre[i]!=-1)
+            {
+                std::cout<<i<<" <-- ";
+                size_t j=arbre[i];
+                while(j!=num)
+                {
+                    std::cout<<j<<" <-- ";
+                    j=arbre[j];
+                }
+                std::cout<<j<<std::endl;
+            }
+        }
+    }
+}

@@ -69,9 +69,16 @@ int main()
 
     Graphe g {"Graphe.txt"};
 
+
     g.ChargementFichierPond("Ponderation.txt");
     g.afficherListe();
-    g.sauvegarderProximite();
+    g.testConnexe();
+    g.supprimer_arrete();
+    g.testConnexe();
+
+    //g.VulnerabiliteDjikstra();
+    //g.testConnexe();
+    //g.sauvegarderProximite();
     //g.VectorPropre();
     //g.SauvegardeVP();
     //g.VulnerabiliteVP();
