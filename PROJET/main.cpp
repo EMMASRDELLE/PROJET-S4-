@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Graphe.h"
 #include "svgfile.h"
-
+#include<time.h>
 #include <windows.h>
 
 void color(int t,int f)
@@ -67,20 +67,19 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Graphe.txt"};
+    Graphe g {"Graphe2.txt"};
 
-
-    g.ChargementFichierPond("Ponderation.txt");
+    srand(time(NULL));
+    g.ChargementFichierPond("Ponderation2.txt");
     g.afficherListe();
-    g.testConnexe();
-    g.supprimer_arrete();
-    g.testConnexe();
-
+    //g.kconnexe();
+    g.SupprimerSommet(0);
+    g.afficherListe();
     //g.VulnerabiliteDjikstra();
     //g.testConnexe();
-    //g.sauvegarderProximite();
+   // g.sauvegarderProximite();
     //g.VectorPropre();
-    //g.SauvegardeVP();
+   // g.SauvegardeVP();
     //g.VulnerabiliteVP();
     //g.Calculproximite();
     //g.Intermediarite(0,3);

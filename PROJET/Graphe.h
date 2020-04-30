@@ -22,7 +22,7 @@ public:
     void afficherListe();
     void Calculproximite();
     std::vector<int> Intermediarite(int debut,int Sommet);
-    void supprimer_arrete();
+    void supprimer_arrete(int num);
     void VulnerabiliteDegre();
     void VulnerabiliteVP();
     void SauvegardeVP();
@@ -31,7 +31,8 @@ public:
     std::vector<int> BFS(int num_s0,int & compteur)const;
      void testConnexe();
      void afficher_parcours(size_t num,const std::vector<int>& arbre);
-
+     void kconnexe();
+     void SupprimerSommet(int indice);
 
     protected:
 
