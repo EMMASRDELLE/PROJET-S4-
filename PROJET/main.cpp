@@ -69,16 +69,17 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Graphe2.txt"};
-    g.ChargementFichierPond("Ponderation2.txt");
+    Graphe g {"Graphe.txt"};
+    g.ChargementFichierPond("Ponderation1.txt");
  //   g.afficherListe();
-    g.Intermediarite(0,3);
+    //g.Intermediarite(0,3);
 
   /* if(choix==1)
     {*/
 
-
-        g.afficher();
+//g.supprimer_arrete();
+        g.VectorPropre("Resultat2.txt");
+        //g.afficher();
         g.Dessiner(svgout);
    /*     color(11,0);
         std::cout<<"\nEntrez votre choix : ";

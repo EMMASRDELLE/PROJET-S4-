@@ -51,3 +51,13 @@ void Sommet::afficher() const
             std::cout<<s->getNom()<<" ";
     }
 
+void Sommet::supp_succ(int indice)
+{
+    for(auto s: m_successeurs)
+    {
+        if(s->getNum()==indice)
+        {
+            delete s;
+        }
+    }
+}

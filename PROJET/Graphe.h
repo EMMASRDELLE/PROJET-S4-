@@ -22,6 +22,8 @@ class Graphe
           void afficherListe();
           void Calculproximite(std::string nomFichier);
           std::vector<int> Intermediarite(int debut,int Sommet);
+          void supprimer_arrete();
+
 
     protected:
 

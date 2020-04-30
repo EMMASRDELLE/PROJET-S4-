@@ -165,7 +165,6 @@ void Graphe::affichage_Resultat1()
     }
 }
 
-
 void Graphe::VectorPropre(std::string Nomfichier)
 {
     std::ofstream ifs{Nomfichier};
@@ -178,22 +177,36 @@ void Graphe::VectorPropre(std::string Nomfichier)
     double Lambdapred=0;
     double Lambda=0;
     double T=0;
-
+   std::vector<int> somme;
     do
     {
 
-        for(auto s: m_sommets)
+        for(int i=0;i<m_sommets.size();++i)
         {
-            for (auto succ:s->getSuccesseurs())
+            for (auto succ:m_sommets[i]->getSuccesseurs())
             {
                 Somme= succ->getNum()+Somme;
+
+
             }
-            T=T+Somme;
 
-            Somme=0;
+    std::cout<<"Indice: " <<m_sommets[i]->getNom()<<" "<<"Somme : "<< Somme<<std::endl;
+        Somme=0;
         }
+        double Total=0;
+for(auto s:m_sommets)
+{
+    for(auto succ:s->getSuccesseurs())
+    {
+        Somme=succ->getNum()+Somme;
+            T=Somme*Somme;
+    }
+    Somme=0;
+   Total =T+Total;
+   Lambda=sqrt(Total);
+}
 
-        Lambda=sqrt(T*T);
+
         double G=0;
         for(auto s: m_sommets)
 
@@ -211,14 +224,14 @@ void Graphe::VectorPropre(std::string Nomfichier)
         }
         Lambdapred=Lambda;
     }
-    while((Lambda-Lambdapred>0));
+    while(Lambda>=Lambdapred*1.05||Lambda<=0.95*Lambdapred);
 }
 
 std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
 {
     /// fichier
     std::ofstream ifs{Nomfichier};
-    //Initialisation des variables
+    ///Initialisation des variables
     std::vector<int> marquage((int)m_sommets.size(),0);
     std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);
@@ -347,7 +360,7 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
     int id;
     int temp2=9999;
     float somme;
-    double var;
+   int var;
     int cpt=0;
 
     dists[debut]=0;// Poids du sommet de départ
@@ -371,7 +384,7 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
         {
             if (a->getEx1()->getNum()==s)
             {
-                if((dists[s]+a->getPoids())<dists[a->getEx2()->getNum()])
+                if((dists[s]+a->getPoids())<=dists[a->getEx2()->getNum()])
                 {
                     dists[a->getEx2()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
@@ -384,7 +397,7 @@ std::cout<<"Sommet "<<a->getEx2()->getNom()<<" : Poids = "<<var<<std::endl;
             }
             if(a->getEx2()->getNum()==s)
             {
-                if((dists[s]+a->getPoids())<dists[a->getEx1()->getNum()])
+                if((dists[s]+a->getPoids())<=dists[a->getEx1()->getNum()])
                 {
                     dists[a->getEx1()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
@@ -420,7 +433,7 @@ double cmpt3=0;
                 {
                     cpt++;
 
-                    if(dists[id]<dists[preds[id]-m_arretes[id]->getPoids()])
+                    //if(m_sommets[id]<m_sommets)
                  {
                      ++cmpt3;
                  }
@@ -438,3 +451,54 @@ double cmpt3=0;
     return preds;
 }
 
+void Graphe::supprimer_arrete()
+{
+    int indice;
+    std::cout<<"selectionner l'indice de l'arrete "<<std::endl;
+    std::cin>>indice;
+
+    for(auto a: m_arretes )
+    {
+        if(a->getIndice()==indice)
+        {
+            for( auto s: m_sommets)
+            {
+                if(s==a->getEx1())
+                {
+                    if(s==a->getEx2())
+                    {
+                    for( auto succ : a->getEx1()->getSuccesseurs())
+                     {
+                         if(succ==a->getEx2())
+                         {
+                             delete(succ);
+                         }
+                     }
+                    }
+
+                }
+                if(s==a->getEx2())
+                {
+                    if(s==a->getEx1())
+                    {
+                        for( auto succ : a->getEx2()->getSuccesseurs())
+                     {
+                         if(succ==a->getEx1())
+                         {
+                             delete(succ);
+                         }
+                     }
+                    }
+
+                }
+            }
+
+            delete a;
+
+
+        }
+
+    }
+    afficherListe();
+
+}
