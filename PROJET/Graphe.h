@@ -15,15 +15,18 @@ class Graphe
          ~Graphe();
          void Dessiner(Svgfile &svgout) const;
          double calculDegre(int num);
-         void sauvegarde(std::string nomFichier);
-         void VectorPropre(std::string nomFichier);
+         void sauvegarde();
+         std::vector<double> VectorPropre( double &Lambda);
          void affichage_Resultat1();
-         std::vector<int> Djikstra(int debut, std::string Nomfichier);
+         std::vector<int> Djikstra(int debut, double &Cps, double & somme );
           void afficherListe();
-          void Calculproximite(std::string nomFichier);
+          void Calculproximite();
           std::vector<int> Intermediarite(int debut,int Sommet);
           void supprimer_arrete();
-          void Vulnerabilite();
+          void VulnerabiliteDegre();
+          void VulnerabiliteVP();
+          void SauvegardeVP();
+           void sauvegarderProximite();
 
 
     protected:

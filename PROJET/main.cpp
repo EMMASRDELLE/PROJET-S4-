@@ -71,15 +71,20 @@ int main()
 
     g.ChargementFichierPond("Ponderation.txt");
     g.afficherListe();
+    g.sauvegarderProximite();
+    //g.VectorPropre();
+    //g.SauvegardeVP();
+    //g.VulnerabiliteVP();
+    //g.Calculproximite();
     //g.Intermediarite(0,3);
 
-  g.Vulnerabilite();
+  //g.VulnerabiliteDegre();
 
   /* if(choix==1)
     {*/
 
 //g.supprimer_arrete();
-        //g.VectorPropre("Resultat2.txt");
+        //g.VectorPropre();
         //g.afficher();
         g.Dessiner(svgout);
    /*     color(11,0);

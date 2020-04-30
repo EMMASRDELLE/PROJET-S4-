@@ -140,9 +140,9 @@ double Graphe::calculDegre(int num)
     return deg;
 }
 
-void Graphe:: sauvegarde(std::string nomFichier)
+void Graphe:: sauvegarde()
 {
-    std::ofstream ifs{nomFichier};
+    std::ofstream ifs{"Resultat1.txt"};
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
 
@@ -154,7 +154,6 @@ void Graphe:: sauvegarde(std::string nomFichier)
     }
     ifs.close();
 }
-
 void Graphe::affichage_Resultat1()
 {
     for(size_t i=0; i<m_sommets.size(); ++i)
@@ -166,9 +165,9 @@ void Graphe::affichage_Resultat1()
     }
 }
 
-void Graphe::VectorPropre(std::string Nomfichier)
+std::vector<double> Graphe::VectorPropre( double &Lambda)
 {
-    std::ofstream ifs{Nomfichier};
+    std::vector<double >Resultat;
     ///initialisation
     for (size_t i=0; i<m_sommets.size(); ++i)
     {
@@ -176,7 +175,7 @@ void Graphe::VectorPropre(std::string Nomfichier)
     }
     double Somme=0;
     double Lambdapred=0;
-    double Lambda=0;
+   Lambda=0;
     double T=0;
     std::vector<int> somme;
     do
@@ -190,8 +189,6 @@ void Graphe::VectorPropre(std::string Nomfichier)
 
 
             }
-
-            std::cout<<"Indice: " <<m_sommets[i]->getNom()<<" "<<"Somme : "<< Somme<<std::endl;
             Somme=0;
         }
         double Total=0;
@@ -220,29 +217,45 @@ void Graphe::VectorPropre(std::string Nomfichier)
 
             double Result=G/Lambda;
             G=0;
-            std::cout<<s->getNom()<<" Lambda : "<<Lambda<<" Calcul : "<<Result<<std::endl;
-            ifs<<s->getNum()<<" "<<s->getNom()<<" "<<Lambda<<" "<< Result<<std::endl;;
-        }
+            Resultat.push_back(Result);
+
+
+        } std::cout<<std::endl;
         Lambdapred=Lambda;
     }
     while(Lambda>=Lambdapred*1.05||Lambda<=0.95*Lambdapred);
-}
+    return Resultat;
 
-std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
+}
+void Graphe::SauvegardeVP()
+{
+    double Lambda=0;
+    std::vector<double> vec=VectorPropre(Lambda);
+     std::ofstream ifs{"Resultat2.txt"};
+
+    for(int i=0; i< vec.size()&&i<m_sommets.size();++i)
+   {
+        std::cout<<m_sommets[i]->getNom()<<" "<<"Lambda :"<< Lambda<<" "<< "ResultatVP :"<< vec[i]<<std::endl;
+         ifs<<m_sommets[i]->getNom()<<" "<<Lambda<<" "<< vec[i]<<std::endl;
+   }
+
+}
+std::vector<int> Graphe::Djikstra(int debut, double &Cps, double & somme )
 {
     /// fichier
-    std::ofstream ifs{Nomfichier};
+    std::ofstream ifs{"CalculProximite.txt"};
     ///Initialisation des variables
     std::vector<int> marquage((int)m_sommets.size(),0);
     std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);
 
+
+
     int temp=0;
     int s;
     int id;
     int temp2=9999;
-    float Cps;
-    float somme;
+
 
     dists[debut]=0;// Poids du sommet de départ
 
@@ -311,18 +324,34 @@ std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
     std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
     for( auto p: m_sommets)
-    {
+{
+
+
         if(p->getNum()==debut)
         {
             std::cout<< "sommet " << p->getNom() << "Somme : "<<somme<< " a une proximite de " << Cps<<std::endl;
-            ifs<<p->getNom()<<" "<<somme<<" "<<Cps;
+
+           // RESULT.push_back(Cps);
         }
 
     }
 
     return preds;
 }
-
+void Graphe::sauvegarderProximite()
+{
+    std::vector<int> dji;
+    std::vector<double> resultat;
+    double Cps=0;
+    double somme=0;
+   std::ofstream ifs{"Resultat2.txt"};
+    for (auto s :m_sommets)
+    {
+        dji=Djikstra(s->getNum(), Cps, somme);
+        std::cout<<"Sommet : "<<s->getNom()<<" "<< "Somme :"<<somme<<" "<< " VP :"<< Cps<<std::endl;
+         ifs<<s->getNom()<<" "<<somme<<" "<<Cps<<std::endl;
+    }
+}
 void Graphe::afficherListe()
 {
     std::cout<<"listes d'adjacence :"<<std::endl;
@@ -332,16 +361,15 @@ void Graphe::afficherListe()
         std::cout<<std::endl;
     }
 }
-void Graphe::Calculproximite(std::string Nomfichier)
+/*void Graphe::Calculproximite()
 {
     std::vector<int> dji;
     for(auto p:m_sommets)
     {
-
-        dji=Djikstra(p->getNum(),Nomfichier);
+        dji=Djikstra(p->getNum());
     }
 }
-
+*/
 std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
 {
     //Initialisation des variables
@@ -494,7 +522,7 @@ void Graphe::supprimer_arrete()
 
 }
 
-void Graphe::Vulnerabilite()
+void Graphe::VulnerabiliteDegre()
 {
     double deg2,deg=0;
     std::vector <double> Result;
@@ -504,33 +532,56 @@ void Graphe::Vulnerabilite()
     double diff=0;
     /// SANS SUPPRESSION
 
-        for(auto s: m_sommets)
-        {
-            deg=calculDegre(s->getNum());
-            Result1=deg/(m_sommets.size()-1);
-            Result.push_back(Result1);
+    for(auto s: m_sommets)
+    {
+        deg=calculDegre(s->getNum());
+        Result1=deg/(m_sommets.size()-1);
+        Result.push_back(Result1);
 
-        }
+    }
 
-        supprimer_arrete();
+    supprimer_arrete();
 
-        ///AVEC SUPPRESSION
-        for(auto s: m_sommets)
-        {
-            deg=calculDegre(s->getNum());
-            Result2=deg/(m_sommets.size()-1);
-            Result_deux.push_back(Result2);
+    ///AVEC SUPPRESSION
+    for(auto s: m_sommets)
+    {
+        deg=calculDegre(s->getNum());
+        Result2=deg/(m_sommets.size()-1);
+        Result_deux.push_back(Result2);
 
-        }
+    }
 
-        for(int i=0;i<Result_deux.size()&&i<Result.size()&&i<m_sommets.size();++i)
-        {
-            diff=Result_deux[i]- Result[i];
-            std::cout<<" Sommet"<<m_sommets[i]->getNom()<<":"<<diff<<std::endl;
-        }
+    for(int i=0; i<Result_deux.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
+    {
+        diff=Result_deux[i]- Result[i];
+        std::cout<<" Sommet"<<m_sommets[i]->getNom()<<":"<<diff<<std::endl;
+    }
 
 
 }
-    //std::cout<<"Sommet1"<<s->getNom()<<" "<<" "<<"Diff : "<<Total<<std::endl;
+void Graphe::VulnerabiliteVP()
+{
+    double deg2,deg=0;
+    double Lambda=0;
+    std::vector <double> Result=VectorPropre(Lambda);
+    std::vector<double> Result2;
+    double Result1=0;
+
+    double diff=0;
+    /// SANS SUPPRESSION
+
+
+    supprimer_arrete();
+
+    ///AVEC SUPPRESSION
+
+   Result2=VectorPropre(Lambda);
+ std::cout<<"RESULTAT DE LA DIFFERENCE"<<std::endl;
+     for(int i=0;i<Result2.size()&&i<Result.size()&&i<m_sommets.size();++i)
+     {
+         diff=Result2[i]- Result[i];
+       std::cout<<" Sommet"<<m_sommets[i]->getNom()<<":"<<diff<<std::endl;
+     }
+}
 
 

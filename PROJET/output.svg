@@ -58,8 +58,8 @@
 <text x="200" y="250" fill="green" >4</text>
 <line x1="200" y1="100" x2="200" y2="200" stroke="black" />
 <text x="200" y="130" fill="red" >5</text>
-<line x1="0" y1="0" x2="0" y2="0" stroke="black" />
-<text x="0" y="-20" fill="red" >10</text>
+<line x1="100" y1="200" x2="200" y2="200" stroke="black" />
+<text x="150" y="180" fill="red" >10</text>
 <line x1="200" y1="200" x2="300" y2="200" stroke="black" />
 <text x="250" y="180" fill="red" >5</text>
 <line x1="200" y1="200" x2="200" y2="300" stroke="black" />
