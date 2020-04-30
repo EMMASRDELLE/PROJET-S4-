@@ -70,9 +70,11 @@ int main()
     color(15,0);*/
 
     Graphe g {"Graphe.txt"};
-    g.ChargementFichierPond("Ponderation1.txt");
- //   g.afficherListe();
-    //g.Intermediarite(0,3);
+
+    g.ChargementFichierPond("Ponderation.txt");
+    g.afficherListe();
+    g.Intermediarite(0,3);
+
 
   /* if(choix==1)
     {*/
