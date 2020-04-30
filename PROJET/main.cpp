@@ -10,7 +10,6 @@ void color(int t,int f)
     SetConsoleTextAttribute(H,f*16+t);
 }
 
-
 void afficher_Arbre(std::vector<Arete*> arretes)
 {
     std::cout<<"Liste :"<<std::endl;
@@ -37,7 +36,6 @@ void Menu()
 
 }
 int main()
-
 {
 
     Menu();
@@ -73,14 +71,15 @@ int main()
 
     g.ChargementFichierPond("Ponderation.txt");
     g.afficherListe();
-    g.Intermediarite(0,3);
+    //g.Intermediarite(0,3);
 
+  g.Vulnerabilite();
 
   /* if(choix==1)
     {*/
 
 //g.supprimer_arrete();
-        g.VectorPropre("Resultat2.txt");
+        //g.VectorPropre("Resultat2.txt");
         //g.afficher();
         g.Dessiner(svgout);
    /*     color(11,0);

@@ -28,7 +28,8 @@ void Graphe::ChargementFichierPond(std::string nomFichier)
             throw std::runtime_error("Probleme lecture arc");
 
         m_arretes[indice]->setPoids(poids);
-}}
+    }
+}
 Graphe::Graphe(std::string nomFichier)
 {
     std::ifstream ifs{nomFichier};
@@ -177,11 +178,11 @@ void Graphe::VectorPropre(std::string Nomfichier)
     double Lambdapred=0;
     double Lambda=0;
     double T=0;
-   std::vector<int> somme;
+    std::vector<int> somme;
     do
     {
 
-        for(int i=0;i<m_sommets.size();++i)
+        for(int i=0; i<m_sommets.size(); ++i)
         {
             for (auto succ:m_sommets[i]->getSuccesseurs())
             {
@@ -190,21 +191,21 @@ void Graphe::VectorPropre(std::string Nomfichier)
 
             }
 
-    std::cout<<"Indice: " <<m_sommets[i]->getNom()<<" "<<"Somme : "<< Somme<<std::endl;
-        Somme=0;
+            std::cout<<"Indice: " <<m_sommets[i]->getNom()<<" "<<"Somme : "<< Somme<<std::endl;
+            Somme=0;
         }
         double Total=0;
-for(auto s:m_sommets)
-{
-    for(auto succ:s->getSuccesseurs())
-    {
-        Somme=succ->getNum()+Somme;
-            T=Somme*Somme;
-    }
-    Somme=0;
-   Total =T+Total;
-   Lambda=sqrt(Total);
-}
+        for(auto s:m_sommets)
+        {
+            for(auto succ:s->getSuccesseurs())
+            {
+                Somme=succ->getNum()+Somme;
+                T=Somme*Somme;
+            }
+            Somme=0;
+            Total =T+Total;
+            Lambda=sqrt(Total);
+        }
 
 
         double G=0;
@@ -306,15 +307,16 @@ std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
 
             }
         }
-    } std::cout<<std::endl;
-     Cps= (m_sommets.size()-1)/somme;
+    }
+    std::cout<<std::endl;
+    Cps= (m_sommets.size()-1)/somme;
     for( auto p: m_sommets)
     {
-          if(p->getNum()==debut)
-          {
-             std::cout<< "sommet " << p->getNom() << "Somme : "<<somme<< " a une proximite de " << Cps<<std::endl;
+        if(p->getNum()==debut)
+        {
+            std::cout<< "sommet " << p->getNom() << "Somme : "<<somme<< " a une proximite de " << Cps<<std::endl;
             ifs<<p->getNom()<<" "<<somme<<" "<<Cps;
-          }
+        }
 
     }
 
@@ -324,11 +326,11 @@ std::vector<int> Graphe::Djikstra(int debut, std::string Nomfichier)
 void Graphe::afficherListe()
 {
     std::cout<<"listes d'adjacence :"<<std::endl;
-        for (auto s : m_sommets)
-        {
-            s->afficher();
-            std::cout<<std::endl;
-        }
+    for (auto s : m_sommets)
+    {
+        s->afficher();
+        std::cout<<std::endl;
+    }
 }
 void Graphe::Calculproximite(std::string Nomfichier)
 {
@@ -340,14 +342,6 @@ void Graphe::Calculproximite(std::string Nomfichier)
     }
 }
 
-
-
-
-
-/*void Graphe::Calculintermediarite()
-{
-
-}*/
 std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
 {
     //Initialisation des variables
@@ -360,7 +354,7 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
     int id;
     int temp2=9999;
     float somme;
-   int var;
+    int var;
     int cpt=0;
 
     dists[debut]=0;// Poids du sommet de départ
@@ -389,9 +383,9 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
                     dists[a->getEx2()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
                     somme= somme+dists[s]+a->getPoids();
-                      var=dists[s]+a->getPoids();
+                    var=dists[s]+a->getPoids();
 
-std::cout<<"Sommet "<<a->getEx2()->getNom()<<" : Poids = "<<var<<std::endl;
+                    std::cout<<"Sommet "<<a->getEx2()->getNom()<<" : Poids = "<<var<<std::endl;
 
                 }
             }
@@ -415,7 +409,7 @@ std::cout<<"Sommet "<<a->getEx2()->getNom()<<" : Poids = "<<var<<std::endl;
                 temp=0;
         }
     }
-double cmpt3=0;
+    double cmpt3=0;
     for( unsigned int i=0; i<m_sommets.size(); ++i)
     {
 
@@ -428,15 +422,15 @@ double cmpt3=0;
             while(preds[id]!=-1)
             {
 
-                 std::cout<<" <--"<<preds[id];
+                std::cout<<" <--"<<preds[id];
                 if(id==Sommet)
                 {
                     cpt++;
 
                     //if(m_sommets[id]<m_sommets)
-                 {
-                     ++cmpt3;
-                 }
+                    {
+                        ++cmpt3;
+                    }
 
                 }
                 id=preds[id];
@@ -445,8 +439,9 @@ double cmpt3=0;
             }
         }
 
-    } std::cout<<std::endl;
-  std::cout<<"compteur"<<cpt<<" "<<cmpt3<<std::endl;
+    }
+    std::cout<<std::endl;
+    std::cout<<"compteur"<<cpt<<" "<<cmpt3<<std::endl;
 
     return preds;
 }
@@ -456,30 +451,40 @@ void Graphe::supprimer_arrete()
     int indice;
     std::cout<<"selectionner l'indice de l'arrete "<<std::endl;
     std::cin>>indice;
-  Sommet* s1;
-      Sommet* s2;
+    Sommet* s1;
+    Sommet* s2;
 
     for(auto a: m_arretes)/// on parcours la liste d'arêtes
     {
         if(a->getIndice()==indice)/// si l indice demandé est trouvé dans la liste arrête
         {
             ///on a les 2 sommets extremités
-             s1=a->getEx1();
-             s2=a->getEx2();
+            s1=a->getEx1();
+            s2=a->getEx2();
 
 
-            for(size_t i=0;i<s1->getSuccesseurs().size();++i)
+            for(size_t i=0; i<s1->getSuccesseurs().size(); ++i)
             {
                 if((s1->getSuccesseurs())[i]->getNum()==s2->getNum())
                 {
 
-                        s1->getSuccesseurs().erase(s1->getSuccesseurs().begin()+i);
+                    s1->getSuccesseurs().erase(s1->getSuccesseurs().begin()+i);
 
                 }
             }
+            for(size_t i=0; i<s2->getSuccesseurs().size(); ++i)
+            {
+                if((s2->getSuccesseurs())[i]->getNum()==s1->getNum())
+                {
+
+                    s2->getSuccesseurs().erase(s2->getSuccesseurs().begin()+i);
+
+                }
+
+            }
 
 
-        delete a;
+            delete a;
 
 
         }
@@ -488,5 +493,44 @@ void Graphe::supprimer_arrete()
     afficherListe();
 
 }
+
+void Graphe::Vulnerabilite()
+{
+    double deg2,deg=0;
+    std::vector <double> Result;
+    std::vector<double> Result_deux;
+    double Result1=0;
+    double Result2=0;
+    double diff=0;
+    /// SANS SUPPRESSION
+
+        for(auto s: m_sommets)
+        {
+            deg=calculDegre(s->getNum());
+            Result1=deg/(m_sommets.size()-1);
+            Result.push_back(Result1);
+
+        }
+
+        supprimer_arrete();
+
+        ///AVEC SUPPRESSION
+        for(auto s: m_sommets)
+        {
+            deg=calculDegre(s->getNum());
+            Result2=deg/(m_sommets.size()-1);
+            Result_deux.push_back(Result2);
+
+        }
+
+        for(int i=0;i<Result_deux.size()&&i<Result.size()&&i<m_sommets.size();++i)
+        {
+            diff=Result_deux[i]- Result[i];
+            std::cout<<" Sommet"<<m_sommets[i]->getNom()<<":"<<diff<<std::endl;
+        }
+
+
+}
+    //std::cout<<"Sommet1"<<s->getNom()<<" "<<" "<<"Diff : "<<Total<<std::endl;
 
 

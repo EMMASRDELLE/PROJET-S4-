@@ -23,6 +23,7 @@ class Graphe
           void Calculproximite(std::string nomFichier);
           std::vector<int> Intermediarite(int debut,int Sommet);
           void supprimer_arrete();
+          void Vulnerabilite();
 
 
     protected:

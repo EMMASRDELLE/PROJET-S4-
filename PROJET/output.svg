@@ -43,23 +43,23 @@
 <text x="1005" y="15" fill="lightgrey" >1000</text>
 <circle cx="200" cy="100" r="10" fill="black" />
 <text x="200" y="80" fill="blue" >A</text>
-<text x="200" y="50" fill="green" >1</text>
+<text x="200" y="50" fill="green" >0</text>
 <circle cx="100" cy="200" r="10" fill="black" />
 <text x="100" y="180" fill="blue" >B</text>
 <text x="100" y="150" fill="green" >1</text>
 <circle cx="200" cy="200" r="10" fill="black" />
 <text x="200" y="180" fill="blue" >C</text>
-<text x="200" y="150" fill="green" >1</text>
+<text x="200" y="150" fill="green" >2</text>
 <circle cx="300" cy="200" r="10" fill="black" />
 <text x="300" y="180" fill="blue" >D</text>
-<text x="300" y="150" fill="green" >1</text>
+<text x="300" y="150" fill="green" >3</text>
 <circle cx="200" cy="300" r="10" fill="black" />
 <text x="200" y="280" fill="blue" >E</text>
-<text x="200" y="250" fill="green" >1</text>
+<text x="200" y="250" fill="green" >4</text>
 <line x1="200" y1="100" x2="200" y2="200" stroke="black" />
 <text x="200" y="130" fill="red" >5</text>
-<line x1="100" y1="200" x2="200" y2="200" stroke="black" />
-<text x="150" y="180" fill="red" >10</text>
+<line x1="0" y1="0" x2="0" y2="0" stroke="black" />
+<text x="0" y="-20" fill="red" >10</text>
 <line x1="200" y1="200" x2="300" y2="200" stroke="black" />
 <text x="250" y="180" fill="red" >5</text>
 <line x1="200" y1="200" x2="200" y2="300" stroke="black" />
