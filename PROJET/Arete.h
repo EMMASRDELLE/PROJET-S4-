@@ -15,8 +15,8 @@ public:
     Arete( Sommet*, Sommet*,int indice,double poids);
     void afficher()const ;
     double getIndice() const;
-    const Sommet*getEx1() const;
-    const Sommet*getEx2() const;
+    Sommet*getEx1() const;
+    Sommet*getEx2() const;
     void Dessiner(Svgfile &svgout) const;
     bool CalculDEG( const Sommet*a, Arete*b);
     void setPoids(double poids);
@@ -25,8 +25,8 @@ public:
 protected:
 
 private:
-    const Sommet* m_ex1;
-    const Sommet* m_ex2;
+     Sommet* m_ex1;
+     Sommet* m_ex2;
     int m_indice;
     double m_poids;
 };

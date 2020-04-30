@@ -10,11 +10,11 @@ double Arete::getIndice()const
     return m_indice;
 }
 
-const Sommet*Arete::getEx1() const
+ Sommet*Arete::getEx1() const
 {
     return m_ex1;
 }
-const Sommet*Arete::getEx2() const
+ Sommet*Arete::getEx2() const
 {
     return m_ex2;
 }

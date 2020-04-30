@@ -30,7 +30,7 @@ class Graphe
     private:
         int m_orientation;
         std::vector<Sommet*> m_sommets;
-        std::vector<Arrete*> m_arretes;
+        std::vector<Arete*> m_arretes;
 };
 
 #endif // GRAPHE_H

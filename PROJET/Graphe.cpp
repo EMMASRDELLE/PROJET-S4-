@@ -63,7 +63,7 @@ Graphe::Graphe(std::string nomFichier)
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture arc");
 
-        m_arretes.push_back(new Arrete(m_sommets[num1],m_sommets[num2],indice2,1));
+        m_arretes.push_back(new Arete(m_sommets[num1],m_sommets[num2],indice2,1));
         m_sommets[num1]->ajouterSucc(m_sommets[num2]);
         if((!m_orientation)&&(num1<num2))
             m_sommets[num2]->ajouterSucc(m_sommets[num1]);
@@ -456,44 +456,30 @@ void Graphe::supprimer_arrete()
     int indice;
     std::cout<<"selectionner l'indice de l'arrete "<<std::endl;
     std::cin>>indice;
+  Sommet* s1;
+      Sommet* s2;
 
-    for(auto a: m_arretes )
+    for(auto a: m_arretes)/// on parcours la liste d'arêtes
     {
-        if(a->getIndice()==indice)
+        if(a->getIndice()==indice)/// si l indice demandé est trouvé dans la liste arrête
         {
-            for( auto s: m_sommets)
-            {
-                if(s==a->getEx1())
-                {
-                    if(s==a->getEx2())
-                    {
-                    for( auto succ : a->getEx1()->getSuccesseurs())
-                     {
-                         if(succ==a->getEx2())
-                         {
-                             delete(succ);
-                         }
-                     }
-                    }
+            ///on a les 2 sommets extremités
+             s1=a->getEx1();
+             s2=a->getEx2();
 
-                }
-                if(s==a->getEx2())
+
+            for(size_t i=0;i<s1->getSuccesseurs().size();++i)
+            {
+                if((s1->getSuccesseurs())[i]->getNum()==s2->getNum())
                 {
-                    if(s==a->getEx1())
-                    {
-                        for( auto succ : a->getEx2()->getSuccesseurs())
-                     {
-                         if(succ==a->getEx1())
-                         {
-                             delete(succ);
-                         }
-                     }
-                    }
+
+                        s1->getSuccesseurs().erase(s1->getSuccesseurs().begin()+i);
 
                 }
             }
 
-            delete a;
+
+        delete a;
 
 
         }
@@ -502,3 +488,5 @@ void Graphe::supprimer_arrete()
     afficherListe();
 
 }
+
+

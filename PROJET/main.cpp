@@ -11,7 +11,7 @@ void color(int t,int f)
 }
 
 
-void afficher_Arbre(std::vector<const Arrete*> arretes)
+void afficher_Arbre(std::vector<Arete*> arretes)
 {
     std::cout<<"Liste :"<<std::endl;
     for (auto a: arretes)
