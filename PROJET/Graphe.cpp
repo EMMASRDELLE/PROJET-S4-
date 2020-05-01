@@ -253,7 +253,7 @@ std::vector<int> Graphe::Djikstra(int debut, double &Cps, double & somme )
     int id;
     int temp2=9999;
 
-    dists[debut]=0;// Poids du sommet de départ
+    dists[debut]=0;/// Poids du sommet de départ
 
     while(temp==0)
     {
@@ -264,16 +264,15 @@ std::vector<int> Graphe::Djikstra(int debut, double &Cps, double & somme )
             {
                 s=i;
 
-                temp2=dists[i]; // On prend l'arrete avec la plus petite distance
+                temp2=dists[i]; /// On prend l'arrete avec la plus petite distance
             }
         }
-        marquage [s]=1; // On marque les sommets découverts
+        marquage [s]=1; /// On marque les sommets découverts
 
 
         for( auto a:m_arretes)
         {
 
-            std::cout<<" +";
             if (a->getEx1()->getNum()==s)
             {
                 if((dists[s]+a->getPoids())<dists[a->getEx2()->getNum()])
@@ -281,28 +280,23 @@ std::vector<int> Graphe::Djikstra(int debut, double &Cps, double & somme )
                     dists[a->getEx2()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
                     somme= somme+dists[s]+a->getPoids();
-                    std::cout<<" EEEEH OUAIS";
                 }
             }
             if(a->getEx2()->getNum()==s)
             {
                 if((dists[s]+a->getPoids())<dists[a->getEx1()->getNum()])
                 {
-                    std::cout<<" YEAAHHH";
                     dists[a->getEx1()->getNum()]=dists[s]+a->getPoids();
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
                     somme= somme+dists[s]+a->getPoids();
                 }
             }
-            std::cout<<"MA BELLE";
         }
         temp=1;
-        std::cout<<"SORTI DE BOUCLE";
         for(unsigned int i=0; i<m_sommets.size(); ++i)
         {
             if(marquage[i]==0)
                 temp=0;
-            std::cout<<" le marquage est done";
         }
     }
 
@@ -457,18 +451,16 @@ std::vector<int> Graphe::Intermediarite(int debut,int Sommet)
 
 void Graphe::supprimer_arrete( int indice)
 {
-
     Sommet* s1;
     Sommet* s2;
 
-    for(auto a: m_arretes)/// on parcours la liste d'arêtes
+    for(int j=0;j<m_arretes.size();++j)/// on parcours la liste d'arêtes
     {
-        if(a->getIndice()==indice)/// si l indice demandé est trouvé dans la liste arrête
+        if(m_arretes[j]->getIndice()==indice)/// si l indice demandé est trouvé dans la liste arrête
         {
             ///on a les 2 sommets extremités
-            s1=a->getEx1();
-            s2=a->getEx2();
-
+            s1=m_arretes[j]->getEx1();
+            s2=m_arretes[j]->getEx2();
 
             for(size_t i=0; i<s1->getSuccesseurs().size(); ++i)
             {
@@ -491,12 +483,13 @@ void Graphe::supprimer_arrete( int indice)
             }
 
 
-            delete a;
+            delete m_arretes[j];
+            m_arretes.erase(m_arretes.begin()+j);
 
 
         }
-
     }
+
     std::cout <<"On affiche la nouvelle liste : "<<std::endl;
     afficherListe();
 
@@ -576,7 +569,7 @@ void Graphe ::VulnerabiliteDjikstra()
     double somme;
     double diff;
 
-    for (auto s :m_sommets)
+   for (auto s :m_sommets)
     {
         dji=Djikstra(s->getNum(), Cps, somme);
         Result.push_back(Cps);
@@ -589,22 +582,18 @@ void Graphe ::VulnerabiliteDjikstra()
     std::cout<<" choisis l arrete que tu veux supp"<<std::endl;
     std::cin>>num;
     supprimer_arrete(num);
-    Cps=0;
-    somme=0;
     for(auto s:m_sommets)
     {
-        std::cout<<"heo";
         Djikstra(s->getNum(), Cps, somme);
-        std::cout<<"salam";
         Result2.push_back(Cps);
 
     }
 
-    /*for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
+   for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
-       diff=Result2[i]- Result[i];
-       std::cout<<" Sommet"<<m_sommets[i]->getNom()<<":"<<diff<<std::endl;
-    }*/
+        diff=Result2[i]- Result[i];
+        std::cout<<" Sommet"<<m_sommets[i]->getNom()<<"  "<<" "<< "Difference : "<<diff<<std::endl;
+    }
 
 }
 std::vector<int> Graphe::BFS(int num_s0, int & compteur)const
@@ -686,34 +675,34 @@ void Graphe::afficher_parcours(size_t num,const std::vector<int>& arbre)
     }
 }
 
-/*void Graphe::kconnexe()
+void Graphe::kconnexe()
 {
     std::vector<int> bfs;
     int compteur;
     int test=0;
-int num=0;
+    int alea=0;
     do
     {
+        alea=rand()%(m_sommets.size());
+
+        for(auto s: m_sommets)
+        {
+            bfs=BFS(s->getNum(), compteur);
+            std::cout<<std::endl;
+
+        }
+        std::cout<<compteur;
+            if(compteur==m_sommets.size())
+            {
+                test=test+1;
+            }
+
+        }
+        while (compteur==m_sommets.size());
+        std::cout<<test<<"-arrete connexe "<<std::endl;
+    }
 
 
-    for(auto s: m_sommets)
-    {
-        bfs=BFS(s->getNum(), compteur);
-        std::cout<<std::endl;
-
-
-    std::cout<<" Saisie une arrete au hasard à supp"<<std::endl;
-    //std::cin>>num;
-    supprimer_arrete(s->getNum());
-    if(compteur==m_sommets.size())
-    {
-        test=test+1;
-    }}
-
-    }while (compteur==m_sommets.size());
-std::cout<<test<<"-arrete connexe "<<std::endl;
-}
-*/
 
 void Graphe::SupprimerSommet(int indice)
 {

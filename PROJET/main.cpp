@@ -73,9 +73,9 @@ int main()
     g.ChargementFichierPond("Ponderation2.txt");
     g.afficherListe();
     //g.kconnexe();
-    g.SupprimerSommet(0);
-    g.afficherListe();
-    //g.VulnerabiliteDjikstra();
+   // g.SupprimerSommet(0);
+
+   g.VulnerabiliteDjikstra();
     //g.testConnexe();
    // g.sauvegarderProximite();
     //g.VectorPropre();

@@ -5,7 +5,7 @@
 Arete::Arete( Sommet* ex1, Sommet*ex2,int indice,double poids):m_ex1{ex1},m_ex2{ex2},m_indice{indice}, m_poids{poids}{}
 
 ///GETTER
-double Arete::getIndice()const
+int Arete::getIndice()const
 {
     return m_indice;
 }

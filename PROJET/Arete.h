@@ -14,7 +14,7 @@ class Arete
 public:
     Arete( Sommet*, Sommet*,int indice,double poids);
     void afficher()const ;
-    double getIndice() const;
+    int getIndice() const;
     Sommet*getEx1() const;
     Sommet*getEx2() const;
     void Dessiner(Svgfile &svgout) const;
