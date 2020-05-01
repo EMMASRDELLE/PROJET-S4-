@@ -22,6 +22,7 @@ class Sommet
         std::vector < Sommet*>& getSuccesseurs() {return m_successeurs; };
         void afficher() const;
         void supp_succ( int indice);
+        void colorier(Svgfile&svgout, int num);
 
 
     protected:

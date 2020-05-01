@@ -61,3 +61,44 @@ void Sommet::supp_succ(int indice)
         }
     }
 }
+void Sommet::colorier(Svgfile&svgout, int num)
+{
+    if(num==0)/// full important
+    {
+        svgout.addDisk(m_x*100,m_y*100,10,"lime");
+    }
+
+    if(num==1)
+        svgout.addDisk(m_x*100,m_y*100,10,"limegreen");
+
+    if(num==2)
+    {
+        svgout.addDisk(m_x*100,m_y*100,10,"palegreen");
+    }
+
+    if(num==3)
+    {
+        svgout.addDisk(m_x*100,m_y*100,10,"coral");
+    }
+
+    if(num==4)
+    {
+        svgout.addDisk(m_x*100,m_y*100,10,"orange");
+    }
+
+    if(num==5)
+    {
+        svgout.addDisk(m_x*100,m_y*100,10,"orangered");
+    }
+
+
+    if(num==6)/// quand c est vraiment pas important
+    {
+
+        svgout.addDisk(m_x*100,m_y*100,10,"red");
+    }
+
+    svgout.addText((m_x*100)-5,(m_y*100)+5,m_indice,"black");
+
+
+}

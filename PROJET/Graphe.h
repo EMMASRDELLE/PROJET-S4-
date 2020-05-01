@@ -17,7 +17,7 @@ public:
     double calculDegre(int num);
     void sauvegarde();
     std::vector<double> VectorPropre( double &Lambda);
-    void affichage_Resultat1();
+    void affichage_Resultat1(Svgfile &svgout);
     std::vector<int> Djikstra(int debut, double &Cps, double & somme );
     void afficherListe();
     void Calculproximite();
@@ -25,9 +25,9 @@ public:
     void supprimer_arrete(int num);
     void VulnerabiliteDegre(int num);
     void VulnerabiliteVP(int num);
-    void SauvegardeVP();
-    void VulnerabiliteDjikstra();
-    void sauvegarderProximite();
+    void SauvegardeVP(Svgfile &svgout);
+    void VulnerabiliteDjikstra(int num);
+    void sauvegarderProximite(Svgfile &svgout);
     std::vector<int> BFS(int num_s0,int & compteur)const;
      void testConnexe();
      void afficher_parcours(size_t num,const std::vector<int>& arbre);

@@ -154,16 +154,68 @@ void Graphe:: sauvegarde()
     }
     ifs.close();
 }
-void Graphe::affichage_Resultat1()
+void Graphe::affichage_Resultat1(Svgfile &svgout)
 {
+        int test;
+    std::vector<double>vec;
+    std::vector <double> bon;
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
         double num=calculDegre(i);
         double CG=num/(m_sommets.size()-1);
+        vec.push_back(CG);
+
 
         std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl;
     }
-}
+
+
+std::sort (vec.begin(), vec.end(), [](double a1, double a2)
+    {
+        return a1>a2;
+    });
+    for(auto s:m_sommets)
+ {
+      double num=calculDegre(s->getNum());
+    double CG=num/(m_sommets.size()-1);
+
+     if(CG==vec[0])///100%
+     {
+         s->colorier(svgout,0);
+
+
+     }
+
+     if(CG<vec[0]&&CG>0.90*vec[0])///90%-100%
+     {
+         s->colorier(svgout,1);
+     }
+     if(CG>vec[0]*0.80&&CG<vec[0]*0.90)///80%-90%
+     {
+         s->colorier(svgout,2);
+     }
+      if(CG>vec[0]*0.60&&CG<vec[0]*0.80)///60%-80%
+     {
+
+         s->colorier(svgout,3);
+     }
+
+      if(CG>vec[0]*0.50&&CG<vec[0]*0.60)///50%-60%
+     {
+         s->colorier(svgout,4);
+     }
+
+     if(CG>vec[vec.size()-1]&&CG<vec[0]*0.50)///<50%
+     {
+         s->colorier(svgout,5);
+     }
+
+     if( CG==vec[vec.size()-1])/// egal a la plus petite
+     {
+         s->colorier(svgout,6);
+     }
+ }
+     }
 
 std::vector<double> Graphe::VectorPropre( double &Lambda)
 {
@@ -228,10 +280,13 @@ std::vector<double> Graphe::VectorPropre( double &Lambda)
     return Resultat;
 
 }
-void Graphe::SauvegardeVP()
+void Graphe::SauvegardeVP(Svgfile&svgout)
 {
     double Lambda=0;
     std::vector<double> vec=VectorPropre(Lambda);
+    Lambda=0;
+    std::vector<double>vec2=VectorPropre(Lambda);
+    Lambda=0;
     std::ofstream ifs{"Resultat2.txt"};
 
     for(int i=0; i< vec.size()&&i<m_sommets.size(); ++i)
@@ -239,8 +294,50 @@ void Graphe::SauvegardeVP()
         std::cout<<m_sommets[i]->getNom()<<" "<<"Lambda :"<< Lambda<<" "<< "ResultatVP :"<< vec[i]<<std::endl;
         ifs<<m_sommets[i]->getNom()<<" "<<Lambda<<" "<< vec[i]<<std::endl;
     }
+std::sort (vec2.begin(), vec2.end(), [](double a1, double a2)
+    {
+        return a1>a2;
+    });
+    for(int i=0;i<m_sommets.size();++i)
+    {
+       std::vector<double> vec=VectorPropre(Lambda);
 
-}
+        if(vec[i]==vec2[0])///100%
+     {
+         m_sommets[i]->colorier(svgout,0);
+
+     }
+
+     if(vec[i]<vec2[0]&&vec[i]>0.90*vec2[0])///90%-100%
+     {
+         m_sommets[i]->colorier(svgout,1);
+     }
+     if(vec[i]>vec2[0]*0.80&&vec[i]<vec2[0]*0.90)///80%-90%
+     {
+         m_sommets[i]->colorier(svgout,2);
+     }
+      if(vec[i]>vec2[0]*0.60&&vec[i]<vec2[0]*0.80)///60%-80%
+     {
+
+         m_sommets[i]->colorier(svgout,3);
+     }
+
+      if(vec[i]>vec2[0]*0.50&&vec[i]<vec2[0]*0.60)///50%-60%
+     {
+         m_sommets[i]->colorier(svgout,4);
+     }
+
+     if(vec[i]>vec2[vec2.size()-1]&&vec[i]<vec2[0]*0.50)///<50%
+     {
+         m_sommets[i]->colorier(svgout,5);
+     }
+
+     if( vec[i]==vec2[vec2.size()-1])/// egal a la plus petite
+     {
+         m_sommets[i]->colorier(svgout,6);
+     }
+    }
+    }
 std::vector<int> Graphe::Djikstra(int debut, double &Cps, double & somme )
 {
     ///Initialisation des variables
@@ -322,19 +419,68 @@ std::vector<int> Graphe::Djikstra(int debut, double &Cps, double & somme )
 
     return preds;
 }
-void Graphe::sauvegarderProximite()
+void Graphe::sauvegarderProximite(Svgfile&svgout)
 {
     std::vector<int> dji;
+     std::vector<int> vec;
+     std::vector<int> vec2;
     double Cps=0;
     double somme=0;
     std::ofstream ifs{"Resultat3.txt"};
     for (auto s :m_sommets)
     {
         dji=Djikstra(s->getNum(), Cps, somme);
+        vec2.push_back(Cps);
         std::cout<<"Sommet : "<<s->getNom()<<" "<< "Somme :"<<somme<<" "<< " VP :"<< Cps<<std::endl;
         ifs<<s->getNom()<<" "<<somme<<" "<<Cps<<std::endl;
+
     }
-}
+    std::sort (vec2.begin(), vec2.end(), [](double a1, double a2)
+    {
+        return a1>a2;
+    });
+    Cps=0;
+    somme=0;
+
+    for(int i=0;i<m_sommets.size();++i)
+    {
+        Djikstra(m_sommets[i]->getNum(),Cps,somme);
+         if(Cps==vec2[0])///100%
+     {
+         m_sommets[i]->colorier(svgout,0);
+
+     }
+
+     if(Cps<vec2[0]&&vec[i]>0.90*vec2[0])///90%-100%
+     {
+         m_sommets[i]->colorier(svgout,1);
+     }
+     if(Cps>vec2[0]*0.80&&vec[i]<vec2[0]*0.90)///80%-90%
+     {
+         m_sommets[i]->colorier(svgout,2);
+     }
+      if(Cps>vec2[0]*0.60&&vec[i]<vec2[0]*0.80)///60%-80%
+     {
+
+         m_sommets[i]->colorier(svgout,3);
+     }
+
+      if(Cps>vec2[0]*0.50&&vec[i]<vec2[0]*0.60)///50%-60%
+     {
+         m_sommets[i]->colorier(svgout,4);
+     }
+
+     if(Cps>vec2[vec2.size()-1]&&vec[i]<vec2[0]*0.50)///<50%
+     {
+         m_sommets[i]->colorier(svgout,5);
+     }
+
+     if( Cps==vec2[vec2.size()-1])/// egal a la plus petite
+     {
+         m_sommets[i]->colorier(svgout,6);
+     }
+    }
+    }
 void Graphe::afficherListe()
 {
     std::cout<<"listes d'adjacence :"<<std::endl;
@@ -483,13 +629,13 @@ void Graphe::supprimer_arrete( int indice)
             }
 
 
-             delete m_arretes[j];
+            delete m_arretes[j];
             m_arretes.erase(m_arretes.begin()+j);
         }
     }
-std::cout <<"On affiche la nouvelle liste : "<<std::endl;
+    std::cout <<"On affiche la nouvelle liste : "<<std::endl;
     afficherListe();
-    for(int i=0;i<m_arretes.size();++i)
+    for(int i=0; i<m_arretes.size(); ++i)
     {
         m_arretes[i]->set_indice(i);
         std::cout<<m_arretes[i]->getIndice()<<" "<<i<<std::endl;
@@ -557,7 +703,7 @@ void Graphe::VulnerabiliteVP( int num)
     }
 }
 
-void Graphe ::VulnerabiliteDjikstra()
+void Graphe ::VulnerabiliteDjikstra(int num)
 {
     std::vector<double> Result;
     std::vector<double> Result2;
@@ -576,18 +722,17 @@ void Graphe ::VulnerabiliteDjikstra()
     {
         std::cout<<v<<std::endl;
     }
-    int num;
-    std::cout<<" choisis l arrete que tu veux supp"<<std::endl;
-    std::cin>>num;
+
     supprimer_arrete(num);
     for(auto s:m_sommets)
-    {  std::cout<<"eh ouais";
+    {
+        std::cout<<"eh ouais";
         dji2=Djikstra(s->getNum(), Cps, somme);
         std::cout<<"mabelle";
         Result2.push_back(Cps);
 
     }
-std::cout<<"ouais";
+    std::cout<<"ouais";
     for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
         diff=Result2[i]- Result[i];
@@ -597,14 +742,12 @@ std::cout<<"ouais";
 }
 void Graphe::MenuVulnerabilite()
 {
-
-
     ///MENU
     int choix=0;
     int num=0;
     std::cout<<"Choisissez une arrete a supprimer"<<std::endl;
     std::cin>>num;
-     std::cout<<"Que voulez vous comparer"<<std::endl;
+    std::cout<<"Que voulez vous comparer"<<std::endl;
     std::cout<<"1) Centralite de degre"<<std::endl;
     std::cout<<"2) Centralite de vector propre"<<std::endl;
     std::cout<<"3) Centralite de proximite"<<std::endl;
@@ -616,24 +759,27 @@ void Graphe::MenuVulnerabilite()
     while(choix<0&&choix>4);
     std::cout<<"RESULTAT DE LA DIFFERENCE"<<std::endl;
 
-   if(choix==1)
-   { Graphe {"Graphe.txt"};
-     VulnerabiliteDegre(num);
+    if(choix==1)
+    {
+        Graphe {"Graphe.txt"};
+        VulnerabiliteDegre(num);
     }
 
     if(choix==2)
     {
+        Graphe {"Graphe.txt"};
         VulnerabiliteVP(num);
     }
     if(choix==3)
-        {
+    {
+        Graphe {"Graphe.txt"};
+        VulnerabiliteDjikstra(num);
 
+    }
+    if(choix==4)
+    {
 
-        }
-        if(choix==4)
-        {
-
-        }
+    }
 
 }
 std::vector<int> Graphe::BFS(int num_s0, int & compteur)const
