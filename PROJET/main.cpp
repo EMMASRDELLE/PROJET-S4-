@@ -67,18 +67,21 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Reseau.txt"};
+    Graphe g {"Graphe2.txt"};
 
     srand(time(NULL));
-    g.ChargementFichierPond("PonderationReseau.txt");
+    //g.ChargementFichierPond("Ponderation2.txt");
     g.afficherListe();
     //g.MenuVulnerabilite();
     //g.kconnexe();
    // g.SupprimerSommet(0);
+   //g.Dessiner(svgout);
+g.affichage_Resultat1(svgout);
 
    //g.VulnerabiliteDjikstra();
     //g.testConnexe();
-   // g.sauvegarderProximite();
+    //g.SauvegardeVP(svgout);
+   //g.sauvegarderProximite(svgout);
     //g.VectorPropre();
 
 

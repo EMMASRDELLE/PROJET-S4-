@@ -66,6 +66,7 @@ void Sommet::colorier(Svgfile&svgout, int num)
     if(num==0)/// full important
     {
         svgout.addDisk(m_x*100,m_y*100,10,"lime");
+        std::cout<<"done";
     }
 
     if(num==1)
@@ -85,12 +86,10 @@ void Sommet::colorier(Svgfile&svgout, int num)
     {
         svgout.addDisk(m_x*100,m_y*100,10,"orange");
     }
-
     if(num==5)
     {
         svgout.addDisk(m_x*100,m_y*100,10,"orangered");
     }
-
 
     if(num==6)/// quand c est vraiment pas important
     {
@@ -99,6 +98,4 @@ void Sommet::colorier(Svgfile&svgout, int num)
     }
 
     svgout.addText((m_x*100)-5,(m_y*100)+5,m_indice,"black");
-
-
 }

@@ -156,7 +156,7 @@ void Graphe:: sauvegarde()
 }
 void Graphe::affichage_Resultat1(Svgfile &svgout)
 {
-        int test;
+    int test;
     std::vector<double>vec;
     std::vector <double> bon;
     for(size_t i=0; i<m_sommets.size(); ++i)
@@ -174,16 +174,17 @@ std::sort (vec.begin(), vec.end(), [](double a1, double a2)
     {
         return a1>a2;
     });
+
     for(auto s:m_sommets)
  {
       double num=calculDegre(s->getNum());
-    double CG=num/(m_sommets.size()-1);
+     double CG=num/(m_sommets.size()-1);
 
      if(CG==vec[0])///100%
      {
          s->colorier(svgout,0);
 
-
+  std::cout<<"oui";
      }
 
      if(CG<vec[0]&&CG>0.90*vec[0])///90%-100%
@@ -286,7 +287,6 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
     std::vector<double> vec=VectorPropre(Lambda);
     Lambda=0;
     std::vector<double>vec2=VectorPropre(Lambda);
-    Lambda=0;
     std::ofstream ifs{"Resultat2.txt"};
 
     for(int i=0; i< vec.size()&&i<m_sommets.size(); ++i)
@@ -294,10 +294,13 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
         std::cout<<m_sommets[i]->getNom()<<" "<<"Lambda :"<< Lambda<<" "<< "ResultatVP :"<< vec[i]<<std::endl;
         ifs<<m_sommets[i]->getNom()<<" "<<Lambda<<" "<< vec[i]<<std::endl;
     }
+
 std::sort (vec2.begin(), vec2.end(), [](double a1, double a2)
     {
         return a1>a2;
     });
+
+    Lambda=0;
     for(int i=0;i<m_sommets.size();++i)
     {
        std::vector<double> vec=VectorPropre(Lambda);
