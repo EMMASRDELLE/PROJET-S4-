@@ -20,7 +20,6 @@ public:
     void affichage_Resultat1(Svgfile &svgout);
     std::vector<int> Djikstra(int debut, double &Cps, double & somme );
     void afficherListe();
-    void Calculproximite();
     std::vector<int> Intermediarite(int debut,int Sommet);
     void supprimer_arrete(int num);
     void VulnerabiliteDegre(int num);
@@ -34,6 +33,10 @@ public:
      void kconnexe();
      void SupprimerSommet(int indice);
      void MenuVulnerabilite();
+     void CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2);
+     std::vector<int> Intermediarite(unsigned int num0,  std::vector<float> &compt);
+     void SauvegardeIntermediarite();
+     void VulnerabiliteIntermediarite(int num);
 
     protected:
 

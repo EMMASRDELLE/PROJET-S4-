@@ -76,8 +76,13 @@ int main()
     //g.kconnexe();
    // g.SupprimerSommet(0);
    //g.Dessiner(svgout);
-g.affichage_Resultat1(svgout);
-
+//g.affichage_Resultat1(svgout);
+std::vector<double>Result1;
+std::vector<double>Result2;
+   // g.CalculIntermediarite(Result1,Result2);
+    std::cout<<std::endl;
+    //g.SauvegardeIntermediarite();
+    g.MenuVulnerabilite();
    //g.VulnerabiliteDjikstra();
     //g.testConnexe();
     //g.SauvegardeVP(svgout);
