@@ -67,15 +67,17 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Graphe2.txt"};
+    Graphe g {"Graphe.txt"};
 
     srand(time(NULL));
-    g.ChargementFichierPond("Ponderation2.txt");
+    //g.ChargementFichierPond("Ponderation.txt");
     g.afficherListe();
+    g.MenuVulnerabilite();
     //g.kconnexe();
    // g.SupprimerSommet(0);
 
-   g.VulnerabiliteDjikstra();
+   //g.VulnerabiliteDjikstra();
+   //g.MenuVulnerabilite();
     //g.testConnexe();
    // g.sauvegarderProximite();
     //g.VectorPropre();
@@ -89,7 +91,7 @@ int main()
   /* if(choix==1)
     {*/
 
-//g.supprimer_arrete();
+//g.supprimer_arrete(1);
         //g.VectorPropre();
         //g.afficher();
         g.Dessiner(svgout);

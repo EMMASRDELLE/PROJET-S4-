@@ -23,8 +23,8 @@ public:
     void Calculproximite();
     std::vector<int> Intermediarite(int debut,int Sommet);
     void supprimer_arrete(int num);
-    void VulnerabiliteDegre();
-    void VulnerabiliteVP();
+    void VulnerabiliteDegre(int num);
+    void VulnerabiliteVP(int num);
     void SauvegardeVP();
     void VulnerabiliteDjikstra();
     void sauvegarderProximite();
@@ -33,6 +33,7 @@ public:
      void afficher_parcours(size_t num,const std::vector<int>& arbre);
      void kconnexe();
      void SupprimerSommet(int indice);
+     void MenuVulnerabilite();
 
     protected:
 

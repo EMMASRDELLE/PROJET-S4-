@@ -454,7 +454,7 @@ void Graphe::supprimer_arrete( int indice)
     Sommet* s1;
     Sommet* s2;
 
-    for(int j=0;j<m_arretes.size();++j)/// on parcours la liste d'arêtes
+    for(int j=0; j<m_arretes.size(); ++j) /// on parcours la liste d'arêtes
     {
         if(m_arretes[j]->getIndice()==indice)/// si l indice demandé est trouvé dans la liste arrête
         {
@@ -483,19 +483,23 @@ void Graphe::supprimer_arrete( int indice)
             }
 
 
-            delete m_arretes[j];
+             delete m_arretes[j];
             m_arretes.erase(m_arretes.begin()+j);
-
-
         }
     }
-
-    std::cout <<"On affiche la nouvelle liste : "<<std::endl;
+std::cout <<"On affiche la nouvelle liste : "<<std::endl;
     afficherListe();
+    for(int i=0;i<m_arretes.size();++i)
+    {
+        m_arretes[i]->set_indice(i);
+        std::cout<<m_arretes[i]->getIndice()<<" "<<i<<std::endl;
+    }
+
+
 
 }
 
-void Graphe::VulnerabiliteDegre()
+void Graphe::VulnerabiliteDegre(int num)
 {
     double deg2,deg=0;
     std::vector <double> Result;
@@ -503,7 +507,7 @@ void Graphe::VulnerabiliteDegre()
     double Result1=0;
     double Result2=0;
     double diff=0;
-    int num;
+
     /// SANS SUPPRESSION
 
     for(auto s: m_sommets)
@@ -513,8 +517,7 @@ void Graphe::VulnerabiliteDegre()
         Result.push_back(Result1);
 
     }
-    std::cout<<" choisis l arrete que tu veux supp"<<std::endl;
-    std::cin>>num;
+
     supprimer_arrete(num);
 
     ///AVEC SUPPRESSION
@@ -533,19 +536,14 @@ void Graphe::VulnerabiliteDegre()
     }
 
 }
-void Graphe::VulnerabiliteVP()
+void Graphe::VulnerabiliteVP( int num)
 {
-    double deg2,deg=0;
     double Lambda=0;
     std::vector <double> Result=VectorPropre(Lambda);
     std::vector<double> Result2;
-    double Result1=0;
-    int num;
     double diff=0;
     /// SANS SUPPRESSION
 
-    std::cout<<" choisis l arrete que tu veux supp"<<std::endl;
-    std::cin>>num;
     supprimer_arrete(num);
 
     ///AVEC SUPPRESSION
@@ -569,7 +567,7 @@ void Graphe ::VulnerabiliteDjikstra()
     double somme;
     double diff;
 
-   for (auto s :m_sommets)
+    for (auto s :m_sommets)
     {
         dji=Djikstra(s->getNum(), Cps, somme);
         Result.push_back(Cps);
@@ -583,17 +581,59 @@ void Graphe ::VulnerabiliteDjikstra()
     std::cin>>num;
     supprimer_arrete(num);
     for(auto s:m_sommets)
-    {
-        Djikstra(s->getNum(), Cps, somme);
+    {  std::cout<<"eh ouais";
+        dji2=Djikstra(s->getNum(), Cps, somme);
+        std::cout<<"mabelle";
         Result2.push_back(Cps);
 
     }
-
-   for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
+std::cout<<"ouais";
+    for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
         diff=Result2[i]- Result[i];
         std::cout<<" Sommet"<<m_sommets[i]->getNom()<<"  "<<" "<< "Difference : "<<diff<<std::endl;
     }
+
+}
+void Graphe::MenuVulnerabilite()
+{
+
+
+    ///MENU
+    int choix=0;
+    int num=0;
+    std::cout<<"Choisissez une arrete a supprimer"<<std::endl;
+    std::cin>>num;
+     std::cout<<"Que voulez vous comparer"<<std::endl;
+    std::cout<<"1) Centralite de degre"<<std::endl;
+    std::cout<<"2) Centralite de vector propre"<<std::endl;
+    std::cout<<"3) Centralite de proximite"<<std::endl;
+    std::cout<<"4) Centralite Intermediarite"<<std::endl;
+    do
+    {
+        std::cin>>choix;
+    }
+    while(choix<0&&choix>4);
+    std::cout<<"RESULTAT DE LA DIFFERENCE"<<std::endl;
+
+   if(choix==1)
+   { Graphe {"Graphe.txt"};
+     VulnerabiliteDegre(num);
+    }
+
+    if(choix==2)
+    {
+        VulnerabiliteVP(num);
+    }
+    if(choix==3)
+        {
+
+
+        }
+        if(choix==4)
+        {
+
+        }
 
 }
 std::vector<int> Graphe::BFS(int num_s0, int & compteur)const
@@ -692,15 +732,15 @@ void Graphe::kconnexe()
 
         }
         std::cout<<compteur;
-            if(compteur==m_sommets.size())
-            {
-                test=test+1;
-            }
-
+        if(compteur==m_sommets.size())
+        {
+            test=test+1;
         }
-        while (compteur==m_sommets.size());
-        std::cout<<test<<"-arrete connexe "<<std::endl;
+
     }
+    while (compteur==m_sommets.size());
+    std::cout<<test<<"-arrete connexe "<<std::endl;
+}
 
 
 
