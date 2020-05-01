@@ -534,7 +534,6 @@ void Graphe::supprimer_arrete( int indice)
     for(int i=0; i<m_arretes.size(); ++i)
     {
         m_arretes[i]->set_indice(i);
-        std::cout<<m_arretes[i]->getIndice()<<" "<<i<<std::endl;
     }
 
 
@@ -964,11 +963,6 @@ void Graphe::VulnerabiliteIntermediarite(int num)
     {
         Result.push_back(R2[i]);
     }
-    for (auto v : Result)
-    {
-        std::cout<<v<<std::endl;
-    }
-
     supprimer_arrete(num);
     std::vector<double> R3;
     std::vector<double> R4;
@@ -976,10 +970,6 @@ void Graphe::VulnerabiliteIntermediarite(int num)
     for(int i=0; i<m_sommets.size(); ++i)
     {
         Result2.push_back(R4[i]);
-    }
-    for (auto v : Result2)
-    {
-        std::cout<<v<<std::endl;
     }
     for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
