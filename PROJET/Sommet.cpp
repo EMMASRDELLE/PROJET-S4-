@@ -87,7 +87,7 @@ void Sommet::colorier(Svgfile&svgout, int num)
     }
     if(num==5)
     {
-        svgout.addDisk(m_x*100,m_y*100,10,"orangered");
+        svgout.addDisk(m_x*100,m_y*100,10,"lightsalmon");
     }
 
     if(num==6)/// quand c est vraiment pas important
