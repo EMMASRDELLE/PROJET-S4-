@@ -205,7 +205,7 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
             s->colorier(svgout,4);
         }
 
-        if(CG>vec[vec.size()-1]&&CG<vec[0]*0.50)///<50%
+        if(CG>vec[vec.size()-1]&&CG<=vec[0]*0.50)///<50%
         {
             s->colorier(svgout,5);
         }
@@ -308,6 +308,7 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
         {
             m_sommets[i]->colorier(svgout,0);
 
+
         }
 
         if(vec[i]<vec2[0]&&vec[i]>0.90*vec2[0])///90%-100%
@@ -329,7 +330,7 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
             m_sommets[i]->colorier(svgout,4);
         }
 
-        if(vec[i]>vec2[vec2.size()-1]&&vec[i]<vec2[0]*0.50)///<50%
+        if(vec[i]>vec2[vec2.size()-1]&&vec[i]<=vec2[0]*0.50)///<=50%
         {
             m_sommets[i]->colorier(svgout,5);
         }
