@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Graphe.h"
 #include "svgfile.h"
+#include<time.h>
 #include <windows.h>
 
 void color(int t,int f)
@@ -10,7 +11,8 @@ void color(int t,int f)
     SetConsoleTextAttribute(H,f*16+t);
 }
 
-void afficher_Arbre(std::vector<const Arrete*> arretes)
+
+void afficher_Arbre(std::vector<Arete*> arretes)
 {
     std::cout<<"Liste :"<<std::endl;
     for (auto a: arretes)
@@ -36,7 +38,6 @@ void Menu()
 
 }
 int main()
-
 {
 
     Menu();
@@ -68,18 +69,40 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Reunion.txt"};
-   // g.ChargementFichierPond("Ponderation2.txt");
-   //  g.afficherListe();
-  // g.Intermediarite(1,5,"Resultat3.txt");
-  g.CalculIntermediarite();
+    Graphe g {"Graphe.txt"};
+
+    srand(time(NULL));
+
+    //g.ChargementFichierPond("Ponderation2.txt");
+    g.afficherListe();
+    //g.MenuVulnerabilite();
+    //g.kconnexe();
+   // g.SupprimerSommet(0);
+   //g.Dessiner(svgout);
+//g.affichage_Resultat1(svgout);
+std::vector<double>Result1;
+std::vector<double>Result2;
+   // g.CalculIntermediarite(Result1,Result2);
+    std::cout<<std::endl;
+    //g.SauvegardeIntermediarite();
+    g.MenuVulnerabilite();
+   //g.VulnerabiliteDjikstra();
+    //g.testConnexe();
+    //g.SauvegardeVP(svgout);
+   //g.sauvegarderProximite(svgout);
+    //g.VectorPropre();
+
+
 
   /* if(choix==1)
     {*/
 
 
-     //   g.afficher();
-      g.Dessiner(svgout);
+//g.supprimer_arrete(1);
+        //g.VectorPropre();
+        //g.afficher();
+        g.Dessiner(svgout);
+
    /*     color(11,0);
         std::cout<<"\nEntrez votre choix : ";
         color(5,0);

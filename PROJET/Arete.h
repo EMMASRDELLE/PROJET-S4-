@@ -8,24 +8,26 @@
 
 
 
-class Arrete
+
+class Arete
 {
 public:
-    Arrete( Sommet*, Sommet*,int indice,double poids);
+    Arete( Sommet*, Sommet*,int indice,double poids);
     void afficher()const ;
-    double getIndice() const;
-    const Sommet*getEx1() const;
-    const Sommet*getEx2() const;
+    int getIndice() const;
+    Sommet*getEx1() const;
+    Sommet*getEx2() const;
     void Dessiner(Svgfile &svgout) const;
-    bool CalculDEG( const Sommet*a, Arrete*b);
+    bool CalculDEG( const Sommet*a, Arete*b);
     void setPoids(double poids);
     double getPoids()const;
+    void set_indice(int nombre);
 
 protected:
 
 private:
-    const Sommet* m_ex1;
-    const Sommet* m_ex2;
+     Sommet* m_ex1;
+     Sommet* m_ex2;
     int m_indice;
     double m_poids;
 };

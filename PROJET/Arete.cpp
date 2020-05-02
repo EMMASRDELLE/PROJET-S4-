@@ -2,49 +2,46 @@
 #include "Arete.h"
 #include "svgfile.h"
 
-Arrete::Arrete( Sommet* ex1, Sommet*ex2,int indice,double poids):m_ex1{ex1},m_ex2{ex2},m_indice{indice}, m_poids{poids}{}
+Arete::Arete( Sommet* ex1, Sommet*ex2,int indice,double poids):m_ex1{ex1},m_ex2{ex2},m_indice{indice}, m_poids{poids}{}
 
 ///GETTER
-double Arrete::getIndice()const
+int Arete::getIndice()const
 {
     return m_indice;
 }
 
-const Sommet*Arrete::getEx1() const
+ Sommet*Arete::getEx1() const
 {
     return m_ex1;
 }
-const Sommet*Arrete::getEx2() const
+ Sommet*Arete::getEx2() const
 {
     return m_ex2;
 }
-double Arrete::getPoids() const
+double Arete::getPoids() const
 { return m_poids;
 }
 
 ///SETTER
-void Arrete::setPoids(double poids)
+void Arete::setPoids(double poids)
 {
     m_poids=poids;
 }
 
 
-
-
 ///AFFICHAGE
-void Arrete::afficher()const
+void Arete::afficher()const
 {
     std::cout<<"<"<<m_indice<<" "<<m_ex1->getNom()<<":"<<m_ex1->getX()<<" "<<m_ex1->getY()<<"  &  "<<m_ex2->getNom()<<":"<<m_ex2->getX()<<" "<<m_ex2->getY()<<">"<<" poids : "<<m_poids<<std::endl;
 }
-void Arrete::Dessiner(Svgfile &svgout) const
+void Arete::Dessiner(Svgfile &svgout) const
 {
     svgout.addLine((m_ex1->getX())*100,(m_ex1->getY())*100,(m_ex2->getX())*100,(m_ex2->getY())*100,"black");
     svgout.addText(((m_ex1->getX())*100+(m_ex2->getX())*100)/2,((m_ex1->getY())*100+(m_ex2->getY())*100)/2-20,m_poids,"red");
 }
 
 
-
-bool Arrete::CalculDEG( const Sommet*a, Arrete*b)
+bool Arete::CalculDEG( const Sommet*a, Arete*b)
 {
 
     if((a==b->m_ex1)||(a==b->m_ex2))
@@ -55,4 +52,8 @@ bool Arrete::CalculDEG( const Sommet*a, Arrete*b)
     {
         return false;
     }
+}
+void Arete::set_indice(int nombre)
+{
+    m_indice=nombre;
 }

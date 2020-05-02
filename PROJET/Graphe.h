@@ -8,30 +8,43 @@
 
 class Graphe
 {
-    public:
-         Graphe(std::string nomFic);
-         void ChargementFichierPond(std::string nomFichier);
-         void afficher()const;
-         ~Graphe();
-         void Dessiner(Svgfile &svgout) const;
-         double calculDegre(int num);
-         void sauvegarde(std::string nomFichier);
-         void VectorPropre(std::string nomFichier);
-         void affichage_Resultat1();
-         std::vector<int> Djikstra(int debut, std::string Nomfichier);
-          void afficherListe();
-          void afficherparcours(unsigned int num,std::vector<int> &arbre);
-          void Calculproximite(std::string nomFichier);
-          std::vector<int> Intermediarite(unsigned int num0, std::vector<float> &compt);
-          void CalculIntermediarite();
-          void compteur(int  num0, int actuel, std::vector<int>preds,std::vector<int> compt3);
+public:
+    Graphe(std::string nomFic);
+    void ChargementFichierPond(std::string nomFichier);
+    void afficher()const;
+    ~Graphe();
+    void Dessiner(Svgfile &svgout) const;
+    double calculDegre(int num);
+    void sauvegarde();
+    std::vector<double> VectorPropre( double &Lambda);
+    void affichage_Resultat1(Svgfile &svgout);
+    std::vector<int> Djikstra(int debut, double &Cps, double & somme );
+    void afficherListe();
+    std::vector<int> Intermediarite(int debut,int Sommet);
+    void supprimer_arrete(int num);
+    void VulnerabiliteDegre(int num);
+    void VulnerabiliteVP(int num);
+    void SauvegardeVP(Svgfile &svgout);
+    void VulnerabiliteDjikstra(int num);
+    void sauvegarderProximite(Svgfile &svgout);
+    std::vector<int> BFS(int num_s0,int & compteur)const;
+     void testConnexe();
+     void afficher_parcours(size_t num,const std::vector<int>& arbre);
+     void kconnexe();
+     void SupprimerSommet(int indice);
+     void MenuVulnerabilite();
+     void CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2);
+     std::vector<int> Intermediarite(unsigned int num0,  std::vector<float> &compt);
+     void SauvegardeIntermediarite();
+     void VulnerabiliteIntermediarite(int num);
+
     protected:
 
-    private:
+        private:
         int m_orientation;
         std::vector<Sommet*> m_sommets;
-        std::vector<Arrete*> m_arretes;
-};
+        std::vector<Arete*> m_arretes;
+    };
 
 #endif // GRAPHE_H
 
