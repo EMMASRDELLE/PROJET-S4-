@@ -402,7 +402,7 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
     }
     std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
-
+afficher_parcours(num_0,preds);
     return preds;
 }
 void Graphe::sauvegarderProximite(Svgfile&svgout)
@@ -724,7 +724,7 @@ void Graphe::kconnexe()
         i++;
         ++compteur;
     }
-    while(test==1);
+    while(test==1&&i<m_sommets.size());
     std::cout<<compteur<<"-arrete connexe "<<std::endl;
 }
 void Graphe::SupprimerSommet(int indice)
@@ -782,7 +782,7 @@ void Graphe::kconnexeSommet()
         i++;
         ++compteur;
     }
-    while(test==1);
+    while(test==1&&i<m_sommets.size());
     std::cout<<compteur<<"-arrete connexe "<<std::endl;
 }
 void Graphe::MenuConnexe()
@@ -792,7 +792,7 @@ void Graphe::MenuConnexe()
     std::cout<<"MENU CONNEXITE"<<std::endl;
     std::cout<<"1) Tester la connexite du graphe"<<std::endl;
     std::cout<<"2) K arrete"<<std::endl;
-    std::cout<<"2) K sommet"<<std::endl;
+    std::cout<<"3) K sommet"<<std::endl;
     do
     {
         std::cin>>choix;

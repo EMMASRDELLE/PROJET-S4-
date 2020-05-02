@@ -102,7 +102,7 @@ int main()
 
     g.Dessiner(svgout);
     legende_svg(svgout);
-    g.MenuConnexe();
+    //g.MenuConnexe();
 //g.affichage_Resultat1(svgout);
 
 std::vector<double>Result1;
@@ -112,12 +112,13 @@ std::vector<double>Result2;
     //g.supprimer_arrete(1);
 //g.testConnexe();
    //g.SauvegardeIntermediarite(svgout);
-  g.kconnexe();
+  //g.kconnexe();
     //g.MenuVulnerabilite();
    //g.VulnerabiliteDjikstra();
     //g.testConnexe();
     //g.SauvegardeVP(svgout);
-  // g.sauvegarderProximite(svgout);
+  g.sauvegarderProximite(svgout);
+
 
     //g.VectorPropre();
 
@@ -129,7 +130,7 @@ std::vector<double>Result2;
 //g.supprimer_arrete(1);
         //g.VectorPropre();
         //g.afficher();
-
+//g.Djikstra(1, double &Cps, double & somme )
    /*     color(11,0);
         std::cout<<"\nEntrez votre choix : ";
         color(5,0);
