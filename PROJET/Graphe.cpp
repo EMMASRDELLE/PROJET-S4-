@@ -425,8 +425,7 @@ std::vector<int> Graphe::Djikstra(int debut, double &Cps, double & somme )
 void Graphe::sauvegarderProximite(Svgfile&svgout)
 {
     std::vector<int> dji;
-    std::vector<int> vec;
-    std::vector<int> vec2;
+    std::vector<double> vec2;
     double Cps=0;
     double somme=0;
     std::ofstream ifs{"Resultat3.txt"};
@@ -445,43 +444,61 @@ void Graphe::sauvegarderProximite(Svgfile&svgout)
     Cps=0;
     somme=0;
 
+
     for(int i=0; i<m_sommets.size(); ++i)
     {
-        Djikstra(m_sommets[i]->getNum(),Cps,somme);
+       Djikstra(m_sommets[i]->getNum(),Cps,somme);
+
+
         if(Cps==vec2[0])///100%
         {
+
             m_sommets[i]->colorier(svgout,0);
 
+
         }
 
-        if(Cps<vec2[0]&&vec[i]>0.90*vec2[0])///90%-100%
+        if(Cps<vec2[0]&&Cps>0.90*vec2[0])///90%-100%
         {
+
             m_sommets[i]->colorier(svgout,1);
+
+
         }
-        if(Cps>vec2[0]*0.80&&vec[i]<vec2[0]*0.90)///80%-90%
+        if(Cps>vec2[0]*0.80&&Cps<vec2[0]*0.90)///80%-90%
         {
             m_sommets[i]->colorier(svgout,2);
+
+
         }
-        if(Cps>vec2[0]*0.60&&vec[i]<vec2[0]*0.80)///60%-80%
+        if(Cps>vec2[0]*0.60&&Cps<vec2[0]*0.80)///60%-80%
         {
 
             m_sommets[i]->colorier(svgout,3);
+
+
         }
 
-        if(Cps>vec2[0]*0.50&&vec[i]<vec2[0]*0.60)///50%-60%
+        if(Cps>vec2[0]*0.50&&Cps<vec2[0]*0.60)///50%-60%
         {
             m_sommets[i]->colorier(svgout,4);
+            std::cout<<Cps;
+
         }
 
-        if(Cps>vec2[vec2.size()-1]&&vec[i]<vec2[0]*0.50)///<50%
+        if(Cps>vec2[vec2.size()-1]&&Cps<=vec2[0]*0.50)///<50%
         {
             m_sommets[i]->colorier(svgout,5);
+
         }
 
         if( Cps==vec2[vec2.size()-1])/// egal a la plus petite
         {
             m_sommets[i]->colorier(svgout,6);
+
         }
+
+
     }
 }
 void Graphe::afficherListe()
@@ -937,10 +954,12 @@ void Graphe::CalculIntermediarite(std::vector<double>&Result1, std::vector<doubl
 
 }
 
-void Graphe::SauvegardeIntermediarite()
+void Graphe::SauvegardeIntermediarite(Svgfile&svgout)
 {
+    int i=0;
     std::vector<double> R1;
     std::vector<double> R2;
+    std::vector<double>R3;
     CalculIntermediarite(R1,R2);
     std::ofstream ifs{"Intermediarite.txt"};
     for(int i =0; i<m_sommets.size(); ++i)
@@ -948,7 +967,77 @@ void Graphe::SauvegardeIntermediarite()
 
         std::cout<<"Sommet : "<<m_sommets[i]->getNom()<<" Centralite : "<<" "<<R1[i] <<" "<<" Centralite normalisee : "<<R2[i]<<std::endl;
         ifs<<m_sommets[i]->getNum()<<" "<<R1[i]<<" "<<R2[i]<<std::endl;
+        R3.push_back(R2[i]);
+
+
     }
+
+        std::sort (R3.begin(), R3.end(), [](double a1, double a2)
+                   {
+                       return a1>a2;
+                   });
+
+
+
+for(auto vec :R2)
+{
+
+
+    //std::cout<<vec<<std::endl;
+
+        if(vec==R3[0])///100%
+        {
+
+            m_sommets[i]->colorier(svgout,0);
+
+
+        }
+
+        if(vec<R3[0]&&vec>0.90*R3[0])///90%-100%
+        {
+
+            m_sommets[i]->colorier(svgout,1);
+
+
+        }
+        if(vec>R3[0]*0.80&&vec<R3[0]*0.90)///80%-90%
+        {
+            m_sommets[i]->colorier(svgout,2);
+
+
+        }
+        if(vec>R3[0]*0.60&&vec<R3[0]*0.80)///60%-80%
+        {
+
+            m_sommets[i]->colorier(svgout,3);
+
+
+        }
+
+        if(vec>R3[0]*0.50&vec<R3[0]*0.60)///50%-60%
+        {
+            m_sommets[i]->colorier(svgout,4);
+
+
+        }
+
+        if(vec>R3[R3.size()-1]&&vec<=R3[0]*0.50)///<50%
+        {
+            m_sommets[i]->colorier(svgout,5);
+
+        }
+
+        if( vec==R3[R3.size()-1])/// egal a la plus petite
+        {
+            m_sommets[i]->colorier(svgout,6);
+
+        }
+
+
+
+i++;
+
+}
 
 }
 void Graphe::VulnerabiliteIntermediarite(int num)

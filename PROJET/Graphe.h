@@ -35,7 +35,7 @@ public:
      void MenuVulnerabilite();
      void CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2);
      std::vector<int> Intermediarite(unsigned int num0,  std::vector<float> &compt);
-     void SauvegardeIntermediarite();
+     void SauvegardeIntermediarite(Svgfile&svgout);
      void VulnerabiliteIntermediarite(int num);
 
     protected:

@@ -66,7 +66,7 @@ void Sommet::colorier(Svgfile&svgout, int num)
     if(num==0)/// full important
     {
         svgout.addDisk(m_x*100,m_y*100,10,"lime");
-        std::cout<<"done";
+
     }
 
     if(num==1)
