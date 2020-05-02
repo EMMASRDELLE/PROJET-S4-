@@ -18,7 +18,7 @@ public:
     void sauvegarde();
     std::vector<double> VectorPropre( double &Lambda);
     void affichage_Resultat1(Svgfile &svgout);
-    std::vector<int> Djikstra(int debut, double &Cps, double & somme );
+    std::vector<int> Djikstra(int num_0, double &Cps, double & somme );
     void afficherListe();
     std::vector<int> Intermediarite(int debut,int Sommet);
     void supprimer_arrete(int num);
@@ -37,6 +37,7 @@ public:
      std::vector<int> Intermediarite(unsigned int num0,  std::vector<float> &compt);
      void SauvegardeIntermediarite();
      void VulnerabiliteIntermediarite(int num);
+
 
     protected:
 
