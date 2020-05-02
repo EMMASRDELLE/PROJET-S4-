@@ -183,7 +183,6 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
         {
             s->colorier(svgout,0);
 
-            std::cout<<"oui";
         }
 
         if(CG<vec[0]&&CG>0.90*vec[0])///90%-100%
@@ -639,13 +638,11 @@ void Graphe ::VulnerabiliteDjikstra(int num)
     supprimer_arrete(num);
     for(auto s:m_sommets)
     {
-        std::cout<<"eh ouais";
+
         dji2=Djikstra(s->getNum(), Cps, somme);
-        std::cout<<"mabelle";
         Result2.push_back(Cps);
 
     }
-    std::cout<<"ouais";
     for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
         diff=Result2[i]- Result[i];
