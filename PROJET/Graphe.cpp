@@ -540,7 +540,6 @@ void Graphe::supprimer_arrete( int indice)
 
 
 }
-
 void Graphe::VulnerabiliteDegre(int num)
 {
     double deg2,deg=0;
@@ -598,7 +597,6 @@ void Graphe::VulnerabiliteVP( int num)
         std::cout<<" Sommet"<<m_sommets[i]->getNom()<<":"<<diff<<std::endl;
     }
 }
-
 void Graphe ::VulnerabiliteDjikstra(int num)
 {
     std::vector<double> Result;
@@ -681,9 +679,7 @@ int Graphe::testConnexe()
     {
         bfs=BFS(s->getNum(), compteur);
         std::cout<<std::endl;
-
     }
-
     if(compteur==m_sommets.size())
     {
         test=1;
@@ -789,7 +785,7 @@ void Graphe::kconnexeSommet()
     while(test==1);
     std::cout<<compteur<<"-arrete connexe "<<std::endl;
 }
-void MenuConnexe()
+void Graphe::MenuConnexe()
 {
     int test;
     int choix;
@@ -808,7 +804,7 @@ void MenuConnexe()
         std::cout<<"Quelle arrete veux tu supprimer"<<std::endl;
         std::cin>>num;
         supprimer_arrete(num);
-        test=testConnexe();
+       test=testConnexe();
         if(test==1)
         {
             std::cout<<" CE GRAPHE EST CONNEXE"<<std::endl;

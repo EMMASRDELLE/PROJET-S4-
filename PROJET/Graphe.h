@@ -38,6 +38,7 @@ public:
      std::vector<int> Intermediarite(unsigned int num0,  std::vector<float> &compt);
      void SauvegardeIntermediarite(Svgfile&svgout);
      void VulnerabiliteIntermediarite(int num);
+     void MenuConnexe();
 
 
     protected:

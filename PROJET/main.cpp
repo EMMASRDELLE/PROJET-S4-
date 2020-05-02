@@ -102,6 +102,7 @@ int main()
 
     g.Dessiner(svgout);
     legende_svg(svgout);
+    g.MenuConnexe();
 //g.affichage_Resultat1(svgout);
 
 std::vector<double>Result1;
