@@ -7,8 +7,6 @@
 #include "svgfile.h"
 
 
-
-
 class Arete
 {
 public:

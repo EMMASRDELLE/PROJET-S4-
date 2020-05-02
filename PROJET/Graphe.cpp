@@ -361,9 +361,6 @@ int Graphe::poidsSucc(Sommet* a, Sommet* b)
     }
 }
 
-
-
-
 /*std::vector<int> Graphe::Dijkstra(int num_s0)const
 {
 /// pour le marquage
@@ -416,7 +413,83 @@ void Graphe::afficher_parcours(size_t num,const std::vector<int>& arbre)
         }
     }
 }
-std::vector<int> Graphe::Djikstra(int num0, double &Cps, double & somme )
+std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
+{
+    ///Initialisation des variables
+    std::vector<int> marquage((int)m_sommets.size(),0);
+    std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
+    std::vector<int> preds((int)m_sommets.size(),-1);
+
+    int temp=0;
+    int actuel;
+    int temp2=99999;
+    int coumt = 0;
+
+    dists[num_0]=0;/// Poids du sommet de départ
+    actuel = num_0;
+    while(temp==0)
+    {
+        coumt = 0;
+        temp2=99999;
+        for (unsigned int i =0; i<m_sommets.size(); i++)
+        {
+            if((dists[i] < temp2)&&(marquage[i]==0))
+            {
+                actuel=i;
+                temp2=dists[i]; /// On prend l'arrete avec la plus petite distance
+            }
+            else
+            {
+                coumt++;
+            }
+        }
+        marquage [actuel]=1; /// On marque les sommets découverts
+
+
+        std::cout <<"yoooo"<<std::endl;
+        for( auto a:m_arretes)
+        {
+
+            if (a->getEx1()->getNum()==actuel)
+            {
+                if((dists[actuel]+a->getPoids())<dists[a->getEx2()->getNum()])
+                {
+                    dists[a->getEx2()->getNum()]=dists[actuel]+a->getPoids();
+                    preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
+                    somme= somme+dists[actuel]+a->getPoids();
+                }
+            }
+            if(a->getEx2()->getNum()==actuel)
+            {
+                if((dists[actuel]+a->getPoids())<dists[a->getEx1()->getNum()])
+                {
+                    dists[a->getEx1()->getNum()]=dists[actuel]+a->getPoids();
+                    preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
+                    somme= somme+dists[actuel]+a->getPoids();
+                }
+            }
+        }
+        if(coumt == m_sommets.size())
+        {
+            temp=1;
+        }
+
+
+       /*    for( int i=0;i<m_sommets.size();i++)
+           {    std::cout<<marquage[i];
+               if(marquage[i]==0)
+               {
+                   temp=0;
+               }
+
+           } std::cout<<std::endl;*/
+    }
+    std::cout<<std::endl;
+    Cps= (m_sommets.size()-1)/somme;
+    afficher_parcours(num_0,preds);
+    return preds;
+}
+/*std::vector<int> Graphe::Djikstra3(int num0, double &Cps, double & somme )
 {
     std::vector<int> marquage((int)m_sommets.size(),0);
     std::vector<int> dists((int)m_sommets.size(),9999);
@@ -479,8 +552,8 @@ std::vector<int> Graphe::Djikstra(int num0, double &Cps, double & somme )
     afficher_parcours(num0,preds);
 
     return preds;
-}
-/*void Graphe::sauvegarderProximite(Svgfile&svgout)
+}*/
+void Graphe::sauvegarderProximite(Svgfile&svgout)
 {
     std::vector<int> dji;
     std::vector<double> vec2;
@@ -558,7 +631,7 @@ std::vector<int> Graphe::Djikstra(int num0, double &Cps, double & somme )
 
 
     }
-}*/
+}
 void Graphe::afficherListe()
 {
     std::cout<<"listes d'adjacence :"<<std::endl;
@@ -695,12 +768,12 @@ void Graphe ::VulnerabiliteDjikstra(int num)
     supprimer_arrete(num);
     for(auto s:m_sommets)
     {
-        std::cout<<"eh ouais";
+
         dji2=Djikstra(s->getNum(), Cps, somme);
-        std::cout<<"mabelle";
+
         Result2.push_back(Cps);
     }
-    std::cout<<"ouais";
+
     for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
         diff=Result2[i]- Result[i];
@@ -882,7 +955,6 @@ void Graphe::MenuConnexe()
         kconnexeSommet();
     }
 }
-
 
 std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &compt)
 {

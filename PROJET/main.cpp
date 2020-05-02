@@ -93,7 +93,7 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Graphe2.txt"};
+    Graphe g {"Graphe.txt"};
 
 
 //    srand(time(NULL));
@@ -104,7 +104,7 @@ int main()
     g.afficherListe();
     g.Djikstra(1,Cps,somme);
    // g.Dijkstra();
-    //g.MenuVulnerabilite();
+    g.MenuVulnerabilite();
     //g.kconnexe();
    // g.SupprimerSommet(0);
 
@@ -127,7 +127,7 @@ std::vector<double>Result2;
     //g.testConnexe();
     //g.SauvegardeVP(svgout);
   //g.sauvegarderProximite(svgout);
-  g.GuideTouristique();
+ // g.GuideTouristique();
 
     //g.VectorPropre();
 

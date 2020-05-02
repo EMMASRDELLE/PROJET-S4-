@@ -18,9 +18,7 @@ public:
     void sauvegarde();
     std::vector<double> VectorPropre( double &Lambda);
     void affichage_Resultat1(Svgfile &svgout);
-
     std::vector<int> Djikstra(int num_0, double &Cps, double & somme );
-
     void afficherListe();
     std::vector<int> Intermediarite(int debut,int Sommet);
     void supprimer_arrete(int num);
@@ -45,9 +43,6 @@ public:
      void GuideTouristique();
      std::vector<int> Djikstra2(int num_0, int fin,int &somme);
      void afficher_parcours2(size_t num, int fin, const std::vector<int>& arbre);
-
-
-
 
     protected:
 
