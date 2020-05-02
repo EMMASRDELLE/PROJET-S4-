@@ -69,23 +69,26 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Graphe.txt"};
+    Graphe g {"Graphe2.txt"};
 
-    srand(time(NULL));
+//    srand(time(NULL));
+    double Cps,somme;
 
-    //g.ChargementFichierPond("Ponderation2.txt");
+   // g.ChargementFichierPond("Ponderation.txt");
     g.afficherListe();
+    g.Djikstra(1,Cps,somme);
+   // g.Dijkstra();
     //g.MenuVulnerabilite();
     //g.kconnexe();
    // g.SupprimerSommet(0);
    //g.Dessiner(svgout);
 //g.affichage_Resultat1(svgout);
-std::vector<double>Result1;
-std::vector<double>Result2;
+//std::vector<double>Result1;
+//std::vector<double>Result2;
    // g.CalculIntermediarite(Result1,Result2);
     std::cout<<std::endl;
     //g.SauvegardeIntermediarite();
-    g.MenuVulnerabilite();
+  //  g.MenuVulnerabilite();
    //g.VulnerabiliteDjikstra();
     //g.testConnexe();
     //g.SauvegardeVP(svgout);

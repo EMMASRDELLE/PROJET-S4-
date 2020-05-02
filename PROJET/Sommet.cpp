@@ -34,6 +34,10 @@ double Sommet::getY()const
     return m_y;
 }
 
+int Sommet::setNum(int num)
+{
+    m_indice=num;
+}
 void Sommet::Dessiner(Svgfile&svgout)const
 {
 
