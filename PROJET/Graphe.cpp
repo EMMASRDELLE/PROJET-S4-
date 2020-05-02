@@ -430,7 +430,7 @@ void Graphe::sauvegarderProximite(Svgfile&svgout)
 
     for(int i=0; i<m_sommets.size(); ++i)
     {
-       Djikstra(m_sommets[i]->getNum(),Cps,somme);
+        Djikstra(m_sommets[i]->getNum(),Cps,somme);
 
 
         if(Cps==vec2[0])///100%
@@ -686,17 +686,13 @@ int Graphe::testConnexe()
 
     if(compteur==m_sommets.size())
     {
-        std::cout<<" CE GRAPHE EST CONNEXE"<<std::endl;
-        std::cout<<std::endl;
         test=1;
     }
     else
     {
-        std::cout<<" CE GRAPHE EST NON CONNEXE"<<std::endl;
-        std::cout<<std::endl;
         test=0;
     }
-return test;
+    return test;
 }
 void Graphe::afficher_parcours(size_t num,const std::vector<int>& arbre)
 {
@@ -726,16 +722,15 @@ void Graphe::kconnexe()
     int test;
     int i=0;
     do
-    { supprimer_arrete(i);
-    test=testConnexe();
-    i++;
-    ++compteur;
-    }while(test==1);
+    {
+        supprimer_arrete(i);
+        test=testConnexe();
+        i++;
+        ++compteur;
+    }
+    while(test==1);
     std::cout<<compteur<<"-arrete connexe "<<std::endl;
 }
-
-
-
 void Graphe::SupprimerSommet(int indice)
 {
     for (s :m_sommets)
@@ -778,6 +773,64 @@ void Graphe::SupprimerSommet(int indice)
         }
     }
 }
+void Graphe::kconnexeSommet()
+{
+    std::vector<int> bfs;
+    int compteur=0;
+    int test;
+    int i=0;
+    do
+    {
+       SupprimerSommet(i);
+        test=testConnexe();
+        i++;
+        ++compteur;
+    }
+    while(test==1);
+    std::cout<<compteur<<"-arrete connexe "<<std::endl;
+}
+void MenuConnexe()
+{
+    int test;
+    int choix;
+    std::cout<<"MENU CONNEXITE"<<std::endl;
+    std::cout<<"1) Tester la connexite du graphe"<<std::endl;
+    std::cout<<"2) K arrete"<<std::endl;
+    std::cout<<"2) K sommet"<<std::endl;
+    do
+    {
+        std::cin>>choix;
+    }
+    while (choix<1&&choix>3);
+    int num;
+    if(choix==1)
+    {
+        std::cout<<"Quelle arrete veux tu supprimer"<<std::endl;
+        std::cin>>num;
+        supprimer_arrete(num);
+        test=testConnexe();
+        if(test==1)
+        {
+            std::cout<<" CE GRAPHE EST CONNEXE"<<std::endl;
+            std::cout<<std::endl;
+        }
+        else if(test==0)
+        {
+            std::cout<<" CE GRAPHE EST NON CONNEXE"<<std::endl;
+            std::cout<<std::endl;
+        }
+
+    }
+    if(choix==2)
+    {
+        kconnexe();
+    }
+    if(choix==3)
+    {
+       kconnexeSommet();
+    }
+}
+
 std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &compt)
 {
     ///Initialisation des variables
@@ -810,7 +863,7 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
             }
         }
         marquage [actuel]=1; // On marque les sommets découverts
-        for( int i=0;i<m_arretes.size();++i)
+        for( int i=0; i<m_arretes.size(); ++i)
         {
             if (m_arretes[i]->getEx1()->getNum()==actuel)
             {
@@ -872,7 +925,7 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
         {
             if(marquage[i]==0)
             {
-                 temp=0;
+                temp=0;
 
             }
 
@@ -881,19 +934,19 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
     }
     // afficherparcours(num0,preds);
 
-       for(int i=0;i<dists.size();++i)
-       {
-          // std::cout<<" yes man"<<dists[i]<<std::endl;
-       }
+    for(int i=0; i<dists.size(); ++i)
+    {
+        // std::cout<<" yes man"<<dists[i]<<std::endl;
+    }
 
     return dists;
 }
 void Graphe::CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2)
 {
-for (auto a:m_arretes)
-{
-    std::cout<<a->getIndice()<<" "<<a->getEx1()->getNum()<<a->getEx2()->getNum()<<std::endl;
-}
+    for (auto a:m_arretes)
+    {
+        std::cout<<a->getIndice()<<" "<<a->getEx1()->getNum()<<a->getEx2()->getNum()<<std::endl;
+    }
     std::vector<int> stock((int)m_sommets.size(),1);
     std::vector<int> stock2((int)m_sommets.size(),1);
     std::vector<float> compt((float)m_sommets.size(),1);
@@ -906,7 +959,7 @@ for (auto a:m_arretes)
     for(unsigned int i=0; i<m_sommets.size(); i++)
     {
         stock=Intermediarite(i,compt); //Intermediaire
-std::cout<<"on recup"<<std::endl;
+        std::cout<<"on recup"<<std::endl;
         for(unsigned int j=0; j<m_sommets.size(); ++j)
         {
             stock2 = Intermediarite(j,somme);//Depart
@@ -957,18 +1010,13 @@ void Graphe::SauvegardeIntermediarite(Svgfile&svgout)
 
     }
 
-        std::sort (R3.begin(), R3.end(), [](double a1, double a2)
-                   {
-                       return a1>a2;
-                   });
+    std::sort (R3.begin(), R3.end(), [](double a1, double a2)
+    {
+        return a1>a2;
+    });
 
-
-
-for(auto vec :R2)
-{
-
-
-    //std::cout<<vec<<std::endl;
+    for(auto vec :R2)
+    {
 
         if(vec==R3[0])///100%
         {
@@ -1020,9 +1068,9 @@ for(auto vec :R2)
 
 
 
-i++;
+        i++;
 
-}
+    }
 
 }
 void Graphe::VulnerabiliteIntermediarite(int num)
@@ -1038,14 +1086,14 @@ void Graphe::VulnerabiliteIntermediarite(int num)
     {
         Result.push_back(R2[i]);
     }
-for(auto s:Result)
-{
-    std::cout<<s<<std::endl;
-}
+    for(auto s:Result)
+    {
+        std::cout<<s<<std::endl;
+    }
     std::vector<double> R3;
     std::vector<double> R4;
     supprimer_arrete(num);
-        CalculIntermediarite(R3,R4);
+    CalculIntermediarite(R3,R4);
 
 
     for(int i=0; i<m_sommets.size(); ++i)
@@ -1095,7 +1143,7 @@ void Graphe::MenuVulnerabilite()
     }
     if(choix==3)
     {
-       // Graphe {Nomfichier};
+        // Graphe {Nomfichier};
         VulnerabiliteDjikstra(num);
 
     }

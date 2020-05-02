@@ -31,6 +31,7 @@ public:
      int testConnexe();
      void afficher_parcours(size_t num,const std::vector<int>& arbre);
      void kconnexe();
+     void kconnexeSommet();
      void SupprimerSommet(int indice);
      void MenuVulnerabilite();
      void CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2);
