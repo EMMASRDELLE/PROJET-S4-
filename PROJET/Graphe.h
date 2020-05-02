@@ -39,6 +39,10 @@ public:
      void SauvegardeIntermediarite(Svgfile&svgout);
      void VulnerabiliteIntermediarite(int num);
      void MenuConnexe();
+     void GuideTouristique();
+     std::vector<int> Djikstra2(int num_0, int fin,int &somme);
+     void afficher_parcours2(size_t num, int fin, const std::vector<int>& arbre);
+
 
 
     protected:

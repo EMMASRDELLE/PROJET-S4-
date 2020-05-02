@@ -402,7 +402,7 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
     }
     std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
-afficher_parcours(num_0,preds);
+    afficher_parcours(num_0,preds);
     return preds;
 }
 void Graphe::sauvegarderProximite(Svgfile&svgout)
@@ -620,11 +620,13 @@ void Graphe ::VulnerabiliteDjikstra(int num)
     supprimer_arrete(num);
     for(auto s:m_sommets)
     {
-
+        std::cout<<"eh ouais";
         dji2=Djikstra(s->getNum(), Cps, somme);
+        std::cout<<"mabelle";
         Result2.push_back(Cps);
 
     }
+    std::cout<<"ouais";
     for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
         diff=Result2[i]- Result[i];
@@ -672,14 +674,12 @@ int Graphe::testConnexe()
 {
     std::vector<int> bfs;
     int compteur;
-
     int test;
     for(auto s: m_sommets)
     {
         bfs=BFS(s->getNum(), compteur);
         std::cout<<std::endl;
     }
-
     if(compteur==m_sommets.size())
     {
         test=1;
@@ -719,7 +719,6 @@ void Graphe::kconnexe()
     int i=0;
     do
     {
-
         supprimer_arrete(i);
         test=testConnexe();
         i++;
@@ -778,7 +777,7 @@ void Graphe::kconnexeSommet()
     int i=0;
     do
     {
-       SupprimerSommet(i);
+        SupprimerSommet(i);
         test=testConnexe();
         i++;
         ++compteur;
@@ -805,7 +804,7 @@ void Graphe::MenuConnexe()
         std::cout<<"Quelle arrete veux tu supprimer"<<std::endl;
         std::cin>>num;
         supprimer_arrete(num);
-       test=testConnexe();
+        test=testConnexe();
         if(test==1)
         {
             std::cout<<" CE GRAPHE EST CONNEXE"<<std::endl;
@@ -824,7 +823,7 @@ void Graphe::MenuConnexe()
     }
     if(choix==3)
     {
-       kconnexeSommet();
+        kconnexeSommet();
     }
 }
 
@@ -1149,5 +1148,135 @@ void Graphe::MenuVulnerabilite()
         //Graphe {Nomfichier};
         VulnerabiliteIntermediarite(num);
     }
+
+}
+std::vector<int> Graphe::Djikstra2(int num_0, int fin,int &somme)
+{
+    ///Initialisation des variables
+    std::vector<int> marquage((int)m_sommets.size(),0);
+    std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
+    std::vector<int> preds((int)m_sommets.size(),-1);
+
+    int temp=0;
+    int actuel;
+    int id;
+    int temp2=9999;
+
+    dists[num_0]=0;/// Poids du sommet de départ
+
+    while(temp==0)
+    {
+        temp2=9999;
+        for (unsigned int i =0; i<m_sommets.size(); i++)
+        {
+            if((dists[i] < temp2)&&(marquage[i]==0))
+            {
+                actuel=i;
+
+                temp2=dists[i]; /// On prend l'arrete avec la plus petite distance
+            }
+        }
+        marquage [actuel]=1; /// On marque les sommets découverts
+
+
+        for( auto a:m_arretes)
+        {
+
+
+         if (a->getEx1()->getNum()==actuel)
+            {
+                if((dists[actuel]+a->getPoids())<dists[a->getEx2()->getNum()])
+                {
+                    dists[a->getEx2()->getNum()]=dists[actuel]+a->getPoids();
+                    preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
+                    somme=a->getPoids();
+                }
+            }
+            if(a->getEx2()->getNum()==actuel)
+            {
+                if((dists[actuel]+a->getPoids())<dists[a->getEx1()->getNum()])
+                {
+                    dists[a->getEx1()->getNum()]=dists[actuel]+a->getPoids();
+                    preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
+                    somme=a->getPoids();
+                }
+            }
+
+        }
+        temp=1;
+        for(unsigned int i=0; i<m_sommets.size(); ++i)
+        {
+            if(marquage[i]==0)
+                temp=0;
+        }
+    }
+    std::cout<<std::endl;
+    afficher_parcours2(num_0,fin,preds);
+    return preds;
+}
+void Graphe::afficher_parcours2(size_t num, int fin, const std::vector<int>& arbre)
+{
+    for(size_t i=0; i<arbre.size(); ++i)
+    {
+
+        if(i!=num&&i==fin)
+        {
+            if(arbre[i]!=-1)
+            {
+                std::cout<<i<<" <-- ";
+                size_t j=arbre[i];
+                while(j!=num)
+                {
+                    std::cout<<j<<" <-- ";
+                    j=arbre[j];
+                }
+                std::cout<<j<<std::endl;
+            }
+        }
+
+    }
+}
+
+void Graphe::GuideTouristique()
+{
+    int choix;
+
+    std::cout<<"BIENVENUE SUR VOTRE GUIDE TOURISTIQUE"<<std::endl;
+    std::cout<<"QUELLE EST VOTRE LOCALISATION ACTUELLE DANS L ILE DE LA REUNION ? "<<std::endl;
+    std::cout<<"O)Saint-Denis"<<std::endl;
+    std::cout<<"1)Saint-Paul"<<std::endl;
+    std::cout<<"2)Saint-Andre"<<std::endl;
+    std::cout<<"3)Saint-Leu "<<std::endl;
+    std::cout<<"4)Saint-Benoit"<<std::endl;
+    std::cout<<"5)Saint-Louis"<<std::endl;
+    std::cout<<"6) Sainte-Rose"<<std::endl;
+    std::cout<<"7)Saint-Pierre"<<std::endl;
+    std::cout<<"8)Saint-Philippe"<<std::endl;
+    std::cout<<"9) Saint-Joseph"<<std::endl;
+
+    do
+    {
+        std::cin>>choix;
+    }while(choix<0&&choix>9);
+    std::cout<<"VOICI LES CHEMINS POSSIBLES"<<std::endl;
+    double Cps, somme;
+    int choix2;
+    Djikstra(choix,Cps, somme);
+    std::cout<<"CHOISISSEZ VOTRE DESTINATION "<<std::endl;
+    std::cout<<"O)Saint-Denis"<<std::endl;
+    std::cout<<"1)Saint-Paul"<<std::endl;
+    std::cout<<"2)Saint-Andre"<<std::endl;
+    std::cout<<"3)Saint-Leu "<<std::endl;
+    std::cout<<"4)Saint-Benoit"<<std::endl;
+    std::cout<<"5)Saint-Louis"<<std::endl;
+    std::cout<<"6) Sainte-Rose"<<std::endl;
+    std::cout<<"7)Saint-Pierre"<<std::endl;
+    std::cout<<"8)Saint-Philippe"<<std::endl;
+    std::cout<<"9) Saint-Joseph"<<std::endl;
+    std::cin>>choix2;
+    std::cout<<"VOICI LE TRAJET A PRENDRE "<<std::endl;
+    int s;
+    Djikstra2(choix, choix2,s);
+    std::cout<<somme<<std::endl;
 
 }
