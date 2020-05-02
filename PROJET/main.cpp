@@ -93,11 +93,9 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Graphe.txt"};
 
+    Graphe g {"Reunion.txt"};
 
-//    srand(time(NULL));
-    double Cps,somme;
 
 
    // g.ChargementFichierPond("Ponderation.txt");
