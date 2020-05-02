@@ -53,3 +53,7 @@ bool Arete::CalculDEG( const Sommet*a, Arete*b)
         return false;
     }
 }
+void Arete::set_indice(int nombre)
+{
+    m_indice=nombre;
+}

@@ -21,6 +21,7 @@ public:
     bool CalculDEG( const Sommet*a, Arete*b);
     void setPoids(double poids);
     double getPoids()const;
+    void set_indice(int nombre);
 
 protected:
 

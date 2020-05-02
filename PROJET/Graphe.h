@@ -17,22 +17,26 @@ public:
     double calculDegre(int num);
     void sauvegarde();
     std::vector<double> VectorPropre( double &Lambda);
-    void affichage_Resultat1();
+    void affichage_Resultat1(Svgfile &svgout);
     std::vector<int> Djikstra(int debut, double &Cps, double & somme );
     void afficherListe();
-    void Calculproximite();
     std::vector<int> Intermediarite(int debut,int Sommet);
     void supprimer_arrete(int num);
-    void VulnerabiliteDegre();
-    void VulnerabiliteVP();
-    void SauvegardeVP();
-    void VulnerabiliteDjikstra();
-    void sauvegarderProximite();
+    void VulnerabiliteDegre(int num);
+    void VulnerabiliteVP(int num);
+    void SauvegardeVP(Svgfile &svgout);
+    void VulnerabiliteDjikstra(int num);
+    void sauvegarderProximite(Svgfile &svgout);
     std::vector<int> BFS(int num_s0,int & compteur)const;
      void testConnexe();
      void afficher_parcours(size_t num,const std::vector<int>& arbre);
      void kconnexe();
      void SupprimerSommet(int indice);
+     void MenuVulnerabilite();
+     void CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2);
+     std::vector<int> Intermediarite(unsigned int num0,  std::vector<float> &compt);
+     void SauvegardeIntermediarite();
+     void VulnerabiliteIntermediarite(int num);
 
     protected:
 
