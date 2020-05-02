@@ -20,9 +20,11 @@ class Graphe
          void affichage_Resultat1();
          std::vector<int> Djikstra(int debut, std::string Nomfichier);
           void afficherListe();
+          void afficherparcours(unsigned int num,std::vector<int> &arbre);
           void Calculproximite(std::string nomFichier);
-          std::vector<int> Intermediarite(int debut,int Sommet);
-
+          std::vector<int> Intermediarite(unsigned int num0, std::vector<float> &compt);
+          void CalculIntermediarite();
+          void compteur(int  num0, int actuel, std::vector<int>preds,std::vector<int> compt3);
     protected:
 
     private:

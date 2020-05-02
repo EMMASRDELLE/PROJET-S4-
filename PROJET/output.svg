@@ -41,29 +41,58 @@
 <text x="905" y="15" fill="lightgrey" >900</text>
 <line x1="1000" y1="0" x2="1000" y2="800" stroke="lightgrey" />
 <text x="1005" y="15" fill="lightgrey" >1000</text>
-<circle cx="200" cy="100" r="10" fill="black" />
-<text x="200" y="80" fill="blue" >A</text>
-<text x="200" y="50" fill="green" >0</text>
-<circle cx="100" cy="200" r="10" fill="black" />
-<text x="100" y="180" fill="blue" >B</text>
-<text x="100" y="150" fill="green" >1</text>
-<circle cx="200" cy="200" r="10" fill="black" />
-<text x="200" y="180" fill="blue" >C</text>
-<text x="200" y="150" fill="green" >2</text>
-<circle cx="300" cy="200" r="10" fill="black" />
-<text x="300" y="180" fill="blue" >D</text>
-<text x="300" y="150" fill="green" >3</text>
-<circle cx="200" cy="300" r="10" fill="black" />
-<text x="200" y="280" fill="blue" >E</text>
-<text x="200" y="250" fill="green" >4</text>
-<line x1="200" y1="100" x2="200" y2="200" stroke="black" />
-<text x="200" y="130" fill="red" >5</text>
-<line x1="100" y1="200" x2="200" y2="200" stroke="black" />
-<text x="150" y="180" fill="red" >10</text>
-<line x1="200" y1="200" x2="300" y2="200" stroke="black" />
-<text x="250" y="180" fill="red" >5</text>
-<line x1="200" y1="200" x2="200" y2="300" stroke="black" />
-<text x="200" y="230" fill="red" >1</text>
+<circle cx="250" cy="150" r="10" fill="black" />
+<text x="250" y="130" fill="blue" >Saint-Denis</text>
+<text x="250" y="100" fill="green" >0</text>
+<circle cx="90" cy="250" r="10" fill="black" />
+<text x="90" y="230" fill="blue" >Saint-Paul</text>
+<text x="90" y="200" fill="green" >1</text>
+<circle cx="400" cy="200" r="10" fill="black" />
+<text x="400" y="180" fill="blue" >Saint-Andre</text>
+<text x="400" y="150" fill="green" >2</text>
+<circle cx="110" cy="400" r="10" fill="black" />
+<text x="110" y="380" fill="blue" >Saint-Leu</text>
+<text x="110" y="350" fill="green" >3</text>
+<circle cx="450" cy="300" r="10" fill="black" />
+<text x="450" y="280" fill="blue" >Saint-Benoit</text>
+<text x="450" y="250" fill="green" >4</text>
+<circle cx="200" cy="500" r="10" fill="black" />
+<text x="200" y="480" fill="blue" >Saint-Louis</text>
+<text x="200" y="450" fill="green" >5</text>
+<circle cx="500" cy="400" r="10" fill="black" />
+<text x="500" y="380" fill="blue" >Sainte-Rose</text>
+<text x="500" y="350" fill="green" >6</text>
+<circle cx="250" cy="530" r="10" fill="black" />
+<text x="250" y="510" fill="blue" >Saint-Pierre</text>
+<text x="250" y="480" fill="green" >7</text>
+<circle cx="460" cy="540" r="10" fill="black" />
+<text x="460" y="520" fill="blue" >Saint-Philippe</text>
+<text x="460" y="490" fill="green" >8</text>
+<circle cx="350" cy="550" r="10" fill="black" />
+<text x="350" y="530" fill="blue" >Saint-Joseph</text>
+<text x="350" y="500" fill="green" >9</text>
+<line x1="250" y1="150" x2="90" y2="250" stroke="black" />
+<text x="170" y="180" fill="red" >1</text>
+<line x1="250" y1="150" x2="400" y2="200" stroke="black" />
+<text x="325" y="155" fill="red" >1</text>
+<line x1="90" y1="250" x2="110" y2="400" stroke="black" />
+<text x="100" y="305" fill="red" >1</text>
+<line x1="110" y1="400" x2="200" y2="500" stroke="black" />
+<text x="155" y="430" fill="red" >1</text>
+<line x1="400" y1="200" x2="450" y2="300" stroke="black" />
+<text x="425" y="230" fill="red" >1</text>
+<line x1="200" y1="500" x2="250" y2="530" stroke="black" />
+<text x="225" y="495" fill="red" >1</text>
+<line x1="450" y1="300" x2="500" y2="400" stroke="black" />
+<text x="475" y="330" fill="red" >1</text>
+<line x1="250" y1="530" x2="350" y2="550" stroke="black" />
+<text x="300" y="520" fill="red" >1</text>
+<line x1="460" y1="540" x2="500" y2="400" stroke="black" />
+<text x="480" y="450" fill="red" >1</text>
+<line x1="460" y1="540" x2="350" y2="550" stroke="black" />
+<text x="405" y="525" fill="red" >1</text>
+<line x1="450" y1="300" x2="250" y2="530" stroke="black" />
+<text x="350" y="395" fill="red" >1</text>
   
 
 <defs>

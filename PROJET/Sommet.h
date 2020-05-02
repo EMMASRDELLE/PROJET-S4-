@@ -17,9 +17,9 @@ class Sommet
         int getNum()const;
         std::string getNom() const;
         void Dessiner(Svgfile&svgout)const;
-        void ajouterSucc(const Sommet*s);
+        void ajouterSucc( Sommet*s);
         void set_indice(int nombre);
-        const std::vector <const Sommet*>& getSuccesseurs()const  {return m_successeurs; };
+         std::vector < Sommet*>& getSuccesseurs() {return m_successeurs; };
         void afficher() const;
 
 
@@ -32,7 +32,7 @@ class Sommet
         std::string m_nom;
         double m_x;
         double m_y;
-        std::vector <const Sommet*> m_successeurs;
+        std::vector <Sommet*> m_successeurs;
 
 };
 
