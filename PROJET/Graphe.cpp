@@ -930,10 +930,6 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
     }
     // afficherparcours(num0,preds);
 
-    for(int i=0; i<dists.size(); ++i)
-    {
-        // std::cout<<" yes man"<<dists[i]<<std::endl;
-    }
 
     return dists;
 }
@@ -1161,6 +1157,7 @@ std::vector<int> Graphe::Djikstra2(int num_0, int fin,int &somme)
     int actuel;
     int id;
     int temp2=9999;
+    somme=0;
 
     dists[num_0]=0;/// Poids du sommet de départ
 
@@ -1182,6 +1179,9 @@ std::vector<int> Graphe::Djikstra2(int num_0, int fin,int &somme)
         for( auto a:m_arretes)
         {
 
+if(a->getEx1()->getNum()!=fin||a->getEx2()->getNum()==fin)
+{
+
 
          if (a->getEx1()->getNum()==actuel)
             {
@@ -1189,8 +1189,9 @@ std::vector<int> Graphe::Djikstra2(int num_0, int fin,int &somme)
                 {
                     dists[a->getEx2()->getNum()]=dists[actuel]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
-                    somme=a->getPoids();
+somme=a->getPoids()+somme;
                 }
+
             }
             if(a->getEx2()->getNum()==actuel)
             {
@@ -1198,10 +1199,13 @@ std::vector<int> Graphe::Djikstra2(int num_0, int fin,int &somme)
                 {
                     dists[a->getEx1()->getNum()]=dists[actuel]+a->getPoids();
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
-                    somme=a->getPoids();
+   somme=a->getPoids()+somme;
+   std::cout<<somme;
                 }
             }
 
+
+        }
         }
         temp=1;
         for(unsigned int i=0; i<m_sommets.size(); ++i)
@@ -1277,6 +1281,6 @@ void Graphe::GuideTouristique()
     std::cout<<"VOICI LE TRAJET A PRENDRE "<<std::endl;
     int s;
     Djikstra2(choix, choix2,s);
-    std::cout<<somme<<std::endl;
+    std::cout<<s<<std::endl;
 
 }
