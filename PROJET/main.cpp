@@ -99,19 +99,26 @@ int main()
     //g.MenuVulnerabilite();
     //g.kconnexe();
    // g.SupprimerSommet(0);
+
     g.Dessiner(svgout);
     legende_svg(svgout);
 //g.affichage_Resultat1(svgout);
+
 std::vector<double>Result1;
 std::vector<double>Result2;
-   // g.CalculIntermediarite(Result1,Result2);
+   //g.CalculIntermediarite(Result1,Result2);
     std::cout<<std::endl;
+
+    //g.supprimer_arrete(1);
+//g.testConnexe();
    //g.SauvegardeIntermediarite(svgout);
+  g.kconnexe();
     //g.MenuVulnerabilite();
    //g.VulnerabiliteDjikstra();
     //g.testConnexe();
     //g.SauvegardeVP(svgout);
   // g.sauvegarderProximite(svgout);
+
     //g.VectorPropre();
 
 
