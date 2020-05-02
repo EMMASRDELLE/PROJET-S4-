@@ -31,9 +31,6 @@ void Menu()
              "2: Calcul des indices de centralite \n"
              "3: Test de vulnerabilite\n\n"
              <<std::endl;
-
-
-
 }
 int main()
 {
@@ -70,12 +67,14 @@ int main()
     Graphe g {"Graphe2.txt"};
 
     srand(time(NULL));
-    g.ChargementFichierPond("Ponderation2.txt");
-    g.afficherListe();
+    //g.ChargementFichierPond("Ponderation2.txt");
+    //g.afficherListe();
     //g.kconnexe();
    // g.SupprimerSommet(0);
+   g.Dessiner(svgout);
+   g.affichage_Resultat1();
 
-   g.VulnerabiliteDjikstra();
+  // g.VulnerabiliteDjikstra();
     //g.testConnexe();
    // g.sauvegarderProximite();
     //g.VectorPropre();
@@ -92,7 +91,7 @@ int main()
 //g.supprimer_arrete();
         //g.VectorPropre();
         //g.afficher();
-        g.Dessiner(svgout);
+
    /*     color(11,0);
         std::cout<<"\nEntrez votre choix : ";
         color(5,0);
