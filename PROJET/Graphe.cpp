@@ -686,27 +686,17 @@ std::vector<int> Graphe::BFS(int num_s0, int & compteur)const
     }
     return preds;
 }
-void Graphe::testConnexe()
+int Graphe::testConnexe()
 {
     std::vector<int> bfs;
     int compteur;
-    for(auto s: m_sommets)
+    do
     {
-        bfs=BFS(s->getNum(), compteur);
-        std::cout<<std::endl;
+        int test=testConnexe();
 
-    }
 
-    if(compteur==m_sommets.size())
-    {
-        std::cout<<" CE GRAPHE EST CONNEXE"<<std::endl;
-        std::cout<<std::endl;
-    }
-    else
-    {
-        std::cout<<" CE GRAPHE EST NON CONNEXE"<<std::endl;
-        std::cout<<std::endl;
-    }
+
+    }while(true);
 
 }
 void Graphe::afficher_parcours(size_t num,const std::vector<int>& arbre)
@@ -752,8 +742,8 @@ void Graphe::kconnexe()
             test=test+1;
         }
 
-    }
-    while (compteur==m_sommets.size());
+    }while (compteur==m_sommets.size());
+
     std::cout<<test<<"-arrete connexe "<<std::endl;
 }
 
