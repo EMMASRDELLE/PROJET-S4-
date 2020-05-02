@@ -108,8 +108,10 @@ std::vector<double>Result1;
 std::vector<double>Result2;
    //g.CalculIntermediarite(Result1,Result2);
     std::cout<<std::endl;
-
-   g.SauvegardeIntermediarite(svgout);
+    //g.supprimer_arrete(1);
+//g.testConnexe();
+   //g.SauvegardeIntermediarite(svgout);
+  g.kconnexe();
     //g.MenuVulnerabilite();
    //g.VulnerabiliteDjikstra();
     //g.testConnexe();

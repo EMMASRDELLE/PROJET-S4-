@@ -28,7 +28,7 @@ public:
     void VulnerabiliteDjikstra(int num);
     void sauvegarderProximite(Svgfile &svgout);
     std::vector<int> BFS(int num_s0,int & compteur)const;
-     void testConnexe();
+     int testConnexe();
      void afficher_parcours(size_t num,const std::vector<int>& arbre);
      void kconnexe();
      void SupprimerSommet(int indice);
