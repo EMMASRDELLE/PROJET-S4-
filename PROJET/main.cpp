@@ -33,9 +33,33 @@ void Menu()
              "2: Calcul des indices de centralite \n"
              "3: Test de vulnerabilite\n\n"
              <<std::endl;
+}
 
+void legende_svg(Svgfile&svgout)
+{
+svgout.addText(650,330,"Importance des sommets en fonction ","black");
+svgout.addText(630,350,"du pourcentage de l'indice de centralite max ","black");
 
+svgout.addDisk(700,400,20,"lime");
+svgout.addText(750,405,"100% de la valeur max","black");
 
+svgout.addDisk(700,450,20,"limegreen");
+svgout.addText(750,455,"90%-100%","black");
+
+svgout.addDisk(700,500,20,"palegreen");
+svgout.addText(750,505,"80%-90%","black");
+
+svgout.addDisk(700,550,20,"coral");
+svgout.addText(750,555,"60%-80%","black");
+
+svgout.addDisk(700,600,20,"orange");
+svgout.addText(750,605,"50%-60%","black");
+
+svgout.addDisk(700,650,20,"lightsalmon");
+svgout.addText(750,655,"0%-50%","black");
+
+svgout.addDisk(700,700,20,"red");
+svgout.addText(750,705,"100% de la valeur min","black");
 }
 int main()
 {
@@ -71,8 +95,10 @@ int main()
 
     Graphe g {"Graphe2.txt"};
 
+
 //    srand(time(NULL));
     double Cps,somme;
+
 
    // g.ChargementFichierPond("Ponderation.txt");
     g.afficherListe();
@@ -81,18 +107,28 @@ int main()
     //g.MenuVulnerabilite();
     //g.kconnexe();
    // g.SupprimerSommet(0);
-   //g.Dessiner(svgout);
+
+    g.Dessiner(svgout);
+    legende_svg(svgout);
+    //g.MenuConnexe();
 //g.affichage_Resultat1(svgout);
-//std::vector<double>Result1;
-//std::vector<double>Result2;
-   // g.CalculIntermediarite(Result1,Result2);
+
+std::vector<double>Result1;
+std::vector<double>Result2;
+   //g.CalculIntermediarite(Result1,Result2);
     std::cout<<std::endl;
-    //g.SauvegardeIntermediarite();
-  //  g.MenuVulnerabilite();
+    //g.supprimer_arrete(1);
+//g.testConnexe();
+   //g.SauvegardeIntermediarite(svgout);
+  //g.kconnexe();
+    //g.MenuVulnerabilite();
+
    //g.VulnerabiliteDjikstra();
     //g.testConnexe();
     //g.SauvegardeVP(svgout);
-   //g.sauvegarderProximite(svgout);
+  //g.sauvegarderProximite(svgout);
+  g.GuideTouristique();
+
     //g.VectorPropre();
 
 
@@ -104,7 +140,8 @@ int main()
 //g.supprimer_arrete(1);
         //g.VectorPropre();
         //g.afficher();
-        g.Dessiner(svgout);
+
+//g.Djikstra(1, double &Cps, double & somme )
 
    /*     color(11,0);
         std::cout<<"\nEntrez votre choix : ";

@@ -66,7 +66,10 @@ Graphe::Graphe(std::string nomFichier)
         m_arretes.push_back(new Arete(m_sommets[num1],m_sommets[num2],indice2,1));
         m_sommets[num1]->ajouterSucc(m_sommets[num2]);
         if((!m_orientation)&&(num1<num2))
+        {
             m_sommets[num2]->ajouterSucc(m_sommets[num1]);
+        }
+
 
     }
 }
@@ -184,7 +187,6 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
         {
             s->colorier(svgout,0);
 
-            std::cout<<"oui";
         }
 
         if(CG<vec[0]&&CG>0.90*vec[0])///90%-100%
@@ -206,7 +208,7 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
             s->colorier(svgout,4);
         }
 
-        if(CG>vec[vec.size()-1]&&CG<vec[0]*0.50)///<50%
+        if(CG>vec[vec.size()-1]&&CG<=vec[0]*0.50)///<50%
         {
             s->colorier(svgout,5);
         }
@@ -239,7 +241,6 @@ std::vector<double> Graphe::VectorPropre( double &Lambda)
             for (auto succ:m_sommets[i]->getSuccesseurs())
             {
                 Somme= succ->getNum()+Somme;
-
 
             }
             Somme=0;
@@ -309,6 +310,7 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
         {
             m_sommets[i]->colorier(svgout,0);
 
+
         }
 
         if(vec[i]<vec2[0]&&vec[i]>0.90*vec2[0])///90%-100%
@@ -330,7 +332,7 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
             m_sommets[i]->colorier(svgout,4);
         }
 
-        if(vec[i]>vec2[vec2.size()-1]&&vec[i]<vec2[0]*0.50)///<50%
+        if(vec[i]>vec2[vec2.size()-1]&&vec[i]<=vec2[0]*0.50)///<=50%
         {
             m_sommets[i]->colorier(svgout,5);
         }
@@ -341,6 +343,7 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
         }
     }
 }
+
 
 int Graphe::poidsSucc(Sommet* a, Sommet* b)
 {
@@ -358,44 +361,8 @@ int Graphe::poidsSucc(Sommet* a, Sommet* b)
     }
 }
 
- /* std::vector<int> Graphe::Djikstra(int num_s0,double &Cps,double &somme)
-  {
-    std::vector<int> couleurs((int)m_sommets.size(),0);
-    std::vector<int> dists((int)m_sommets.size(),9999);
-    std::vector<int> preds((int)m_sommets.size(),-1);
-    std::queue<Sommet*> file;
-    Sommet* p;
-    int temp=0;
-    int actuel;
-    int temp2=9999;
-    double poids=0;
-
-  /*  for(auto s: p->getSuccesseurs() )
-    {
-        file.push(s);
-    }
-
-    dists[num_s0]=0;// Poids du sommet de départ
-    while((!file.empty())&&(couleurs[p->getNum()]==0))
-    {
-        for(auto succ: p->getSuccesseurs())
-        {    poids=poidsSucc(p,succ);
-            if((dists[p->getNum()] + poids)<(dists[succ->getNum()]))
-            {
-                couleurs[succ->getNum()]=1;
-                dists[succ->getNum()]=poids + dists[p->getNum()] ;
-                preds[succ->getNum()]= p->getNum();///on le met dans la file
-                file.push({m_sommets[succ->getNum()]});///Je pense qu'il y a un soucis concernant le succ.first->getNum().
-
-            }
-
-        }
-    }
-
-return preds;
 
 
-  }*/
 
 /*std::vector<int> Graphe::Dijkstra(int num_s0)const
 {
@@ -516,8 +483,7 @@ std::vector<int> Graphe::Djikstra(int num0, double &Cps, double & somme )
 /*void Graphe::sauvegarderProximite(Svgfile&svgout)
 {
     std::vector<int> dji;
-    std::vector<int> vec;
-    std::vector<int> vec2;
+    std::vector<double> vec2;
     double Cps=0;
     double somme=0;
     std::ofstream ifs{"Resultat3.txt"};
@@ -536,43 +502,61 @@ std::vector<int> Graphe::Djikstra(int num0, double &Cps, double & somme )
     Cps=0;
     somme=0;
 
+
     for(int i=0; i<m_sommets.size(); ++i)
     {
         Djikstra(m_sommets[i]->getNum(),Cps,somme);
+
+
         if(Cps==vec2[0])///100%
         {
+
             m_sommets[i]->colorier(svgout,0);
 
+
         }
 
-        if(Cps<vec2[0]&&vec[i]>0.90*vec2[0])///90%-100%
+        if(Cps<vec2[0]&&Cps>0.90*vec2[0])///90%-100%
         {
+
             m_sommets[i]->colorier(svgout,1);
+
+
         }
-        if(Cps>vec2[0]*0.80&&vec[i]<vec2[0]*0.90)///80%-90%
+        if(Cps>vec2[0]*0.80&&Cps<vec2[0]*0.90)///80%-90%
         {
             m_sommets[i]->colorier(svgout,2);
+
+
         }
-        if(Cps>vec2[0]*0.60&&vec[i]<vec2[0]*0.80)///60%-80%
+        if(Cps>vec2[0]*0.60&&Cps<vec2[0]*0.80)///60%-80%
         {
 
             m_sommets[i]->colorier(svgout,3);
+
+
         }
 
-        if(Cps>vec2[0]*0.50&&vec[i]<vec2[0]*0.60)///50%-60%
+        if(Cps>vec2[0]*0.50&&Cps<vec2[0]*0.60)///50%-60%
         {
             m_sommets[i]->colorier(svgout,4);
+            std::cout<<Cps;
+
         }
 
-        if(Cps>vec2[vec2.size()-1]&&vec[i]<vec2[0]*0.50)///<50%
+        if(Cps>vec2[vec2.size()-1]&&Cps<=vec2[0]*0.50)///<50%
         {
             m_sommets[i]->colorier(svgout,5);
+
         }
 
         if( Cps==vec2[vec2.size()-1])/// egal a la plus petite
         {
             m_sommets[i]->colorier(svgout,6);
+
         }
+
+
     }
 }*/
 void Graphe::afficherListe()
@@ -631,7 +615,6 @@ void Graphe::supprimer_arrete( int indice)
 
 
 }
-
 void Graphe::VulnerabiliteDegre(int num)
 {
     double deg2,deg=0;
@@ -689,7 +672,7 @@ void Graphe::VulnerabiliteVP( int num)
     }
 }
 
-/*void Graphe ::VulnerabiliteDjikstra(int num)
+void Graphe ::VulnerabiliteDjikstra(int num)
 {
     std::vector<double> Result;
     std::vector<double> Result2;
@@ -724,7 +707,7 @@ void Graphe::VulnerabiliteVP( int num)
         std::cout<<" Sommet"<<m_sommets[i]->getNom()<<"  "<<" "<< "Difference : "<<diff<<std::endl;
     }
 
-}*/
+}
 
 std::vector<int> Graphe::BFS(int num_s0, int & compteur)const
 {
@@ -761,55 +744,42 @@ std::vector<int> Graphe::BFS(int num_s0, int & compteur)const
     }
     return preds;
 }
-void Graphe::testConnexe()
+int Graphe::testConnexe()
 {
     std::vector<int> bfs;
     int compteur;
+    int test;
     for(auto s: m_sommets)
     {
         bfs=BFS(s->getNum(), compteur);
         std::cout<<std::endl;
-
     }
-
     if(compteur==m_sommets.size())
     {
-        std::cout<<" CE GRAPHE EST CONNEXE"<<std::endl;
-        std::cout<<std::endl;
+        test=1;
     }
     else
     {
-        std::cout<<" CE GRAPHE EST NON CONNEXE"<<std::endl;
-        std::cout<<std::endl;
+        test=0;
     }
-
+    return test;
 }
 
 void Graphe::kconnexe()
 {
     std::vector<int> bfs;
-    int compteur;
-    int test=0;
-    int alea=0;
+    int compteur=0;
+    int test;
+    int i=0;
     do
     {
-        alea=rand()%(m_sommets.size());
-
-        for(auto s: m_sommets)
-        {
-            bfs=BFS(s->getNum(), compteur);
-            std::cout<<std::endl;
-
-        }
-        std::cout<<compteur;
-        if(compteur==m_sommets.size())
-        {
-            test=test+1;
-        }
-
+        supprimer_arrete(i);
+        test=testConnexe();
+        i++;
+        ++compteur;
     }
-    while (compteur==m_sommets.size());
-    std::cout<<test<<"-arrete connexe "<<std::endl;
+    while(test==1&&i<m_sommets.size());
+    std::cout<<compteur<<"-arrete connexe "<<std::endl;
 }
 
 void Graphe::SupprimerSommet(int indice)
@@ -855,6 +825,65 @@ void Graphe::SupprimerSommet(int indice)
     }
 }
 
+void Graphe::kconnexeSommet()
+{
+    std::vector<int> bfs;
+    int compteur=0;
+    int test;
+    int i=0;
+    do
+    {
+        SupprimerSommet(i);
+        test=testConnexe();
+        i++;
+        ++compteur;
+    }
+    while(test==1&&i<m_sommets.size());
+    std::cout<<compteur<<"-arrete connexe "<<std::endl;
+}
+void Graphe::MenuConnexe()
+{
+    int test;
+    int choix;
+    std::cout<<"MENU CONNEXITE"<<std::endl;
+    std::cout<<"1) Tester la connexite du graphe"<<std::endl;
+    std::cout<<"2) K arrete"<<std::endl;
+    std::cout<<"3) K sommet"<<std::endl;
+    do
+    {
+        std::cin>>choix;
+    }
+    while (choix<1&&choix>3);
+    int num;
+    if(choix==1)
+    {
+        std::cout<<"Quelle arrete veux tu supprimer"<<std::endl;
+        std::cin>>num;
+        supprimer_arrete(num);
+        test=testConnexe();
+        if(test==1)
+        {
+            std::cout<<" CE GRAPHE EST CONNEXE"<<std::endl;
+            std::cout<<std::endl;
+        }
+        else if(test==0)
+        {
+            std::cout<<" CE GRAPHE EST NON CONNEXE"<<std::endl;
+            std::cout<<std::endl;
+        }
+
+    }
+    if(choix==2)
+    {
+        kconnexe();
+    }
+    if(choix==3)
+    {
+        kconnexeSommet();
+    }
+}
+
+
 std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &compt)
 {
     //Initialisation des variables
@@ -864,7 +893,9 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
     int temp=0;
     int actuel;
     int temp2=9999;
-
+    double somme;
+    int cpt=1;
+    double cmpt3=0;
     compt[num0]=0;
 
     dists[num0]=0;// Poids du sommet de départ
@@ -950,13 +981,20 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
     }
     // afficherparcours(num0,preds);
 
+    /*   for (unsigned int i=0; i<m_sommets.size(); ++i)
+       {
+           std::cout<< i<<" Nombre de pcc : " <<compt[i]<< " Poids : "<<dists[i]<<std::endl;
+       }*/
 
     return dists;
 }
 
 void Graphe::CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2)
 {
-
+    for (auto a:m_arretes)
+    {
+        std::cout<<a->getIndice()<<" "<<a->getEx1()->getNum()<<a->getEx2()->getNum()<<std::endl;
+    }
     std::vector<int> stock((int)m_sommets.size(),1);
     std::vector<int> stock2((int)m_sommets.size(),1);
     std::vector<float> compt((float)m_sommets.size(),1);
@@ -973,6 +1011,7 @@ void Graphe::CalculIntermediarite(std::vector<double>&Result1, std::vector<doubl
         for(unsigned int j=0; j<m_sommets.size(); ++j)
         {
             stock2 = Intermediarite(j,somme);//Depart
+
             for(unsigned int t=j; t<m_sommets.size(); t++) // Int a arrivée
             {
                 if (i!=j&&j!=t&&i!=t)// Arrivée
@@ -1000,10 +1039,12 @@ void Graphe::CalculIntermediarite(std::vector<double>&Result1, std::vector<doubl
 
 }
 
-void Graphe::SauvegardeIntermediarite()
+void Graphe::SauvegardeIntermediarite(Svgfile&svgout)
 {
+    int i=0;
     std::vector<double> R1;
     std::vector<double> R2;
+    std::vector<double>R3;
     CalculIntermediarite(R1,R2);
     std::ofstream ifs{"Intermediarite.txt"};
     for(int i =0; i<m_sommets.size(); ++i)
@@ -1011,6 +1052,71 @@ void Graphe::SauvegardeIntermediarite()
 
         std::cout<<"Sommet : "<<m_sommets[i]->getNom()<<" Centralite : "<<" "<<R1[i] <<" "<<" Centralite normalisee : "<<R2[i]<<std::endl;
         ifs<<m_sommets[i]->getNum()<<" "<<R1[i]<<" "<<R2[i]<<std::endl;
+        R3.push_back(R2[i]);
+
+
+    }
+
+    std::sort (R3.begin(), R3.end(), [](double a1, double a2)
+    {
+        return a1>a2;
+    });
+
+    for(auto vec :R2)
+    {
+
+        if(vec==R3[0])///100%
+        {
+
+            m_sommets[i]->colorier(svgout,0);
+
+
+        }
+
+        if(vec<R3[0]&&vec>0.90*R3[0])///90%-100%
+        {
+
+            m_sommets[i]->colorier(svgout,1);
+
+
+        }
+        if(vec>R3[0]*0.80&&vec<R3[0]*0.90)///80%-90%
+        {
+            m_sommets[i]->colorier(svgout,2);
+
+
+        }
+        if(vec>R3[0]*0.60&&vec<R3[0]*0.80)///60%-80%
+        {
+
+            m_sommets[i]->colorier(svgout,3);
+
+
+        }
+
+        if(vec>R3[0]*0.50&vec<R3[0]*0.60)///50%-60%
+        {
+            m_sommets[i]->colorier(svgout,4);
+
+
+        }
+
+        if(vec>R3[R3.size()-1]&&vec<=R3[0]*0.50)///<50%
+        {
+            m_sommets[i]->colorier(svgout,5);
+
+        }
+
+        if( vec==R3[R3.size()-1])/// egal a la plus petite
+        {
+            m_sommets[i]->colorier(svgout,6);
+
+        }
+
+
+
+        i++;
+
     }
 
 }
@@ -1027,13 +1133,24 @@ void Graphe::VulnerabiliteIntermediarite(int num)
     {
         Result.push_back(R2[i]);
     }
-    supprimer_arrete(num);
+    for(auto s:Result)
+    {
+        std::cout<<s<<std::endl;
+    }
     std::vector<double> R3;
     std::vector<double> R4;
+    supprimer_arrete(num);
     CalculIntermediarite(R3,R4);
+
+
     for(int i=0; i<m_sommets.size(); ++i)
     {
         Result2.push_back(R4[i]);
+    }
+
+    for(auto vec : Result2)
+    {
+        std::cout<<vec<<std::endl;
     }
     for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
@@ -1062,26 +1179,157 @@ void Graphe::MenuVulnerabilite()
 
     if(choix==1)
     {
-        Graphe {"Graphe.txt"};
+
         VulnerabiliteDegre(num);
     }
 
     if(choix==2)
     {
-        Graphe {"Graphe.txt"};
+
         VulnerabiliteVP(num);
     }
     if(choix==3)
     {
-        Graphe {"Graphe.txt"};
-//        VulnerabiliteDjikstra(num);
+        // Graphe {Nomfichier};
+        VulnerabiliteDjikstra(num);
 
     }
     if(choix==4)
     {
-        Graphe {"Graphe.txt"};
+        //Graphe {Nomfichier};
         VulnerabiliteIntermediarite(num);
     }
+
+}
+
+std::vector<int> Graphe::Djikstra2(int num_0, int fin,int &somme)
+{
+    ///Initialisation des variables
+    std::vector<int> marquage((int)m_sommets.size(),0);
+    std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
+    std::vector<int> preds((int)m_sommets.size(),-1);
+
+    int temp=0;
+    int actuel;
+    int id;
+    int temp2=9999;
+
+    dists[num_0]=0;/// Poids du sommet de départ
+
+    while(temp==0)
+    {
+        temp2=9999;
+        for (unsigned int i =0; i<m_sommets.size(); i++)
+        {
+            if((dists[i] < temp2)&&(marquage[i]==0))
+            {
+                actuel=i;
+
+                temp2=dists[i]; /// On prend l'arrete avec la plus petite distance
+            }
+        }
+        marquage [actuel]=1; /// On marque les sommets découverts
+
+
+        for( auto a:m_arretes)
+        {
+
+
+         if (a->getEx1()->getNum()==actuel)
+            {
+                if((dists[actuel]+a->getPoids())<dists[a->getEx2()->getNum()])
+                {
+                    dists[a->getEx2()->getNum()]=dists[actuel]+a->getPoids();
+                    preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
+                    somme=a->getPoids();
+                }
+            }
+            if(a->getEx2()->getNum()==actuel)
+            {
+                if((dists[actuel]+a->getPoids())<dists[a->getEx1()->getNum()])
+                {
+                    dists[a->getEx1()->getNum()]=dists[actuel]+a->getPoids();
+                    preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
+                    somme=a->getPoids();
+                }
+            }
+
+        }
+        temp=1;
+        for(unsigned int i=0; i<m_sommets.size(); ++i)
+        {
+            if(marquage[i]==0)
+                temp=0;
+        }
+    }
+    std::cout<<std::endl;
+    afficher_parcours2(num_0,fin,preds);
+    return preds;
+}
+void Graphe::afficher_parcours2(size_t num, int fin, const std::vector<int>& arbre)
+{
+    for(size_t i=0; i<arbre.size(); ++i)
+    {
+
+        if(i!=num&&i==fin)
+        {
+            if(arbre[i]!=-1)
+            {
+                std::cout<<i<<" <-- ";
+                size_t j=arbre[i];
+                while(j!=num)
+                {
+                    std::cout<<j<<" <-- ";
+                    j=arbre[j];
+                }
+                std::cout<<j<<std::endl;
+            }
+        }
+
+    }
+}
+
+void Graphe::GuideTouristique()
+{
+    int choix;
+
+    std::cout<<"BIENVENUE SUR VOTRE GUIDE TOURISTIQUE"<<std::endl;
+    std::cout<<"QUELLE EST VOTRE LOCALISATION ACTUELLE DANS L ILE DE LA REUNION ? "<<std::endl;
+    std::cout<<"O)Saint-Denis"<<std::endl;
+    std::cout<<"1)Saint-Paul"<<std::endl;
+    std::cout<<"2)Saint-Andre"<<std::endl;
+    std::cout<<"3)Saint-Leu "<<std::endl;
+    std::cout<<"4)Saint-Benoit"<<std::endl;
+    std::cout<<"5)Saint-Louis"<<std::endl;
+    std::cout<<"6) Sainte-Rose"<<std::endl;
+    std::cout<<"7)Saint-Pierre"<<std::endl;
+    std::cout<<"8)Saint-Philippe"<<std::endl;
+    std::cout<<"9) Saint-Joseph"<<std::endl;
+
+    do
+    {
+        std::cin>>choix;
+    }while(choix<0&&choix>9);
+    std::cout<<"VOICI LES CHEMINS POSSIBLES"<<std::endl;
+    double Cps, somme;
+    int choix2;
+    Djikstra(choix,Cps, somme);
+    std::cout<<"CHOISISSEZ VOTRE DESTINATION "<<std::endl;
+    std::cout<<"O)Saint-Denis"<<std::endl;
+    std::cout<<"1)Saint-Paul"<<std::endl;
+    std::cout<<"2)Saint-Andre"<<std::endl;
+    std::cout<<"3)Saint-Leu "<<std::endl;
+    std::cout<<"4)Saint-Benoit"<<std::endl;
+    std::cout<<"5)Saint-Louis"<<std::endl;
+    std::cout<<"6) Sainte-Rose"<<std::endl;
+    std::cout<<"7)Saint-Pierre"<<std::endl;
+    std::cout<<"8)Saint-Philippe"<<std::endl;
+    std::cout<<"9) Saint-Joseph"<<std::endl;
+    std::cin>>choix2;
+    std::cout<<"VOICI LE TRAJET A PRENDRE "<<std::endl;
+    int s;
+    Djikstra2(choix, choix2,s);
+    std::cout<<somme<<std::endl;
 
 }
 
