@@ -620,13 +620,11 @@ void Graphe ::VulnerabiliteDjikstra(int num)
     supprimer_arrete(num);
     for(auto s:m_sommets)
     {
-        std::cout<<"eh ouais";
+
         dji2=Djikstra(s->getNum(), Cps, somme);
-        std::cout<<"mabelle";
         Result2.push_back(Cps);
 
     }
-    std::cout<<"ouais";
     for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
         diff=Result2[i]- Result[i];
@@ -674,12 +672,14 @@ int Graphe::testConnexe()
 {
     std::vector<int> bfs;
     int compteur;
+
     int test;
     for(auto s: m_sommets)
     {
         bfs=BFS(s->getNum(), compteur);
         std::cout<<std::endl;
     }
+
     if(compteur==m_sommets.size())
     {
         test=1;
@@ -719,6 +719,7 @@ void Graphe::kconnexe()
     int i=0;
     do
     {
+
         supprimer_arrete(i);
         test=testConnexe();
         i++;
