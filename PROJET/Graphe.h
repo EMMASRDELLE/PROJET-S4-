@@ -44,6 +44,11 @@ public:
      std::vector<int> Djikstra2(int num_0, int fin,int &somme);
      void afficher_parcours2(size_t num, int fin, const std::vector<int>& arbre);
      void MenuIndiceCentralite(Svgfile&svgout);
+     void Dessiner_centralite_vect_propre(Svgfile &svgout);
+     void Dessiner_centralite_degre(Svgfile&svgout);
+     void Dessiner_centralite_prox(Svgfile&svgout);
+     void Dessiner_centralite_intermediaire(Svgfile&svgout);
+     void Menu_afficher_centralite(Svgfile&svgout);
 
     protected:
 

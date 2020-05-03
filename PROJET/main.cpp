@@ -20,6 +20,7 @@ void afficher_Arbre(std::vector<Arete*> arretes)
         a->afficher();
     }
 }
+
 void Menu()
 {
 
@@ -35,6 +36,8 @@ void Menu()
              "8 : Supprimer un sommet\n"
              <<std::endl;
 }
+
+
 
 void legende_svg(Svgfile&svgout)
 {
@@ -66,6 +69,7 @@ int main()
 {
     Svgfile svgout;
     int choix;
+
     std::string NomFichier;
 
 color(15,0);
