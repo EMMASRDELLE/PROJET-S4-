@@ -155,7 +155,7 @@ void Graphe:: sauvegarde()
         double CG=deg/(m_sommets.size()-1);
 
         if (ifs.is_open())
-            ifs<<m_sommets[i]->getNum()<<m_sommets[i]->getNom()<<" "<<deg<<" "<< CG<<"\n";
+            ifs<<m_sommets[i]->getNum()<<" "<<m_sommets[i]->getNom()<<" "<<deg<<" "<< CG<<"\n";
     }
     ifs.close();
 }
@@ -450,7 +450,6 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
                }
 
            }
-
 
     }
   std::cout<<std::endl;
