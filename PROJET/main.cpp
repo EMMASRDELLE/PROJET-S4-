@@ -35,7 +35,8 @@ void Menu()
              "4 : Afficher les resultats de calcul sur le graphe\n"
              "5 : Guide Touristique\n"
              "6 : Tester la k-connexite\n"
-             "7 : Charger un graphe\n"
+             "7 : Supprimer une arrete\n"
+             "8 : Supprimer un sommet\n"
              <<std::endl;
 }
 
@@ -69,22 +70,24 @@ int main()
 {
     Svgfile svgout;
     int choix;
-std::string NomFichier;
-        color(15,0);
- std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
-           std::cout<<"1) Graphe.txt\n"
-                     <<"2) Graphe2.txt\n"
-                     <<"3) Graphe3.txt\n"
-                      <<std::endl;
-                std::cout<< "\n Nom du fichier de topologie (ex: Graphe.txt) : ";
-                color(5,0);
-            std::cin>>NomFichier;
-            Graphe g{NomFichier};
+    std::string NomFichier;
+    color(15,0);
+    std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
+    std::cout<<"1) Graphe.txt\n"
+             <<"2) Graphe2.txt\n"
+             <<"3) Graphe3.txt\n"
+             <<"4) Grapheoriente.txt\n"
+             <<std::endl;
+    std::cout<< "\n Nom du fichier de topologie (ex: Graphe.txt) : ";
+    color(5,0);
+    std::cin>>NomFichier;
+    Graphe g{NomFichier};
     std::cout<<std::endl;
 
-do{
- g.afficher();
-    color(11,0);
+    do
+    {
+        g.afficherListe();
+        color(11,0);
 
 
         Menu();
@@ -99,12 +102,12 @@ do{
         if(choix==1)
         {
             std::string NomFic;
-    std::cout<< " Saisir Nom du fichier de ponderation (ex: Ponderation.txt) : ";
-    color(5,0);
-    std::cin>>NomFic;
-    g.ChargementFichierPond(NomFic);
-    std::cout<<std::endl;
-    color(15,0);
+            std::cout<< " Saisir Nom du fichier de ponderation (ex: Ponderation.txt) : ";
+            color(5,0);
+            std::cin>>NomFic;
+            g.ChargementFichierPond(NomFic);
+            std::cout<<std::endl;
+            color(15,0);
         }
         if(choix==2)
         {
@@ -114,7 +117,7 @@ do{
         if(choix==3)
         {
 
-         g.MenuVulnerabilite();
+            g.MenuVulnerabilite();
         }
         if(choix==4)
         {
@@ -126,24 +129,24 @@ do{
             g.ChargementFichierPond("PonderationReseau.txt");
             g.GuideTouristique();
         }
-         if(choix==6)
-         {
-             g.MenuConnexe();
-         }
-         if(choix==7)
-         {
-             std::string NomFichier;
-             std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
-           std::cout<<"1) Graphe.txt\n"
-                     <<"2) Graphe2.txt\n"
-                     <<"3) Graphe3.txt\n"
-                      <<std::endl;
-                std::cout<< "\n Nom du fichier de topologie (ex: Graphe.txt) : ";
-                color(5,0);
-            std::cin>>NomFichier;
-            Graphe g{NomFichier};
-         }
-         g.afficherListe();
+        if(choix==6)
+        {
+            g.MenuConnexe();
+        }
+        if(choix==7)
+        {
+            int num;
+            std::cout<<"Supprime une arrete"<<std::endl;
+            std::cin>>num;
+            g.supprimer_arrete(num);
+        }
+        if(choix==8)
+        {
+            int num;
+            std::cout<<"Supprime un sommet"<<std::endl;
+            std::cin>>num;
+            g.SupprimerSommet(num);
+        }
 
 
     }

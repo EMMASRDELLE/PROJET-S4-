@@ -5,7 +5,7 @@
 #include "svgfile.h"
 #include <queue>
 #include <time.h>
-
+///Chargement Fichier Ponderé
 void Graphe::ChargementFichierPond(std::string nomFichier)
 {
     std::ifstream ifs{nomFichier};
@@ -26,9 +26,10 @@ void Graphe::ChargementFichierPond(std::string nomFichier)
         if ( ifs.fail() )
             throw std::runtime_error("Probleme lecture arc");
 
-        m_arretes[indice]->setPoids(poids);
+        m_arretes[indice]->setPoids(poids); ///on attribu le poids à l'arrete
     }
 }
+///Constructeur
 Graphe::Graphe(std::string nomFichier)
 {
     std::ifstream ifs{nomFichier};
@@ -75,7 +76,6 @@ Graphe::Graphe(std::string nomFichier)
 }
 
 ///méthode d'affichage
-
 void Graphe::afficher()const
 {
     if(m_orientation==1)
@@ -90,6 +90,7 @@ void Graphe::afficher()const
         std::cout<<std::endl;
     }
 }
+///Destructeur
 Graphe::~Graphe()
 {
     for(int i=0; i<(int)m_sommets.size(); i++)
@@ -118,24 +119,23 @@ void Graphe::Dessiner(Svgfile &svgout) const
         m_arretes[j]->Dessiner(svgout);
     }
 
-
 }
-
 /// Calcul de degré
 double Graphe::calculDegre(int num)
 {
     double deg=0;
 
-    for (auto b: m_arretes)
+    for (auto b: m_arretes) ///on parcourt les arretes
     {
-        for (auto a : m_sommets)
+        for (auto a : m_sommets)///on parcourt les sommets
+    {
         {
 
-            if (a==m_sommets[num])
+            if (a==m_sommets[num]) ///si le sommet est égale au sommet de l'indice envoyé
             {
-                if(b->CalculDEG(a,b)==true)
+                if(b->CalculDEG(a,b)==true) /// si le calculDEG renvoie vrai
                 {
-                    ++deg;
+                    ++deg; ///on accrémente le compteur de degré
                 }
             }
         }
@@ -143,10 +143,11 @@ double Graphe::calculDegre(int num)
 
     return deg;
 }
-
+}
+///Sauvegarde du resultat Calcul degre
 void Graphe:: sauvegarde()
 {
-    std::ofstream ifs{"Resultat1.txt"};
+    std::ofstream ifs{"Resultat1.txt"}; ///ouverture fichier
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
 
@@ -158,6 +159,7 @@ void Graphe:: sauvegarde()
     }
     ifs.close();
 }
+///Affichage du resultat du premier algorithme
 void Graphe::affichage_Resultat1(Svgfile &svgout)
 {
     int test;
@@ -167,13 +169,11 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
     {
         double num=calculDegre(i);
         double CG=num/(m_sommets.size()-1);
-        vec.push_back(CG);
-
-
-        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" "<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl;
+        vec.push_back(CG);/// on push le resultat normalise dans un vecteur
+        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" "<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl; ///on affiche le resultat
     }
 
-    std::sort (vec.begin(), vec.end(), [](double a1, double a2)
+    std::sort (vec.begin(), vec.end(), [](double a1, double a2) ///methode de trie par ordre decroissant
     {
         return a1>a2;
     });
@@ -183,10 +183,9 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
         double num=calculDegre(s->getNum());
         double CG=num/(m_sommets.size()-1);
 
-        if(CG==vec[0])///100%
+        if(CG==vec[0])/// si CG est egale au plus grand vecteur, on le colorie
         {
             s->colorier(svgout,0);
-
         }
 
         if(CG<vec[0]&&CG>0.90*vec[0])///90%-100%
@@ -219,7 +218,7 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
         }
     }
 }
-
+///SSPG CALCUL VECTOR PROPRE
 std::vector<double> Graphe::VectorPropre( double &Lambda)
 {
     std::vector<double >Resultat;
@@ -232,30 +231,29 @@ std::vector<double> Graphe::VectorPropre( double &Lambda)
     double Lambdapred=0;
     Lambda=0;
     double T=0;
+    double Total=0;
     std::vector<int> somme;
     do
     {
-
         for(int i=0; i<m_sommets.size(); ++i)
         {
-            for (auto succ:m_sommets[i]->getSuccesseurs())
+            for (auto succ:m_sommets[i]->getSuccesseurs())///on parcours les successeurs d'un sommet
             {
-                Somme= succ->getNum()+Somme;
+                Somme= succ->getNum()+Somme; ///on additionne les indices du sommet
 
             }
             Somme=0;
         }
-        double Total=0;
         for(auto s:m_sommets)
         {
             for(auto succ:s->getSuccesseurs())
             {
                 Somme=succ->getNum()+Somme;
-                T=Somme*Somme;
+                T=Somme*Somme;///au carré
             }
             Somme=0;
             Total =T+Total;
-            Lambda=sqrt(Total);
+            Lambda=sqrt(Total); ///Racine de la somme totale
         }
 
 
@@ -273,15 +271,15 @@ std::vector<double> Graphe::VectorPropre( double &Lambda)
             G=0;
             Resultat.push_back(Result);
 
-
         }
         std::cout<<std::endl;
-        Lambdapred=Lambda;
+        Lambdapred=Lambda;///on donne la valeur du lambda actuel au precedent
     }
-    while(Lambda>=Lambdapred*1.05||Lambda<=0.95*Lambdapred);
+    while(Lambda>=Lambdapred*1.05||Lambda<=0.95*Lambdapred);///variation du lambda
     return Resultat;
 
 }
+///Affichage et sauvegarde du calcul de l'indice du vector propre
 void Graphe::SauvegardeVP(Svgfile&svgout)
 {
     double Lambda=0;
@@ -293,10 +291,10 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
     for(int i=0; i< vec.size()&&i<m_sommets.size(); ++i)
     {
         std::cout<<m_sommets[i]->getNom()<<" "<<"Lambda :"<< Lambda<<" "<< "ResultatVP :"<< vec[i]<<std::endl;
-        ifs<<m_sommets[i]->getNom()<<" "<<Lambda<<" "<< vec[i]<<std::endl;
+        ifs<<m_sommets[i]->getNom()<<" "<<Lambda<<" "<< vec[i]<<std::endl; ///sauvegarde dans un fichier
     }
 
-    std::sort (vec2.begin(), vec2.end(), [](double a1, double a2)
+    std::sort (vec2.begin(), vec2.end(), [](double a1, double a2) ///trie decroissant
     {
         return a1>a2;
     });
@@ -309,7 +307,6 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
         if(vec[i]==vec2[0])///100%
         {
             m_sommets[i]->colorier(svgout,0);
-
 
         }
 
@@ -361,38 +358,6 @@ int Graphe::poidsSucc(Sommet* a, Sommet* b)
     }
 }
 
-/*std::vector<int> Graphe::Dijkstra(int num_s0)const
-{
-/// pour le marquage
-/// couleurs [i] indique si le sommet numéro i est non marqué (valeur 0)
-/// ou marqué (valeur 1)
-    std::vector<int> couleurs((int)m_sommets.size(),0);
-    Sommet* p;
-    std::vector<int> dists((int)m_sommets.size(),9999);
-    std::vector<int> preds((int)m_sommets.size(),-1);
-    dists[num_s0]=0;
-///définition « à la volée »de la fonction de comparaison cmp
-   /*  top();//prend la premiere valeur
-    while((!file.empty())&&(couleurs[p.first->getNum()]==0))
-    {
-        p=file.top();
-        file.pop();
-        for(auto succ: p.first->getSuccesseurs())
-        {
-            if((p.second + succ.second)<(dists[succ.first->getNum()]))
-            {
-                couleurs[succ.first->getNum()]=1;
-                dists[succ.first->getNum()]=p.second + succ.second;
-                preds[succ.first->getNum()]= p.first->getNum();///on le met dans la file
-                file.push({m_sommets[succ.first->getNum()], dists[succ.first->getNum()]});///Je pense qu'il y a un soucis concernant le succ.first->getNum().
-
-            }
-
-        }
-    }
-    return preds;///on retourne la liste de vecteur
-}
-} */
 void Graphe::afficher_parcours(size_t num,const std::vector<int>& arbre)
 {
     for(size_t i=0; i<arbre.size(); ++i)
@@ -471,74 +436,12 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
         }
 
     }
+    afficher_parcours(num_0, preds);
     std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
     return preds;
 }
-/*std::vector<int> Graphe::Djikstra3(int num0, double &Cps, double & somme )
-{
-    std::vector<int> marquage((int)m_sommets.size(),0);
-    std::vector<int> dists((int)m_sommets.size(),9999);
-    std::vector<int> preds((int)m_sommets.size(),-1);
-    std::queue<Sommet*> file;
-    Sommet* p;
-    int temp=0;
-    int temp2=9999;
-    int actuel;
-    int poids=0;
-    int poids2=0;
-    file.push(m_sommets[num0]);
-    p=file.front();
-    dists[num0]=0;// Poids du sommet de départ
 
-
-    double n;
-
-    while(temp==0)
-    {
-        temp2=99999;
-        for(unsigned int i=0;i<m_sommets.size();++i)
-        {
-             if(dists[i]<temp2&&marquage[i]==0)
-             {
-                 p->setNum(i); // FAIRE UN SETTER
-                 temp2=dists[i];
-
-             }
-        }marquage[p->getNum()]=1;
-
-
-        for(auto succ: p->getSuccesseurs())
-        {std::cout<<"BBBBBBBBBBBBBBBBBBBB";
-            poids= poidsSucc(p,succ);
-
-                 if((dists[p->getNum()] + poids )<(dists[succ->getNum()]))
-            {
-                 n= dists[p->getNum()] + poids;
-                std::cout<<n<<" "<<dists[succ->getNum()];
-
-                dists[succ->getNum()]=poids + dists[p->getNum()] ;
-                preds[succ->getNum()]= p->getNum();///on le met dans la file
-
-                if (marquage[succ->getNum()]==0)
-                {
-                     file.push({m_sommets[succ->getNum()]});
-                }
-
-                poids2=poids;
-                poids=0;
-            }
-           }
-        } temp=1;
-            for(int j =0; j<marquage.size(); ++j)
-            {
-                if(marquage[j]==0)
-                    temp=0;
-            }
-    afficher_parcours(num0,preds);
-
-    return preds;
-}*/
 void Graphe::sauvegarderProximite(Svgfile&svgout)
 {
     std::vector<int> dji;
