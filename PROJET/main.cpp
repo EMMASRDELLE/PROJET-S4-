@@ -1,3 +1,4 @@
+///Source: Code et cours de madame Palasi
 #include <iostream>
 #include "Graphe.h"
 #include "svgfile.h"
@@ -9,6 +10,7 @@ void color(int t,int f)
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H,f*16+t);
 }
+
 
 void afficher_Arbre(std::vector<Arete*> arretes)
 {
@@ -26,7 +28,7 @@ void Menu()
     std::cout<<" \t \t \t \t \t \t \tING2 TD7\n\n"<<std::endl;
     color(3,0);
     std::cout<< " \t\t\t   Voici l'ensemble des action que vous pouvez effectuer\n\n"
-             "0: Quitter"
+             "0: Quitter\n"
              "1: Changer le systeme de ponderation\n"
              "2: Calcul des indices de centralite \n"
              "3: Test de vulnerabilite\n\n"
@@ -66,12 +68,12 @@ int main()
     color(15,0);
     Svgfile svgout;
 
-    std::vector <int> DJ;
+ /*   std::vector <int> DJ;
     int choix;
     int choix2;
     int choix3;
     char* reponse;
-  /*  std::string NomFichier;
+    std::string NomFichier;
     std::string NomFic;
     color(11,0);
     std::cout<<"\nEntrez votre choix : ";
@@ -91,12 +93,17 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Graphe2.txt"};
 
-    srand(time(NULL));
-    //g.ChargementFichierPond("Ponderation2.txt");
-    //g.afficherListe();
-    //g.MenuVulnerabilite();
+
+    Graphe g {"Reunion.txt"};
+
+
+
+   // g.ChargementFichierPond("Ponderation.txt");
+    g.afficherListe();
+    g.Djikstra(1,Cps,somme);
+   // g.Dijkstra();
+    g.MenuVulnerabilite();
     //g.kconnexe();
    // g.SupprimerSommet(0);
 
@@ -109,17 +116,18 @@ std::vector<double>Result1;
 std::vector<double>Result2;
    //g.CalculIntermediarite(Result1,Result2);
     std::cout<<std::endl;
-
     //g.supprimer_arrete(1);
 //g.testConnexe();
    //g.SauvegardeIntermediarite(svgout);
   //g.kconnexe();
     //g.MenuVulnerabilite();
-   g.VulnerabiliteDjikstra(0);
+
+
+   //g.VulnerabiliteDjikstra();
     //g.testConnexe();
     //g.SauvegardeVP(svgout);
- // g.sauvegarderProximite(svgout);
-
+  //g.sauvegarderProximite(svgout);
+ // g.GuideTouristique();
 
     //g.VectorPropre();
 
@@ -128,10 +136,13 @@ std::vector<double>Result2;
   /* if(choix==1)
     {*/
 
+
 //g.supprimer_arrete(1);
         //g.VectorPropre();
         //g.afficher();
+
 //g.Djikstra(1, double &Cps, double & somme )
+
    /*     color(11,0);
         std::cout<<"\nEntrez votre choix : ";
         color(5,0);
@@ -146,14 +157,14 @@ std::vector<double>Result2;
         color(5,0);
         std::cin>>NomFic;
         g.ChargementFichierPond("Ponderation.txt");
-    /*    color(15,0);
+       color(15,0);
         g.afficher();
         color(11,0);
         std::cout<<"\nEntrez votre choix : ";
         color(5,0);
         std::cin>> choix;
     }
-   /* if(choix==3)
+    if(choix==3)
     {
         color(3,0);;
         std::cout<<" Quel calcul voulez vous affichez?\n"
