@@ -78,9 +78,9 @@ int main()
 
     color(15,0);
 
-    color(5,0);
+
     do
-    {
+    {color(5,0);
         Menu();
             do
             {
@@ -106,7 +106,6 @@ int main()
             if(choix==4)
             {
                 g.Menu_afficher_centralite(svgout);
-
 
             }
             if(choix==5)
