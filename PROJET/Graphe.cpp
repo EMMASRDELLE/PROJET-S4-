@@ -671,36 +671,33 @@ void Graphe ::VulnerabiliteDjikstra(int num)
 ///BFS
 std::vector<int> Graphe::BFS(int num_s0, int & compteur)const
 {
-    /// déclaration de la file
-    std::queue< Sommet*> file;
-    /// pour le marquage
-    std::vector<int> couleurs((int)m_sommets.size(),0);
-    ///pour noter les prédécesseurs : on note les numéros des prédécesseurs (on pourrait stocker des pointeurs sur ...)
-    std::vector<int> preds((int)m_sommets.size(),-1);
-    ///étape initiale : on enfile et on marque le sommet initial
+
+    std::queue< Sommet*> file;/// déclaration de la file
+    std::vector<int> couleurs((int)m_sommets.size(),0); /// pour le marquage
+    std::vector<int> preds((int)m_sommets.size(),-1);///pour noter les prédécesseurs
+    ///Initialisation
     file.push(m_sommets[num_s0]);
     couleurs[num_s0]=1;
     Sommet*s;
     compteur=0;
-    ///tant que la file n'est pas vide
-    while(!file.empty())
+
+    while(!file.empty()) ///tant que la file n'est pas vide
     {
-        ///on défile le prochain sommet
+
         s=file.front();
         file.pop();
-        ///pour chaque successeur du sommet défilé
-        for(auto succ:s->getSuccesseurs())
+
+        for(auto succ:s->getSuccesseurs())///pour chaque successeur du sommet
         {
             if(couleurs[succ->getNum()]==0)
             {
                 ///s'il n'est pas marqué
                 couleurs[succ->getNum()]=1;///on le marque
-                preds[succ->getNum()]=s->getNum();///on note son prédecesseur (=le sommet défilé)
+                preds[succ->getNum()]=s->getNum();///on marque son prédecesseur
                 file.push(succ);///on le met dans la file
-
             }
         }
-        ++compteur;
+        ++compteur; ///on accrémente le compteur
     }
     return preds;
 }
