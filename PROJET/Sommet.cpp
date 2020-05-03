@@ -5,19 +5,10 @@ Sommet::Sommet(int indice, std::string nom,  double x, double y):m_indice{indice
 {
     //ctor
 }
+/// GETTER
 int Sommet::getNum()const
 {
     return m_indice;
-}
-/// GETTER
-
-void Sommet::set_indice(int nombre)
-{
-    m_indice=nombre;
-}
-void Sommet::ajouterSucc( Sommet*s)
-{
-    m_successeurs.push_back(s);
 }
 std::string Sommet::getNom()const
 {
@@ -31,38 +22,48 @@ double Sommet::getY()const
 {
     return m_y;
 }
+///ajouter un successeur
+void Sommet::ajouterSucc( Sommet*s)
+{
+    m_successeurs.push_back(s);
+}
 
+///Attribuer à l'indice un nombre
 int Sommet::setNum(int num)
 {
     m_indice=num;
 }
+void Sommet::set_indice(int nombre)
+{
+    m_indice=nombre;
+}
 void Sommet::Dessiner(Svgfile&svgout)const
 {
-
 
     svgout.addDisk(m_x*100,m_y*100,10,"black");
     svgout.addText(m_x*100,(m_y*100)-20,m_nom,"blue");
     svgout.addText((m_x*100)-5,(m_y*100)+5,m_indice,"black");
 
 }
-
+///Afficher un sommet
 void Sommet::afficher() const
     {
         std::cout<<"     sommet "<<m_nom<<" : ";
         for (auto s : m_successeurs)
             std::cout<<s->getNom()<<" ";
     }
-
+///supprimer un successeur
 void Sommet::supp_succ(int indice)
 {
     for(auto s: m_successeurs)
     {
         if(s->getNum()==indice)
         {
-            delete s;
+            delete s;///supprimer un succcesseurs
         }
     }
 }
+///Coloriage
 void Sommet::colorier(Svgfile&svgout, int num)
 {
 
