@@ -422,9 +422,10 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
 
     int temp=0;
     int actuel;
+    int coumt=0;
 
-    int temp2=99999;
-    int coumt = 0;
+    int id;
+    int temp2=9999;
 
     dists[num_0]=0;/// Poids du sommet de départ
     actuel = num_0;
@@ -471,24 +472,16 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
             }
         }
 
-        if(coumt == m_sommets.size())
+        temp=1;
+        for(unsigned int i=0; i<m_sommets.size(); ++i)
         {
-            temp=1;
+            if(marquage[i]==0)
+                temp=0;
         }
-
-
-       /*    for( int i=0;i<m_sommets.size();i++)
-           {    std::cout<<marquage[i];
-               if(marquage[i]==0)
-               {
-                   temp=0;
-               }
-
-           } std::cout<<std::endl;*/
     }
     std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
-    afficher_parcours(num_0,preds);
+afficher_parcours(num_0,preds);
     return preds;
 }
 /*std::vector<int> Graphe::Djikstra3(int num0, double &Cps, double & somme )
@@ -859,17 +852,17 @@ void Graphe::kconnexe()
 
 void Graphe::SupprimerSommet(int indice)
 {
-    for (int i =0;i<m_sommets.size();++i)
+    for (s :m_sommets)
     {
-        if (m_sommets[i]->getNum()==indice)
+        if (s->getNum()==indice)
         {
-            for(int j=0;j<m_arretes.size();++j)
+            for(a :m_arretes)
             {
-                if(m_arretes[j]->getEx1()->getNum()==m_sommets[i]->getNum()|| m_arretes[j]->getEx2()->getNum()==m_sommets[i]->getNum())
+                if(a->getEx1()->getNum()==s->getNum()|| a->getEx2()->getNum()==s->getNum())
                 {
                     ///on a les 2 sommets extremités
-                    Sommet*s1=m_arretes[j]->getEx1();
-                    Sommet*s2=m_arretes[j]->getEx2();
+                    Sommet*s1=a->getEx1();
+                    Sommet*s2=a->getEx2();
 
                     for(size_t i=0; i<s1->getSuccesseurs().size(); ++i)
                     {
@@ -892,12 +885,10 @@ void Graphe::SupprimerSommet(int indice)
                     }
 
 
-                    delete m_arretes[j];
-                    m_arretes.erase(m_arretes.begin()+j);
+                    delete a;
                 }
             }
-            delete m_sommets[i];
-            m_sommets.erase(m_sommets.begin()+i);
+            delete s;
         }
     }
 }
@@ -916,7 +907,7 @@ void Graphe::kconnexeSommet()
         ++compteur;
     }
     while(test==1&&i<m_sommets.size());
-    std::cout<<compteur<<"-Sommet connexe "<<std::endl;
+    std::cout<<compteur<<"-arrete connexe "<<std::endl;
 }
 void Graphe::MenuConnexe()
 {

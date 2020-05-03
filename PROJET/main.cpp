@@ -94,21 +94,17 @@ int main()
     color(15,0);*/
 
 
+    Graphe g {"Graphe.txt"};
 
-    Graphe g {"Reunion.txt"};
-
-
-
-   // g.ChargementFichierPond("Ponderation.txt");
+    srand(time(NULL));
+    //g.ChargementFichierPond("Ponderation2.txt");
     g.afficherListe();
-    g.Djikstra(1,Cps,somme);
-   // g.Dijkstra();
-    g.MenuVulnerabilite();
+    //g.MenuVulnerabilite();
     //g.kconnexe();
    // g.SupprimerSommet(0);
 
-    //g.Dessiner(svgout);
-   // legende_svg(svgout);
+    g.Dessiner(svgout);
+    legende_svg(svgout);
     //g.MenuConnexe();
 //g.affichage_Resultat1(svgout);
 
@@ -122,12 +118,11 @@ std::vector<double>Result2;
   //g.kconnexe();
     //g.MenuVulnerabilite();
 
-
    //g.VulnerabiliteDjikstra();
     //g.testConnexe();
     //g.SauvegardeVP(svgout);
-  //g.sauvegarderProximite(svgout);
- // g.GuideTouristique();
+  g.sauvegarderProximite(svgout);
+
 
     //g.VectorPropre();
 
