@@ -20,13 +20,9 @@ void afficher_Arbre(std::vector<Arete*> arretes)
         a->afficher();
     }
 }
-
 void Menu()
 {
-    std::cout << "\t\t-------------------------------------PROJET PISCINE-------------------------------------\n"<<std::endl;
 
-    std::cout<<" \t  \t\t \t Yanis CHAMSON --- Shobiya KANDASAMY --- Emma SIRANDELLE "<<std::endl;
-    std::cout<<" \t \t \t \t \t \t \tING2 TD7\n\n"<<std::endl;
     color(3,0);
     std::cout<< " \t\t\t   Voici l'ensemble des action que vous pouvez effectuer\n\n"
              "0: Quitter\n"
@@ -36,11 +32,10 @@ void Menu()
              "4 : Afficher les resultats de calcul sur le graphe\n"
              "5 : Guide Touristique\n"
              "6 : Tester la k-connexite\n"
-             "7 : Charger un graphe\n"
+             "7 : Supprimer une arrete\n"
+             "8 : Supprimer un sommet\n"
              <<std::endl;
 }
-
-
 
 void legende_svg(Svgfile&svgout)
 {
@@ -72,87 +67,83 @@ int main()
 {
     Svgfile svgout;
     int choix;
-    Graphe g {"Graphe.txt"};
-    legende_svg(svgout);
-    g.Dessiner(svgout);
+    std::cout << "\t\t-------------------------------------PROJET PISCINE-------------------------------------\n"<<std::endl;
 
-    color(15,0);
+    std::cout<<" \t  \t\t \t Yanis CHAMSON --- Shobiya KANDASAMY --- Emma SIRANDELLE "<<std::endl;
+    std::cout<<" \t \t \t \t \t \t \tING2 TD7\n\n"<<std::endl;
 
 
+    std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
+    std::cout<<"1) Graphe.txt\n"
+             <<"2) Graphe2.txt\n"
+             <<"3) Graphe3.txt\n"
+             <<"4) Grapheoriente.txt\n"
+             <<std::endl;
+std::cout<< " Choisir Nom du fichier  (ex: Graphe.txt) : ";
+    std::string Nomfichier;
+    std::cin>>Nomfichier;
+    Graphe g {Nomfichier};
+     g.afficherListe();
     do
-    {color(5,0);
+    {
+        color(5,0);
         Menu();
-            do
-            {
-                std::cout<<"\nEntrez votre choix : "<<std::endl;
-                std::cin>> choix;
-            }
-            while (choix<0||choix>8);
-            if(choix==1)
-            {
-
-            }
-            if(choix==2)
-            {
-
-                g.MenuIndiceCentralite(svgout);
-
-
-            }
-            if(choix==3)
-            {
-             g.MenuVulnerabilite();
-            }
-            if(choix==4)
-            {
-                g.Menu_afficher_centralite(svgout);
-
-            }
-            if(choix==5)
-            {
-                Graphe g {"Reunion.txt"};
-                g.ChargementFichierPond("PonderationReseau.txt");
-                g.GuideTouristique();
-            }
-             if(choix==6)
-             {
-                 g.MenuConnexe();
-             }
-            if(choix==7)
-            {
-                int num;
-                std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
-               std::cout<<"1) Graphe.txt\n"
-                         <<"2) Graphe2.txt\n"
-                         <<"3) Graphe3.txt\n"
-                          <<std::endl;
-                          do
-                          {
-                              std::cout<<"CHOISIS CELUI QUE TU VEUX CHARGER"<<std::endl;
-                              std::cin>>num;
-                          }while( choix<1&&choix>3);
-
-                          if(choix==1)
-                          {
-                               Graphe g {"Graphe.txt"};
-                          }
-                          if(choix==2)
-                          {
-                              Graphe g{"Graphe2.txt"};
-                          }
-                          if(choix==3)
-                          {
-                              Graphe g{"Graphe3.txt"};
-                          }
-            }
-             g.afficherListe();
-
-
-g.Dessiner(svgout);
-
+        do
+        {
+            std::cout<<"\nEntrez votre choix : "<<std::endl;
+            std::cin>> choix;
+        }
+        while (choix<0||choix>8);
+        if(choix==1)
+        {
+            std::string NomFic;
+            color(11,0);
+            std::cout<< " Choisir Nom du fichier de ponderation (ex: Ponderation.txt) : ";
+            color(5,0);
+            std::cin>>NomFic;
+            g.ChargementFichierPond(NomFic);
+        }
+        if(choix==2)
+        {
+            g.MenuIndiceCentralite(svgout);
+        }
+        if(choix==3)
+        {
+            g.MenuVulnerabilite();
+        }
+        if(choix==4)
+        {
+            g.Menu_afficher_centralite(svgout);
 
         }
-        while(choix!=0);
+        if(choix==5)
+        {
+            Graphe g {"Reunion.txt"};
+            g.ChargementFichierPond("PonderationReseau.txt");
+            g.GuideTouristique();
+        }
+        if(choix==6)
+        {
+            g.MenuConnexe();
+        }
+        if(choix==7)
+        {
+            int num;
+            std::cout<<"Quelle arrete veux tu supprimer"<<std::endl;
+            std::cin>>num;
+           g.supprimer_arrete(num);
+        }
+        if(choix==8)
+        {
+            int num;
+            std::cout<<"Quel sommet veux tu supprimer"<<std::endl;
+            std::cin>>num;
+            g.SupprimerSommet(num);
+        }
+
+        g.Dessiner(svgout);
+    }
+    while(choix!=0);
     return 0;
 }
 
