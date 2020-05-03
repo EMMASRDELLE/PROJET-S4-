@@ -152,9 +152,9 @@ void Graphe:: sauvegarde()
 
         double deg=calculDegre(i);
         double CG=deg/(m_sommets.size()-1);
-
         if (ifs.is_open())
-            ifs<<m_sommets[i]->getNum()<<m_sommets[i]->getNom()<<" "<<deg<<" "<< CG<<"\n";
+
+            ifs<<m_sommets[i]->getNum()<<" "<<m_sommets[i]->getNom()<<" "<<deg<<" "<< CG<<"\n";///on ecrit dans le fichier
     }
     ifs.close();
 }
