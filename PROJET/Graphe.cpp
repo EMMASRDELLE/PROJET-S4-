@@ -104,7 +104,7 @@ Graphe::~Graphe()
 ///DessinerSVG
 void Graphe::Dessiner(Svgfile &svgout) const
 {
-    svgout.addGrid();
+
     ///on dessine les sommets
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
@@ -156,6 +156,7 @@ void Graphe:: sauvegarde()
 ///Affichage du resultat du calcul de degré
 void Graphe::affichage_Resultat1(Svgfile &svgout)
 {
+
     int test;
     std::vector<double>vec;
     std::vector <double> bon;
@@ -163,22 +164,26 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
     {
         double num=calculDegre(i);
         double CG=num/(m_sommets.size()-1);
-        vec.push_back(CG); ///on stock la valeur normalisée dans un vecteur à chaque tour
+        vec.push_back(CG);
         std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" "<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl;
+
     }
-    std::sort (vec.begin(), vec.end(), [](double a1, double a2) ///tri décroissant du vecteur vec
+
+    std::sort (vec.begin(), vec.end(), [](double a1, double a2)
     {
         return a1>a2;
     });
 
     for(auto s:m_sommets)
     {
+
         double num=calculDegre(s->getNum());
         double CG=num/(m_sommets.size()-1);
 
-        if(CG==vec[0])///Si égale à 100% de la plus grande valeur normalisée
+        if(CG==vec[0])///100%
         {
             s->colorier(svgout,0);
+
         }
 
         if(CG<vec[0]&&CG>0.90*vec[0])///90%-100%
@@ -208,7 +213,10 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
         {
             s->colorier(svgout,6);
         }
+
+
     }
+
 }
 ///Calcul de l'indice Vector Propre
 std::vector<double> Graphe::VectorPropre( double &Lambda)

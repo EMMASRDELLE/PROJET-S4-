@@ -67,6 +67,7 @@ void legende_svg(Svgfile&svgout)
 int main()
 {
     Svgfile svgout;
+    svgout.addGrid();
     int choix;
     std::cout << "\t\t-------------------------------------PROJET PISCINE-------------------------------------\n"<<std::endl;
 
@@ -84,8 +85,9 @@ std::cout<< " Choisir Nom du fichier  (ex: Graphe.txt) : ";
     std::string Nomfichier;
     std::cin>>Nomfichier;
     Graphe g {Nomfichier};
-     g.afficherListe();
-    do
+    g.Dessiner(svgout);
+    g.afficherListe();
+   do
     {
         color(5,0);
         Menu();
@@ -103,10 +105,11 @@ std::cout<< " Choisir Nom du fichier  (ex: Graphe.txt) : ";
             color(5,0);
             std::cin>>NomFic;
             g.ChargementFichierPond(NomFic);
+
         }
         if(choix==2)
         {
-            g.MenuIndiceCentralite(svgout);
+            g.affichage_Resultat1(svgout);
         }
         if(choix==3)
         {
