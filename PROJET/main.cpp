@@ -22,11 +22,7 @@ void afficher_Arbre(std::vector<Arete*> arretes)
 }
 void Menu()
 {
-    std::cout << "\t\t-------------------------------------PROJET PISCINE-------------------------------------\n"<<std::endl;
 
-    std::cout<<" \t  \t\t \t Yanis CHAMSON --- Shobiya KANDASAMY --- Emma SIRANDELLE "<<std::endl;
-    std::cout<<" \t \t \t \t \t \t \tING2 TD7\n\n"<<std::endl;
-    color(3,0);
     std::cout<< " \t\t\t   Voici l'ensemble des action que vous pouvez effectuer\n\n"
              "0: Quitter\n"
              "1: Ajouter un systeme de ponderation\n"
@@ -71,7 +67,13 @@ int main()
     Svgfile svgout;
     int choix;
     std::string NomFichier;
-    color(15,0);
+
+color(15,0);
+    std::cout << "\t\t-------------------------------------PROJET PISCINE-------------------------------------\n"<<std::endl;
+
+    std::cout<<" \t  \t\t \t Yanis CHAMSON --- Shobiya KANDASAMY --- Emma SIRANDELLE "<<std::endl;
+    std::cout<<" \t \t \t \t \t \t \tING2 TD7\n\n"<<std::endl;
+    color(3,0);
     std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
     std::cout<<"1) Graphe.txt\n"
              <<"2) Graphe2.txt\n"

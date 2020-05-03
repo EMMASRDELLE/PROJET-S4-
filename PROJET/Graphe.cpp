@@ -357,7 +357,7 @@ int Graphe::poidsSucc(Sommet* a, Sommet* b)
 
     }
 }
-
+///Affichage parcours
 void Graphe::afficher_parcours(size_t num,const std::vector<int>& arbre)
 {
     for(size_t i=0; i<arbre.size(); ++i)
@@ -384,12 +384,17 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
     std::vector<int> marquage((int)m_sommets.size(),0);
     std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);
+
     int temp=0;
     int actuel;
     int temp2=99999;
     int coumt = 0;
+    int poids=0;
+    Sommet *p;
+
     dists[num_0]=0;/// Poids du sommet de départ
-    actuel = num_0;
+    actuel=num_0;
+
     while(temp==0)
     {
         coumt = 0;
@@ -399,45 +404,57 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
             if((dists[i] < temp2)&&(marquage[i]==0))
             {
                 actuel=i;
-                temp2=dists[i]; /// On prend l'arrete avec la plus petite distance
-            }
+                temp2=dists[i];
+
+          } /// On prend l'arrete avec la plus petite distance
+
             else
             {
-                coumt++;
+                coumt++; ///Le compteur s'accremente
             }
         }
-        marquage [actuel]=1; /// On marque les sommets découverts
+     for (int i=0;i<m_sommets.size();++i)
+      {
+          if(actuel==m_sommets[i]->getNum())
+          {
+              p=m_sommets[i];
+          }
+      }
 
-        for( auto a:m_arretes)
+        marquage [p->getNum()]=1; /// On marque les sommets découverts
+
+
+        for(succ: p->getSuccesseurs())
         {
-            if (a->getEx1()->getNum()==actuel)
+            poids=poidsSucc(p,succ);
+
+            if(dists[p->getNum()]+poids< dists[succ->getNum()])
             {
-                if((dists[actuel]+a->getPoids())<dists[a->getEx2()->getNum()])
-                {
-                    dists[a->getEx2()->getNum()]=dists[actuel]+a->getPoids();
-                    preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
-                    somme= somme+dists[actuel]+a->getPoids();
-                }
-            }
-            if(a->getEx2()->getNum()==actuel)
-            {
-                if((dists[actuel]+a->getPoids())<dists[a->getEx1()->getNum()])
-                {
-                    dists[a->getEx1()->getNum()]=dists[actuel]+a->getPoids();
-                    preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
-                    somme= somme+dists[actuel]+a->getPoids();
-                }
+                    dists[succ->getNum()]=dists[p->getNum()]+poids;
+                    preds[succ->getNum()]=p->getNum();
+                    somme= somme+dists[p->getNum()]+poids;
             }
         }
+
+            temp=1;
 
         if(coumt == m_sommets.size())
         {
             temp=1;
+            return preds;
         }
+         for( int i=0;i<m_sommets.size();i++)
+           {
+               if(marquage[i]==0)
+               {
+                   temp=0;
+               }
+
+           }
+
 
     }
-    afficher_parcours(num_0, preds);
-    std::cout<<std::endl;
+  std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
     return preds;
 }
