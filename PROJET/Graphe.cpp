@@ -351,7 +351,6 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
 
     int temp=0;
     int actuel;
-    int id;
     int temp2=9999;
 
     dists[num_0]=0;/// Poids du sommet de départ
@@ -364,7 +363,6 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
             if((dists[i] < temp2)&&(marquage[i]==0))
             {
                 actuel=i;
-
                 temp2=dists[i]; /// On prend l'arrete avec la plus petite distance
             }
         }
@@ -394,11 +392,18 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
             }
         }
         temp=1;
-        for(unsigned int i=0; i<m_sommets.size(); ++i)
+
+        for (auto j : preds)
+            {
+                for( int i=0;i<m_sommets.size();i++)
         {
-            if(marquage[i]==0)
+
+                 if((marquage[i]==0))
                 temp=0;
+            }
+
         }
+
     }
     std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
@@ -620,13 +625,14 @@ void Graphe ::VulnerabiliteDjikstra(int num)
     supprimer_arrete(num);
     for(auto s:m_sommets)
     {
-        std::cout<<"eh ouais";
         dji2=Djikstra(s->getNum(), Cps, somme);
-        std::cout<<"mabelle";
         Result2.push_back(Cps);
 
     }
-    std::cout<<"ouais";
+     for (auto v : Result2)
+    {
+        std::cout<<v<<std::endl;
+    }
     for(int i=0; i<Result2.size()&&i<Result.size()&&i<m_sommets.size(); ++i)
     {
         diff=Result2[i]- Result[i];
@@ -919,11 +925,15 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
 
         for( int i=0; i<m_sommets.size(); ++i)
         {
-            if(marquage[i]==0)
+            for(auto j : preds)
+            {
+                 if(marquage[i]==0&&preds[j]==0)
             {
                 temp=0;
 
             }
+            }
+
 
         }
 
@@ -1179,7 +1189,7 @@ std::vector<int> Graphe::Djikstra2(int num_0, int fin,int &somme)
         for( auto a:m_arretes)
         {
 
-if(a->getEx1()->getNum()!=fin||a->getEx2()->getNum()==fin)
+if(a->getEx1()->getNum()!=fin)
 {
 
 
@@ -1189,7 +1199,7 @@ if(a->getEx1()->getNum()!=fin||a->getEx2()->getNum()==fin)
                 {
                     dists[a->getEx2()->getNum()]=dists[actuel]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
-somme=a->getPoids()+somme;
+
                 }
 
             }
@@ -1199,8 +1209,6 @@ somme=a->getPoids()+somme;
                 {
                     dists[a->getEx1()->getNum()]=dists[actuel]+a->getPoids();
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
-   somme=a->getPoids()+somme;
-   std::cout<<somme;
                 }
             }
 

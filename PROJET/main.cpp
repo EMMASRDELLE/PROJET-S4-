@@ -91,12 +91,12 @@ int main()
     std::cout<<std::endl;
     color(15,0);*/
 
-    Graphe g {"Reunion.txt"};
+    Graphe g {"Graphe.txt"};
 
     srand(time(NULL));
     //g.ChargementFichierPond("Ponderation2.txt");
     g.afficherListe();
-    //g.MenuVulnerabilite();
+    g.MenuVulnerabilite();
     //g.kconnexe();
    // g.SupprimerSommet(0);
 
