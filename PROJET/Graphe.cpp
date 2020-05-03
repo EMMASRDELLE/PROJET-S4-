@@ -160,6 +160,8 @@ void Graphe:: sauvegarde()
 }
 void Graphe::affichage_Resultat1(Svgfile &svgout)
 {
+    Dessiner(svgout);
+
     int test;
     std::vector<double>vec;
     std::vector <double> bon;
@@ -168,9 +170,8 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
         double num=calculDegre(i);
         double CG=num/(m_sommets.size()-1);
         vec.push_back(CG);
-
-
         std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" "<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl;
+
     }
 
     std::sort (vec.begin(), vec.end(), [](double a1, double a2)
@@ -180,21 +181,25 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
 
     for(auto s:m_sommets)
     {
+
         double num=calculDegre(s->getNum());
         double CG=num/(m_sommets.size()-1);
 
         if(CG==vec[0])///100%
         {
+
             s->colorier(svgout,0);
 
         }
 
         if(CG<vec[0]&&CG>0.90*vec[0])///90%-100%
         {
+            Dessiner(svgout);
             s->colorier(svgout,1);
         }
         if(CG>vec[0]*0.80&&CG<vec[0]*0.90)///80%-90%
         {
+
             s->colorier(svgout,2);
         }
         if(CG>vec[0]*0.60&&CG<vec[0]*0.80)///60%-80%
@@ -205,18 +210,22 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
 
         if(CG>vec[0]*0.50&&CG<vec[0]*0.60)///50%-60%
         {
+
             s->colorier(svgout,4);
         }
 
         if(CG>vec[vec.size()-1]&&CG<=vec[0]*0.50)///<50%
         {
+
             s->colorier(svgout,5);
         }
 
         if( CG==vec[vec.size()-1])/// egal a la plus petite
         {
+
             s->colorier(svgout,6);
         }
+
     }
 }
 
@@ -347,16 +356,16 @@ void Graphe::SauvegardeVP(Svgfile&svgout)
 
 int Graphe::poidsSucc(Sommet* a, Sommet* b)
 {
-    for (int i=0;i<m_arretes.size();++i)
+    for (int i=0; i<m_arretes.size(); ++i)
     {
         if(m_arretes[i]->getEx1()==a&&m_arretes[i]->getEx2()==b)
-            {
-                return m_arretes[i]->getPoids();
-            }
+        {
+            return m_arretes[i]->getPoids();
+        }
         if(m_arretes[i]->getEx1()==b&&m_arretes[i]->getEx2()==a)
-            {
-                return m_arretes[i]->getPoids();
-            }
+        {
+            return m_arretes[i]->getPoids();
+        }
 
     }
 }
@@ -478,14 +487,14 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
         }
 
 
-       /*    for( int i=0;i<m_sommets.size();i++)
-           {    std::cout<<marquage[i];
-               if(marquage[i]==0)
-               {
-                   temp=0;
-               }
+        /*    for( int i=0;i<m_sommets.size();i++)
+            {    std::cout<<marquage[i];
+                if(marquage[i]==0)
+                {
+                    temp=0;
+                }
 
-           } std::cout<<std::endl;*/
+            } std::cout<<std::endl;*/
 
     }
     std::cout<<std::endl;
@@ -856,20 +865,18 @@ void Graphe::kconnexe()
 
 void Graphe::SupprimerSommet(int indice)
 {
-
-
-    for (int k=0;k<m_sommets.size();++k)
+    for (int k=0; k<m_sommets.size(); ++k)
     {
         if (m_sommets[k]->getNum()==indice)
         {
-            for(int j=0; j<m_arretes.size();++j)
+            for(int j=0; j<m_arretes.size(); ++j)
             {
                 if(m_arretes[j]->getEx1()->getNum()==m_sommets[k]->getNum()|| m_arretes[j]->getEx2()->getNum()==m_sommets[k]->getNum())
 
                 {
                     ///on a les 2 sommets extremités
-                    Sommet*s1=a->getEx1();
-                    Sommet*s2=a->getEx2();
+                    Sommet*s1=m_arretes[j]->getEx1();
+                    Sommet*s2=m_arretes[j]->getEx2();
 
                     for(size_t i=0; i<s1->getSuccesseurs().size(); ++i)
                     {
@@ -965,7 +972,7 @@ void Graphe::MenuConnexe()
 std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &compt)
 {
     //Initialisation des variables
- /*   std::vector<int> marquage((int)m_sommets.size(),0);//Aucun sommet n'est découvert
+   std::vector<int> marquage((int)m_sommets.size(),0);//Aucun sommet n'est découvert
     std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);//Liste des prédecesseurs
     int temp=0;
@@ -975,22 +982,24 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
     int cpt=1;
     double cmpt3=0;
     compt[num0]=0;
-
     dists[num0]=0;// Poids du sommet de départ
+    int compteur=0;
 
     while(temp==0)
     {
+        compteur=0;
         temp2=9999;//longueur infinie pour une arrete  non découverte
 
         for (unsigned int i =0; i<m_sommets.size(); i++)
         {
-            if((dists[i] < temp2))
+            if((dists[i] < temp2)&&(marquage[i]==0))
             {
-                if((marquage[i]==0))
-                {
                     actuel=i;
                     temp2=dists[i]; // On prend l'arrete avec la plus petite distance
-                }
+
+            }
+            else{
+                compteur++;
             }
         }
         marquage [actuel]=1; // On marque les sommets découverts
@@ -1050,22 +1059,13 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
                 }
             }
         }
-        temp=1;
-        for(unsigned int i=0; i<m_sommets.size(); ++i)
-        {
-if(marquage[i]==0)
-                temp=0;
-            }
-
-
-
+      if(compteur==m_sommets.size())
+      {
+          temp=1;
+      }
 
         }
-    }
-    // afficherparcours(num0,preds);
-
-
-    return dists;*/
+    return dists;
 }
 
 void Graphe::CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2)
@@ -1310,31 +1310,31 @@ std::vector<int> Graphe::Djikstra2(int num_0, int fin,int &somme)
         for( auto a:m_arretes)
         {
 
-if(a->getEx1()->getNum()!=fin)
-{
-
-
-         if (a->getEx1()->getNum()==actuel)
+            if(a->getEx1()->getNum()!=fin)
             {
-                if((dists[actuel]+a->getPoids())<dists[a->getEx2()->getNum()])
+
+
+                if (a->getEx1()->getNum()==actuel)
                 {
-                    dists[a->getEx2()->getNum()]=dists[actuel]+a->getPoids();
-                    preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
+                    if((dists[actuel]+a->getPoids())<dists[a->getEx2()->getNum()])
+                    {
+                        dists[a->getEx2()->getNum()]=dists[actuel]+a->getPoids();
+                        preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
+
+                    }
 
                 }
-
-            }
-            if(a->getEx2()->getNum()==actuel)
-            {
-                if((dists[actuel]+a->getPoids())<dists[a->getEx1()->getNum()])
+                if(a->getEx2()->getNum()==actuel)
                 {
-                    dists[a->getEx1()->getNum()]=dists[actuel]+a->getPoids();
-                    preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
+                    if((dists[actuel]+a->getPoids())<dists[a->getEx1()->getNum()])
+                    {
+                        dists[a->getEx1()->getNum()]=dists[actuel]+a->getPoids();
+                        preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
+                    }
                 }
+
+
             }
-
-
-        }
         }
         temp=1;
         for(unsigned int i=0; i<m_sommets.size(); ++i)
@@ -1390,7 +1390,8 @@ void Graphe::GuideTouristique()
     do
     {
         std::cin>>choix;
-    }while(choix<0&&choix>9);
+    }
+    while(choix<0&&choix>9);
     std::cout<<"VOICI LES CHEMINS POSSIBLES"<<std::endl;
     double Cps, somme;
     int choix2;
@@ -1417,6 +1418,7 @@ void Graphe::GuideTouristique()
 
 void Graphe::MenuIndiceCentralite( Svgfile&svgout)
 {
+
     int choix;
 
     std::cout<<"1) Centralite de degre"<<std::endl;
@@ -1427,11 +1429,13 @@ void Graphe::MenuIndiceCentralite( Svgfile&svgout)
     {
         std::cout<<"Quel indice veux tu calculer"<<std::endl;
         std::cin>>choix;
-    }while(choix<1&&choix>5);
+    }
+    while(choix<1&&choix>5);
     if(choix==1)
     {
         affichage_Resultat1(svgout);
         sauvegarde();
+
     }
     if(choix==2)
     {
@@ -1446,3 +1450,110 @@ void Graphe::MenuIndiceCentralite( Svgfile&svgout)
         SauvegardeIntermediarite(svgout);
     }
 }
+
+void Graphe::Menu_afficher_centralite(Svgfile&svgout)
+{
+    int choix;
+
+    std::cout<<"1) Centralite de degre"<<std::endl;
+    std::cout<<"2)Centralite de vector propre"<<std::endl;
+    std::cout<<"3)Centralite de proximite"<<std::endl;
+    std::cout<<"4) Centralite d'intermediarite"<<std::endl;
+    do
+    {
+        std::cout<<"Quel indice veux tu afficher sur le graphe ? "<<std::endl;
+        std::cin>>choix;
+    }
+    while(choix<1&&choix>5);
+    if(choix==1)
+    {
+        Dessiner_centralite_degre(svgout);
+        sauvegarde();
+
+    }
+    if(choix==2)
+    {
+        Dessiner_centralite_vect_propre(svgout);
+        SauvegardeVP(svgout);
+    }
+    if(choix==3)
+    {
+        Dessiner_centralite_prox(svgout);
+        sauvegarderProximite(svgout);
+    }
+    if(choix==4)
+    {
+        Dessiner_centralite_intermediaire(svgout);
+        SauvegardeIntermediarite(svgout);
+    }
+
+}
+
+void Graphe::Dessiner_centralite_vect_propre(Svgfile &svgout)
+{
+    double Lambda=0;
+
+    std::vector<double> vec=VectorPropre(Lambda);
+    for(int i=0; i< vec.size()&&i<m_sommets.size(); ++i)
+    {
+        svgout.addText((m_sommets[i]->getX())*100-10,(m_sommets[i]->getY())*100-30,vec[i],"red");
+        Dessiner(svgout);
+
+    }
+
+}
+
+
+void Graphe::Dessiner_centralite_degre(Svgfile&svgout)
+{
+
+
+    ///dessiner en SVG les centralités
+    for(size_t i=0; i<m_sommets.size(); ++i)
+    {
+
+        double deg=calculDegre(i);
+        double CG=deg/(m_sommets.size()-1);
+
+        svgout.addText((m_sommets[i]->getX())*100-10,(m_sommets[i]->getY())*100-45,CG,"blue");
+        Dessiner(svgout);
+
+
+    }
+}
+
+
+void Graphe::Dessiner_centralite_prox(Svgfile&svgout)
+{
+    std::vector<int >dji;
+    double Cps=0;
+    double somme=0;
+    ///dessiner en SVG les centralités
+    for(size_t i=0; i<m_sommets.size(); ++i)
+    {
+        dji=Djikstra(m_sommets[i]->getNum(), Cps, somme);
+        svgout.addText((m_sommets[i]->getX())*100-10,(m_sommets[i]->getY())*100-45,Cps,"blue");
+        Dessiner(svgout);
+
+    }
+
+}
+
+void Graphe::Dessiner_centralite_intermediaire(Svgfile&svgout)
+{
+    int i=0;
+    std::vector<double> R1;
+    std::vector<double> R2;
+    CalculIntermediarite(R1,R2);
+
+    for(int i =0; i<m_sommets.size(); ++i)
+    {
+
+        svgout.addText((m_sommets[i]->getX())*100-10,(m_sommets[i]->getY())*100-45,R2[i],"blue");
+        Dessiner(svgout);
+
+    }
+
+
+}
+

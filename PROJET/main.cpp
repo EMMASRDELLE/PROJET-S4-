@@ -20,6 +20,7 @@ void afficher_Arbre(std::vector<Arete*> arretes)
         a->afficher();
     }
 }
+
 void Menu()
 {
     std::cout << "\t\t-------------------------------------PROJET PISCINE-------------------------------------\n"<<std::endl;
@@ -38,6 +39,8 @@ void Menu()
              "7 : Charger un graphe\n"
              <<std::endl;
 }
+
+
 
 void legende_svg(Svgfile&svgout)
 {
@@ -69,80 +72,88 @@ int main()
 {
     Svgfile svgout;
     int choix;
+    Graphe g {"Graphe.txt"};
+    legende_svg(svgout);
+    g.Dessiner(svgout);
 
+    color(15,0);
 
+    color(5,0);
+    do
+    {
         Menu();
-        color(15,0);
+            do
+            {
+                std::cout<<"\nEntrez votre choix : "<<std::endl;
+                std::cin>> choix;
+            }
+            while (choix<0||choix>8);
+            if(choix==1)
+            {
+
+            }
+            if(choix==2)
+            {
+
+                g.MenuIndiceCentralite(svgout);
 
 
+            }
+            if(choix==3)
+            {
+             g.MenuVulnerabilite();
+            }
+            if(choix==4)
+            {
+                g.Menu_afficher_centralite(svgout);
 
-        color(5,0);
-        do
-        {
-            std::cout<<"\nEntrez votre choix : "<<std::endl;
-            std::cin>> choix;
+
+            }
+            if(choix==5)
+            {
+                Graphe g {"Reunion.txt"};
+                g.ChargementFichierPond("PonderationReseau.txt");
+                g.GuideTouristique();
+            }
+             if(choix==6)
+             {
+                 g.MenuConnexe();
+             }
+            if(choix==7)
+            {
+                int num;
+                std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
+               std::cout<<"1) Graphe.txt\n"
+                         <<"2) Graphe2.txt\n"
+                         <<"3) Graphe3.txt\n"
+                          <<std::endl;
+                          do
+                          {
+                              std::cout<<"CHOISIS CELUI QUE TU VEUX CHARGER"<<std::endl;
+                              std::cin>>num;
+                          }while( choix<1&&choix>3);
+
+                          if(choix==1)
+                          {
+                               Graphe g {"Graphe.txt"};
+                          }
+                          if(choix==2)
+                          {
+                              Graphe g{"Graphe2.txt"};
+                          }
+                          if(choix==3)
+                          {
+                              Graphe g{"Graphe3.txt"};
+                          }
+            }
+             g.afficherListe();
+
+
+g.Dessiner(svgout);
+
+
         }
-        while (choix<0||choix>8);
-
-        if(choix==1)
-        {
-
-        }
-        if(choix==2)
-        {
-            g.MenuIndiceCentralite(svgout);
-        }
-        if(choix==3)
-        {
-         g.MenuVulnerabilite();
-        }
-        if(choix==4)
-        {
-
-        }
-        if(choix==5)
-        {
-            Graphe g {"Reunion.txt"};
-            g.ChargementFichierPond("PonderationReseau.txt");
-            g.GuideTouristique();
-        }
-         if(choix==6)
-         {
-             g.MenuConnexe();
-         }
-        if(choix==7)
-        {
-            int num;
-            std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
-           std::cout<<"1) Graphe.txt\n"
-                     <<"2) Graphe2.txt\n"
-                     <<"3) Graphe3.txt\n"
-                      <<std::endl;
-                      do
-                      {
-                          std::cout<<"CHOISIS CELUI QUE TU VEUX CHARGER"<<std::endl;
-                          std::cin>>num;
-                      }while( choix<1&&choix>3);
-
-                      if(choix==1)
-                      {
-                           Graphe g {"Graphe.txt"};
-                      }
-                      if(choix==2)
-                      {
-                          Graphe g{"Graphe2.txt"};
-                      }
-                      if(choix==3)
-                      {
-                          Graphe g{"Graphe3.txt"};
-                      }
-        }
-         g.afficherListe();
-         g.Dessiner(svgout);
-
-
-    }
-    while(choix!=0);
+        while(choix!=0);
     return 0;
 }
 
