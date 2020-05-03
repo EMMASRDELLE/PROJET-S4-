@@ -170,7 +170,7 @@ void Graphe::affichage_Resultat1(Svgfile &svgout)
         vec.push_back(CG);
 
 
-        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl;
+        std::cout<<m_sommets[i]->getNum()<<" : "<<m_sommets[i]->getNom()<<" "<< "Degre : "<<num<<" Calcul= "<<CG<<std::endl;
     }
 
     std::sort (vec.begin(), vec.end(), [](double a1, double a2)
@@ -447,8 +447,6 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
         }
         marquage [actuel]=1; /// On marque les sommets découverts
 
-
-        std::cout <<"yoooo"<<std::endl;
         for( auto a:m_arretes)
         {
 
@@ -478,10 +476,21 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
             if(marquage[i]==0)
                 temp=0;
         }
+
+
+       /*    for( int i=0;i<m_sommets.size();i++)
+           {    std::cout<<marquage[i];
+               if(marquage[i]==0)
+               {
+                   temp=0;
+               }
+
+           } std::cout<<std::endl;*/
+
     }
     std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
-afficher_parcours(num_0,preds);
+    //afficher_parcours(num_0,preds);
     return preds;
 }
 /*std::vector<int> Graphe::Djikstra3(int num0, double &Cps, double & somme )
@@ -755,17 +764,12 @@ void Graphe ::VulnerabiliteDjikstra(int num)
         dji=Djikstra(s->getNum(), Cps, somme);
         Result.push_back(Cps);
     }
-    for (auto v : Result)
-    {
-        std::cout<<v<<std::endl;
-    }
 
     supprimer_arrete(num);
     for(auto s:m_sommets)
     {
 
         dji2=Djikstra(s->getNum(), Cps, somme);
-
         Result2.push_back(Cps);
     }
 
@@ -852,13 +856,16 @@ void Graphe::kconnexe()
 
 void Graphe::SupprimerSommet(int indice)
 {
-    for (s :m_sommets)
+
+
+    for (int k=0;k<m_sommets.size();++k)
     {
-        if (s->getNum()==indice)
+        if (m_sommets[k]->getNum()==indice)
         {
-            for(a :m_arretes)
+            for(int j=0; j<m_arretes.size();++j)
             {
-                if(a->getEx1()->getNum()==s->getNum()|| a->getEx2()->getNum()==s->getNum())
+                if(m_arretes[j]->getEx1()->getNum()==m_sommets[k]->getNum()|| m_arretes[j]->getEx2()->getNum()==m_sommets[k]->getNum())
+
                 {
                     ///on a les 2 sommets extremités
                     Sommet*s1=a->getEx1();
@@ -885,10 +892,14 @@ void Graphe::SupprimerSommet(int indice)
                     }
 
 
-                    delete a;
+                    delete m_arretes[j];
+                    m_arretes.erase(m_arretes.begin()+j);
                 }
             }
-            delete s;
+
+            delete m_sommets[k];
+            m_sommets.erase(m_sommets.begin()+k);
+
         }
     }
 }
@@ -954,7 +965,7 @@ void Graphe::MenuConnexe()
 std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &compt)
 {
     //Initialisation des variables
-    std::vector<int> marquage((int)m_sommets.size(),0);//Aucun sommet n'est découvert
+ /*   std::vector<int> marquage((int)m_sommets.size(),0);//Aucun sommet n'est découvert
     std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);//Liste des prédecesseurs
     int temp=0;
@@ -1042,14 +1053,19 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
         temp=1;
         for(unsigned int i=0; i<m_sommets.size(); ++i)
         {
-            if(marquage[i]==0)
+if(marquage[i]==0)
                 temp=0;
+            }
+
+
+
+
         }
     }
     // afficherparcours(num0,preds);
 
 
-    return dists;
+    return dists;*/
 }
 
 void Graphe::CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2)
@@ -1176,8 +1192,6 @@ void Graphe::SauvegardeIntermediarite(Svgfile&svgout)
 
         }
 
-
-
         i++;
 
     }
@@ -1253,13 +1267,11 @@ void Graphe::MenuVulnerabilite()
     }
     if(choix==3)
     {
-        // Graphe {Nomfichier};
         VulnerabiliteDjikstra(num);
 
     }
     if(choix==4)
     {
-        //Graphe {Nomfichier};
         VulnerabiliteIntermediarite(num);
     }
 
@@ -1298,7 +1310,7 @@ std::vector<int> Graphe::Djikstra2(int num_0, int fin,int &somme)
         for( auto a:m_arretes)
         {
 
-if(a->getEx1()->getNum()!=fin||a->getEx2()->getNum()==fin)
+if(a->getEx1()->getNum()!=fin)
 {
 
 
@@ -1308,7 +1320,7 @@ if(a->getEx1()->getNum()!=fin||a->getEx2()->getNum()==fin)
                 {
                     dists[a->getEx2()->getNum()]=dists[actuel]+a->getPoids();
                     preds[a->getEx2()->getNum()]=a->getEx1()->getNum();
-somme=a->getPoids()+somme;
+
                 }
 
             }
@@ -1318,8 +1330,6 @@ somme=a->getPoids()+somme;
                 {
                     dists[a->getEx1()->getNum()]=dists[actuel]+a->getPoids();
                     preds[a->getEx1()->getNum()]=a->getEx2()->getNum();
-   somme=a->getPoids()+somme;
-   std::cout<<somme;
                 }
             }
 
@@ -1384,7 +1394,9 @@ void Graphe::GuideTouristique()
     std::cout<<"VOICI LES CHEMINS POSSIBLES"<<std::endl;
     double Cps, somme;
     int choix2;
-    Djikstra(choix,Cps, somme);
+    std::vector<int> dji;
+    dji=Djikstra(choix,Cps, somme);
+    afficher_parcours(choix,dji);
     std::cout<<"CHOISISSEZ VOTRE DESTINATION "<<std::endl;
     std::cout<<"O)Saint-Denis"<<std::endl;
     std::cout<<"1)Saint-Paul"<<std::endl;
@@ -1400,7 +1412,37 @@ void Graphe::GuideTouristique()
     std::cout<<"VOICI LE TRAJET A PRENDRE "<<std::endl;
     int s;
     Djikstra2(choix, choix2,s);
-    std::cout<<s<<std::endl;
 
 }
 
+void Graphe::MenuIndiceCentralite( Svgfile&svgout)
+{
+    int choix;
+
+    std::cout<<"1) Centralite de degre"<<std::endl;
+    std::cout<<"2)Centralite de vector propre"<<std::endl;
+    std::cout<<"3)Centralite de proximite"<<std::endl;
+    std::cout<<"4) Centralite d'intermediarite"<<std::endl;
+    do
+    {
+        std::cout<<"Quel indice veux tu calculer"<<std::endl;
+        std::cin>>choix;
+    }while(choix<1&&choix>5);
+    if(choix==1)
+    {
+        affichage_Resultat1(svgout);
+        sauvegarde();
+    }
+    if(choix==2)
+    {
+        SauvegardeVP(svgout);
+    }
+    if(choix==3)
+    {
+        sauvegarderProximite(svgout);
+    }
+    if(choix==4)
+    {
+        SauvegardeIntermediarite(svgout);
+    }
+}
