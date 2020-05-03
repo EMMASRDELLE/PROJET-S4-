@@ -419,13 +419,10 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
     std::vector<int> marquage((int)m_sommets.size(),0);
     std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);
-
     int temp=0;
     int actuel;
-
     int temp2=99999;
     int coumt = 0;
-
     dists[num_0]=0;/// Poids du sommet de départ
     actuel = num_0;
     while(temp==0)
@@ -448,7 +445,6 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
 
         for( auto a:m_arretes)
         {
-
             if (a->getEx1()->getNum()==actuel)
             {
                 if((dists[actuel]+a->getPoids())<dists[a->getEx2()->getNum()])
@@ -474,19 +470,9 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
             temp=1;
         }
 
-       /*    for( int i=0;i<m_sommets.size();i++)
-           {    std::cout<<marquage[i];
-               if(marquage[i]==0)
-               {
-                   temp=0;
-               }
-
-           } std::cout<<std::endl;*/
-
     }
     std::cout<<std::endl;
     Cps= (m_sommets.size()-1)/somme;
-    //afficher_parcours(num_0,preds);
     return preds;
 }
 /*std::vector<int> Graphe::Djikstra3(int num0, double &Cps, double & somme )
@@ -604,9 +590,7 @@ void Graphe::sauvegarderProximite(Svgfile&svgout)
         }
         if(Cps>vec2[0]*0.60&&Cps<vec2[0]*0.80)///60%-80%
         {
-
             m_sommets[i]->colorier(svgout,3);
-
 
         }
 
@@ -628,7 +612,6 @@ void Graphe::sauvegarderProximite(Svgfile&svgout)
             m_sommets[i]->colorier(svgout,6);
 
         }
-
 
     }
 }
@@ -959,7 +942,7 @@ void Graphe::MenuConnexe()
 std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &compt)
 {
     //Initialisation des variables
- /*   std::vector<int> marquage((int)m_sommets.size(),0);//Aucun sommet n'est découvert
+   std::vector<int> marquage((int)m_sommets.size(),0);//Aucun sommet n'est découvert
     std::vector<int> dists((int)m_sommets.size(),99999);// Lorque les sommets ne sont pas découverts on leur attribue une longueur infinie
     std::vector<int> preds((int)m_sommets.size(),-1);//Liste des prédecesseurs
     int temp=0;
@@ -969,22 +952,24 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
     int cpt=1;
     double cmpt3=0;
     compt[num0]=0;
-
     dists[num0]=0;// Poids du sommet de départ
+    int compteur=0;
 
     while(temp==0)
     {
+        compteur=0;
         temp2=9999;//longueur infinie pour une arrete  non découverte
 
         for (unsigned int i =0; i<m_sommets.size(); i++)
         {
-            if((dists[i] < temp2))
+            if((dists[i] < temp2)&&(marquage[i]==0))
             {
-                if((marquage[i]==0))
-                {
                     actuel=i;
                     temp2=dists[i]; // On prend l'arrete avec la plus petite distance
-                }
+
+            }
+            else{
+                compteur++;
             }
         }
         marquage [actuel]=1; // On marque les sommets découverts
@@ -1044,22 +1029,13 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
                 }
             }
         }
-        temp=1;
-        for(unsigned int i=0; i<m_sommets.size(); ++i)
-        {
-if(marquage[i]==0)
-                temp=0;
-            }
-
-
-
+      if(compteur==m_sommets.size())
+      {
+          temp=1;
+      }
 
         }
-    }
-    // afficherparcours(num0,preds);
-
-
-    return dists;*/
+    return dists;
 }
 
 void Graphe::CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2)

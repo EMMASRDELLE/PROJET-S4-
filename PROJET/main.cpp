@@ -69,13 +69,25 @@ int main()
 {
     Svgfile svgout;
     int choix;
+std::string NomFichier;
+        color(15,0);
+ std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
+           std::cout<<"1) Graphe.txt\n"
+                     <<"2) Graphe2.txt\n"
+                     <<"3) Graphe3.txt\n"
+                      <<std::endl;
+                std::cout<< "\n Nom du fichier de topologie (ex: Graphe.txt) : ";
+                color(5,0);
+            std::cin>>NomFichier;
+            Graphe g{NomFichier};
+    std::cout<<std::endl;
+
+do{
+ g.afficher();
+    color(11,0);
 
 
         Menu();
-        color(15,0);
-
-
-
         color(5,0);
         do
         {
@@ -86,14 +98,22 @@ int main()
 
         if(choix==1)
         {
-
+            std::string NomFic;
+    std::cout<< " Saisir Nom du fichier de ponderation (ex: Ponderation.txt) : ";
+    color(5,0);
+    std::cin>>NomFic;
+    g.ChargementFichierPond(NomFic);
+    std::cout<<std::endl;
+    color(15,0);
         }
         if(choix==2)
         {
+            g.Dessiner(svgout);
             g.MenuIndiceCentralite(svgout);
         }
         if(choix==3)
         {
+
          g.MenuVulnerabilite();
         }
         if(choix==4)
@@ -110,35 +130,20 @@ int main()
          {
              g.MenuConnexe();
          }
-        if(choix==7)
-        {
-            int num;
-            std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
+         if(choix==7)
+         {
+             std::string NomFichier;
+             std::cout<<"VOICI LES GRAPHES A CHARGER"<<std::endl;
            std::cout<<"1) Graphe.txt\n"
                      <<"2) Graphe2.txt\n"
                      <<"3) Graphe3.txt\n"
                       <<std::endl;
-                      do
-                      {
-                          std::cout<<"CHOISIS CELUI QUE TU VEUX CHARGER"<<std::endl;
-                          std::cin>>num;
-                      }while( choix<1&&choix>3);
-
-                      if(choix==1)
-                      {
-                           Graphe g {"Graphe.txt"};
-                      }
-                      if(choix==2)
-                      {
-                          Graphe g{"Graphe2.txt"};
-                      }
-                      if(choix==3)
-                      {
-                          Graphe g{"Graphe3.txt"};
-                      }
-        }
+                std::cout<< "\n Nom du fichier de topologie (ex: Graphe.txt) : ";
+                color(5,0);
+            std::cin>>NomFichier;
+            Graphe g{NomFichier};
+         }
          g.afficherListe();
-         g.Dessiner(svgout);
 
 
     }
