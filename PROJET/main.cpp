@@ -1,4 +1,5 @@
 ///Source: Code et cours de madame Palasi
+///https://openclassrooms.com/forum/sujet/tuto-couleur-console-windows
 #include <iostream>
 #include "Graphe.h"
 #include "svgfile.h"
@@ -131,12 +132,14 @@ std::cout<< " Choisir Nom du fichier  (ex: Graphe.txt) : ";
             int num;
             std::cout<<"Quelle arrete veux tu supprimer"<<std::endl;
             std::cin>>num;
+             g.afficherListe();
            g.supprimer_arrete(num);
         }
         if(choix==8)
         {
             int num;
             std::cout<<"Quel sommet veux tu supprimer"<<std::endl;
+             g.afficherListe();
             std::cin>>num;
             g.SupprimerSommet(num);
         }

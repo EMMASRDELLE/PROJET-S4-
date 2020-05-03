@@ -923,10 +923,7 @@ std::vector<int> Graphe::Intermediarite(unsigned int num0,  std::vector<float> &
 ///Calcul de l'indice d'intermediarité
 void Graphe::CalculIntermediarite(std::vector<double>&Result1, std::vector<double>&Result2)
 {
-    for (auto a:m_arretes)
-    {
-        std::cout<<a->getIndice()<<" "<<a->getEx1()->getNum()<<a->getEx2()->getNum()<<std::endl;
-    }
+
     ///Initialisation des variables
     std::vector<int> stock((int)m_sommets.size(),1);
     std::vector<int> stock2((int)m_sommets.size(),1);
@@ -1304,11 +1301,8 @@ void Graphe::Menu_afficher_centralite(Svgfile&svgout)
 
     int choix;
     std::cout<<"1) Centralite de degre"<<std::endl;
-
     std::cout<<"2)Centralite de vector propre"<<std::endl;
-
     std::cout<<"3)Centralite de proximite"<<std::endl;
-
     std::cout<<"4) Centralite d'intermediarite"<<std::endl;
 
     do
@@ -1347,9 +1341,6 @@ void Graphe::Menu_afficher_centralite(Svgfile&svgout)
     }
 
 }
-
-
-
 void Graphe::Dessiner_centralite_vect_propre(Svgfile &svgout)
 {
 
