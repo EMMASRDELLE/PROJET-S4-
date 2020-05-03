@@ -422,6 +422,7 @@ std::vector<int> Graphe::Djikstra(int num_0, double &Cps, double & somme )
 
     int temp=0;
     int actuel;
+
     int temp2=99999;
     int coumt = 0;
 
@@ -851,6 +852,7 @@ void Graphe::kconnexe()
 
 void Graphe::SupprimerSommet(int indice)
 {
+
     for (int k=0;k<m_sommets.size();++k)
     {
         if (m_sommets[k]->getNum()==indice)
@@ -858,6 +860,7 @@ void Graphe::SupprimerSommet(int indice)
             for(int j=0; j<m_arretes.size();++j)
             {
                 if(m_arretes[j]->getEx1()->getNum()==m_sommets[k]->getNum()|| m_arretes[j]->getEx2()->getNum()==m_sommets[k]->getNum())
+
                 {
                     ///on a les 2 sommets extremités
                     Sommet*s1=m_arretes[j]->getEx1();
@@ -882,12 +885,15 @@ void Graphe::SupprimerSommet(int indice)
                         }
 
                     }
+
                     delete m_arretes[j];
                     m_arretes.erase(m_arretes.begin()+j);
                 }
             }
+
             delete m_sommets[k];
             m_sommets.erase(m_sommets.begin()+k);
+
         }
     }
 }

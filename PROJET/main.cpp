@@ -69,9 +69,6 @@ int main()
 {
     Svgfile svgout;
     int choix;
- Graphe g {"Graphe.txt"};
-    do
-    {
 
 
         Menu();
