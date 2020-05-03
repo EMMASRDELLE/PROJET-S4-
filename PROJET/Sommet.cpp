@@ -9,8 +9,6 @@ int Sommet::getNum()const
 {
     return m_indice;
 }
-
-
 /// GETTER
 
 void Sommet::set_indice(int nombre)
@@ -34,6 +32,10 @@ double Sommet::getY()const
     return m_y;
 }
 
+int Sommet::setNum(int num)
+{
+    m_indice=num;
+}
 void Sommet::Dessiner(Svgfile&svgout)const
 {
 
@@ -41,8 +43,6 @@ void Sommet::Dessiner(Svgfile&svgout)const
     svgout.addText(m_x*100,(m_y*100)-20,m_nom,"blue");
     svgout.addText((m_x*100),(m_y*100)-50,m_indice,"green");
 }
-
-
 
 void Sommet::afficher() const
     {

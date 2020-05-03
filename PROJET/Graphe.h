@@ -38,12 +38,12 @@ public:
      std::vector<int> Intermediarite(unsigned int num0,  std::vector<float> &compt);
      void SauvegardeIntermediarite(Svgfile&svgout);
      void VulnerabiliteIntermediarite(int num);
+     int poidsSucc(Sommet* a, Sommet* b);
      void MenuConnexe();
      void GuideTouristique();
      std::vector<int> Djikstra2(int num_0, int fin,int &somme);
      void afficher_parcours2(size_t num, int fin, const std::vector<int>& arbre);
-
-
+     void MenuIndiceCentralite(Svgfile&svgout);
 
     protected:
 

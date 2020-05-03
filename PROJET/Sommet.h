@@ -20,6 +20,7 @@ class Sommet
         void ajouterSucc( Sommet*s);
         void set_indice(int nombre);
         std::vector < Sommet*>& getSuccesseurs() {return m_successeurs; };
+        int setNum(int num);
         void afficher() const;
         void supp_succ( int indice);
         void colorier(Svgfile&svgout, int num);
@@ -34,6 +35,7 @@ class Sommet
         double m_x;
         double m_y;
         std::vector < Sommet*> m_successeurs;
+
 
 };
 
