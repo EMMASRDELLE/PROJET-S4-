@@ -84,14 +84,12 @@ color(15,0);
     color(5,0);
     std::cin>>NomFichier;
     Graphe g{NomFichier};
+    g.afficherListe();
     std::cout<<std::endl;
-
     do
     {
-        g.afficherListe();
+
         color(11,0);
-
-
         Menu();
         color(5,0);
         do
@@ -149,7 +147,6 @@ color(15,0);
             std::cin>>num;
             g.SupprimerSommet(num);
         }
-
 
     }
     while(choix!=0);
